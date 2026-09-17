@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+/* ============================================================
+   はじめてのAIガイド — デザイントークン
+   「取扱説明書」の見た目。白い紙・黒い線・番号の丸・章ごとの色。
+   公開=青 / コマンド=緑 / 用語=黄 / プロンプト=桃
+   ============================================================ */
+:root {
+  --ag-paper: #f6f4ee;
+  --ag-card: #ffffff;
+  --ag-ink: #1b1b1d;
+  --ag-soft: #55544f; /* 紙の地でコントラスト比 7 以上 */
+  --ag-line: #d8d4c8;
+  --ag-blue: #2f5be0;
+  --ag-blue-bg: #e6ecfd;
+  --ag-green: #13875c;
+  --ag-green-bg: #dff3ea;
+  --ag-yellow: #f0b400;
+  --ag-yellow-bg: #fdf1c9;
+  --ag-pink: #d9486f;
+  --ag-pink-bg: #fce3ea;
+  --ag-red: #c93a2e;
+}
+
+@theme inline {
+  --color-paper: var(--ag-paper);
+  --color-card: var(--ag-card);
+  --color-ink: var(--ag-ink);
+  --color-soft: var(--ag-soft);
+  --color-line: var(--ag-line);
+  --color-blue: var(--ag-blue);
+  --color-blue-bg: var(--ag-blue-bg);
+  --color-green: var(--ag-green);
+  --color-green-bg: var(--ag-green-bg);
+  --color-yellow: var(--ag-yellow);
+  --color-yellow-bg: var(--ag-yellow-bg);
+  --color-pink: var(--ag-pink);
+  --color-pink-bg: var(--ag-pink-bg);
+  --font-sans: var(--font-zen-kaku), "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+
+body {
+  background: var(--ag-paper);
+  color: var(--ag-ink);
+  font-family: var(--font-sans);
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "palt" 0;
+}
+
+/* ---------- 和文の折り方 ----------
+   句点・読点ごとに塊にして、塊の境目でしか折れないようにする。
+   幅が変わっても「、」「。」の後ろで折れる（J コンポーネント） */
+.j-s {
+  display: inline-block;
+  max-width: 100%;
+  /* URL など折り目のない長い英字で、枠が押し広げられないように */
+  overflow-wrap: anywhere;
+}
+.j-w {
+  white-space: nowrap;
+}
+
+/* 黒地の上の番号の丸 */
+.ag-num.ag-num-inv {
+  background: #fff;
+  color: var(--ag-ink);
+}
+
+.mobile-break {
+  display: none;
+}
+@media screen and (max-width: 620px) {
+  .mobile-break {
+    display: inline;
+  }
+}
+
+/* ---------- 枠 ---------- */
+.ag-box {
+  background: var(--ag-card);
+  border: 2px solid var(--ag-ink);
+  border-radius: 16px;
+}
+.ag-shadow {
+  box-shadow: 4px 4px 0 var(--ag-ink);
+}
+
+/* 番号の丸 */
+.ag-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 2.2em;
+  height: 2.2em;
+  border-radius: 999px;
+  background: var(--ag-ink);
+  color: #fff;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  line-height: 1;
+}
+
+/* キー・ボタン名 */
+.ag-key {
+  display: inline-block;
+  padding: 0 0.45em;
+  margin: 0 0.1em;
+  border: 1.5px solid var(--ag-ink);
+  border-bottom-width: 3px;
+  border-radius: 6px;
+  background: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.ag-code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: rgba(27, 27, 29, 0.07);
+  border-radius: 5px;
+  padding: 0.05em 0.35em;
+  overflow-wrap: anywhere;
+}
+
+/* 蛍光ペン */
+.ag-mark {
+  background: linear-gradient(transparent 58%, var(--ag-yellow-bg) 58%);
+}
+
+/* フォーカスを必ず見せる */
+:focus-visible {
+  outline: 3px solid var(--ag-blue);
+  outline-offset: 2px;
+}
+
+/* コピーボタン */
+.ag-copy {
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: 2px solid var(--ag-ink);
+  border-radius: 999px;
+  padding: 0.3em 1em;
+  background: #fff;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.ag-copy:hover {
+  background: var(--ag-yellow-bg);
+}
+.ag-copy:active {
+  transform: translateY(1px);
+}
+.ag-copy[data-state="done"] {
+  background: var(--ag-ink);
+  color: #fff;
+}
+
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .ag-chev {
+  transform: rotate(90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
