@@ -1,79 +1,96 @@
 @import "tailwindcss";
 
 /* ============================================================
-   はじめてのAIガイド — デザイントークン
-   「取扱説明書」の見た目。白い紙・黒い線・番号の丸・章ごとの色。
-   公開=青 / コマンド=緑 / 用語=黄 / プロンプト=桃
+   はじめてのAIガイド v2 — デザイントークン
+   「見やすい」を先に。黒い太枠はやめて、やわらかい色の面で区切る。
+   ワクワクはイラスト（太めの線＋明るい塗り）とちょっとした動きで出す。
+   章の色: 公開=sky / ターミナル=grape / AI=coral / コマンド=mint / 用語=sun / プロンプト=pink
    ============================================================ */
 :root {
-  --ag-paper: #f6f4ee;
+  --ag-paper: #fffaf1;
+  --ag-paper-2: #fbf1df;
   --ag-card: #ffffff;
-  --ag-ink: #1b1b1d;
-  --ag-soft: #55544f; /* 紙の地でコントラスト比 7 以上 */
-  --ag-line: #d8d4c8;
-  --ag-blue: #2f5be0;
-  --ag-blue-bg: #e6ecfd;
-  --ag-green: #13875c;
-  --ag-green-bg: #dff3ea;
-  --ag-yellow: #f0b400;
-  --ag-yellow-bg: #fdf1c9;
-  --ag-pink: #d9486f;
-  --ag-pink-bg: #fce3ea;
-  --ag-red: #c93a2e;
+  --ag-ink: #23233f;
+  --ag-soft: #56566f; /* 紙の地でコントラスト比 7 以上 */
+  --ag-line: #ece3d1;
+
+  --ag-sky: #3d6ff5;
+  --ag-sky-bg: #e6eeff;
+  --ag-mint: #0f9f76;
+  --ag-mint-bg: #d9f5ea;
+  --ag-sun: #f5b100;
+  --ag-sun-bg: #fff1c2;
+  --ag-coral: #f0533f;
+  --ag-coral-bg: #ffe3dd;
+  --ag-grape: #7a55e6;
+  --ag-grape-bg: #ece6ff;
+  --ag-pink: #e0487a;
+  --ag-pink-bg: #ffe2ec;
+
+  --ag-shadow: 0 1px 0 rgba(35, 35, 63, 0.06), 0 12px 32px -14px rgba(35, 35, 63, 0.28);
 }
 
 @theme inline {
   --color-paper: var(--ag-paper);
+  --color-paper-2: var(--ag-paper-2);
   --color-card: var(--ag-card);
   --color-ink: var(--ag-ink);
   --color-soft: var(--ag-soft);
   --color-line: var(--ag-line);
-  --color-blue: var(--ag-blue);
-  --color-blue-bg: var(--ag-blue-bg);
-  --color-green: var(--ag-green);
-  --color-green-bg: var(--ag-green-bg);
-  --color-yellow: var(--ag-yellow);
-  --color-yellow-bg: var(--ag-yellow-bg);
+  --color-sky: var(--ag-sky);
+  --color-sky-bg: var(--ag-sky-bg);
+  --color-mint: var(--ag-mint);
+  --color-mint-bg: var(--ag-mint-bg);
+  --color-sun: var(--ag-sun);
+  --color-sun-bg: var(--ag-sun-bg);
+  --color-coral: var(--ag-coral);
+  --color-coral-bg: var(--ag-coral-bg);
+  --color-grape: var(--ag-grape);
+  --color-grape-bg: var(--ag-grape-bg);
   --color-pink: var(--ag-pink);
   --color-pink-bg: var(--ag-pink-bg);
   --font-sans: var(--font-zen-kaku), "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --font-round: var(--font-rounded), var(--font-zen-kaku), "Hiragino Maru Gothic ProN", sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
 html {
   color-scheme: light;
   scroll-behavior: smooth;
-  scroll-padding-top: 84px;
+  scroll-padding-top: 88px;
 }
 
 body {
   background: var(--ag-paper);
   color: var(--ag-ink);
   font-family: var(--font-sans);
-  line-height: 1.85;
+  font-size: 17px;
+  line-height: 1.9;
   -webkit-font-smoothing: antialiased;
-  font-feature-settings: "palt" 0;
+}
+@media (max-width: 620px) {
+  body {
+    font-size: 16px;
+  }
 }
 
-/* ---------- 和文の折り方 ----------
-   句点・読点ごとに塊にして、塊の境目でしか折れないようにする。
-   幅が変わっても「、」「。」の後ろで折れる（J コンポーネント） */
+h1,
+h2,
+h3,
+.font-round {
+  font-family: var(--font-round);
+  letter-spacing: 0.01em;
+}
+
+/* ---------- 和文の折り方（J コンポーネント） ---------- */
 .j-s {
   display: inline-block;
   max-width: 100%;
-  /* URL など折り目のない長い英字で、枠が押し広げられないように */
   overflow-wrap: anywhere;
 }
 .j-w {
   white-space: nowrap;
 }
-
-/* 黒地の上の番号の丸 */
-.ag-num.ag-num-inv {
-  background: #fff;
-  color: var(--ag-ink);
-}
-
 .mobile-break {
   display: none;
 }
@@ -83,14 +100,13 @@ body {
   }
 }
 
-/* ---------- 枠 ---------- */
-.ag-box {
+/* 部品のクラスは components レイヤーに入れる（bg-sky などのユーティリティで上書きできるように） */
+@layer components {
+/* ---------- 面 ---------- */
+.ag-card {
   background: var(--ag-card);
-  border: 2px solid var(--ag-ink);
-  border-radius: 16px;
-}
-.ag-shadow {
-  box-shadow: 4px 4px 0 var(--ag-ink);
+  border-radius: 24px;
+  box-shadow: var(--ag-shadow);
 }
 
 /* 番号の丸 */
@@ -99,71 +115,94 @@ body {
   align-items: center;
   justify-content: center;
   flex: none;
-  width: 2.2em;
-  height: 2.2em;
+  width: 2.3em;
+  height: 2.3em;
   border-radius: 999px;
   background: var(--ag-ink);
   color: #fff;
-  font-weight: 700;
-  font-family: var(--font-mono);
+  font-weight: 800;
+  font-family: var(--font-round);
   line-height: 1;
 }
 
-/* キー・ボタン名 */
+/* 画面のボタン名 */
 .ag-key {
   display: inline-block;
-  padding: 0 0.45em;
-  margin: 0 0.1em;
-  border: 1.5px solid var(--ag-ink);
+  padding: 0 0.55em;
+  margin: 0 0.15em;
+  border: 1.5px solid rgba(35, 35, 63, 0.35);
   border-bottom-width: 3px;
-  border-radius: 6px;
+  border-radius: 8px;
   background: #fff;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-weight: 700;
   font-size: 0.88em;
-  line-height: 1.6;
+  line-height: 1.7;
   overflow-wrap: anywhere;
 }
 .ag-code {
   font-family: var(--font-mono);
-  font-size: 0.9em;
-  background: rgba(27, 27, 29, 0.07);
-  border-radius: 5px;
-  padding: 0.05em 0.35em;
+  font-size: 0.88em;
+  background: rgba(35, 35, 63, 0.07);
+  border-radius: 6px;
+  padding: 0.1em 0.4em;
   overflow-wrap: anywhere;
 }
 
 /* 蛍光ペン */
 .ag-mark {
-  background: linear-gradient(transparent 58%, var(--ag-yellow-bg) 58%);
+  background: linear-gradient(transparent 60%, var(--ag-sun-bg) 60%);
 }
 
-/* フォーカスを必ず見せる */
-:focus-visible {
-  outline: 3px solid var(--ag-blue);
-  outline-offset: 2px;
+/* ボタン */
+.ag-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  border-radius: 999px;
+  padding: 0.7em 1.5em;
+  font-weight: 800;
+  font-family: var(--font-round);
+  line-height: 1.3;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 0 rgba(35, 35, 63, 0.9);
+}
+.ag-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(35, 35, 63, 0.9);
+}
+.ag-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(35, 35, 63, 0.9);
 }
 
 /* コピーボタン */
 .ag-copy {
   font-weight: 700;
   font-size: 0.85rem;
-  border: 2px solid var(--ag-ink);
   border-radius: 999px;
-  padding: 0.3em 1em;
-  background: #fff;
+  padding: 0.35em 1.05em;
+  background: var(--ag-ink);
+  color: #fff;
   white-space: nowrap;
   cursor: pointer;
-  transition: transform 0.1s;
+  transition: transform 0.1s, background 0.15s;
 }
 .ag-copy:hover {
-  background: var(--ag-yellow-bg);
+  background: #3a3a63;
 }
 .ag-copy:active {
   transform: translateY(1px);
 }
 .ag-copy[data-state="done"] {
-  background: var(--ag-ink);
-  color: #fff;
+  background: var(--ag-mint);
+}
+
+}
+
+:focus-visible {
+  outline: 3px solid var(--ag-sky);
+  outline-offset: 3px;
 }
 
 details > summary {
@@ -177,8 +216,122 @@ details[open] .ag-chev {
   transform: rotate(90deg);
 }
 
+/* ---------- 背景の飾り ---------- */
+.ag-dots {
+  background-image: radial-gradient(rgba(35, 35, 63, 0.11) 1.4px, transparent 1.6px);
+  background-size: 22px 22px;
+}
+
+/* ---------- 動き ---------- */
+@keyframes ag-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes ag-wiggle {
+  0%,
+  100% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+@keyframes ag-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+@keyframes ag-caret {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes ag-pop {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ag-dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+@keyframes ag-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ag-float {
+  animation: ag-float 4s ease-in-out infinite;
+}
+.ag-float-slow {
+  animation: ag-float 6s ease-in-out infinite;
+}
+.ag-wiggle {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: ag-wiggle 1.4s ease-in-out infinite;
+}
+.ag-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ag-blink 4s infinite;
+}
+.ag-caret {
+  animation: ag-caret 1s steps(1) infinite;
+}
+.ag-dash {
+  animation: ag-dash 1.6s linear infinite;
+}
+.ag-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ag-spin 12s linear infinite;
+}
+
+/* スクロールで出てくる（JSが動くときだけ隠す。動かなければ最初から見える） */
+.js .ag-reveal {
+  opacity: 0;
+}
+.js .ag-reveal[data-shown] {
+  animation: ag-pop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.js .ag-reveal[data-static] {
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .ag-float,
+  .ag-float-slow,
+  .ag-wiggle,
+  .ag-blink,
+  .ag-caret,
+  .ag-dash,
+  .ag-spin {
+    animation: none;
+  }
+  .js .ag-reveal {
+    opacity: 1;
+  }
+  .js .ag-reveal[data-shown] {
+    animation: none;
   }
 }

@@ -19,7 +19,7 @@ import BreakText from "./BreakText";
 /** 文節の頭になる文字（この文字が「しっぽ」の後に来たら、新しい文節） */
 const HEAD = /[一-龠々〆ヵヶァ-ヴーA-Za-z0-9０-９Ａ-Ｚａ-ｚ「『（【〈《［“"'`/:.#@_\-+＋]/;
 /** 1文節がこれより長いときは、中で折れてもよい（はみ出し防止） */
-const MAX = 12;
+const MAX = 8;
 
 function phrases(s: string): string[] {
   const out: string[] = [];

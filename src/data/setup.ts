@@ -4,7 +4,7 @@
  * 文中の印： ［ボタン名］ / `ファイル名` / ◆◇（改行）
  */
 
-export type Step = { title: string; body: string; tip?: string; warn?: string };
+export type Step = { title: string; body: string; tip?: string; warn?: string; visual?: string };
 
 export type Route = {
   id: "a" | "b" | "c";
@@ -29,7 +29,7 @@ export const ROUTES: Route[] = [
     need: ["Netlify のアカウント（無料）"],
     steps: [
       {
-        title: "Netlify に登録する",
+        title: "Netlify に登録する", visual: "signup",
         body: "https://app.netlify.com を開いて、［Sign up］から登録する。GitHub か Google のアカウントで登録すると早い。",
         warn: "ログインせずに置くこともできる。でもそのサイトはパスワード付きになって、1時間ほどで消える。先に登録しておく。",
       },
@@ -38,12 +38,12 @@ export const ROUTES: Route[] = [
         body: "ログインしたまま https://app.netlify.com/drop を開く。点線で囲まれた、ファイルを落とす枠が出る。",
       },
       {
-        title: "フォルダをまるごと落とす",
+        title: "フォルダをまるごと落とす", visual: "drop",
         body: "Finder（Windows はエクスプローラー）で、サイトのフォルダを選ぶ。そのまま点線の枠までドラッグして、手を離す。",
         tip: "落とすのは `index.html` が「すぐ中に」あるフォルダ。その1つ外側のフォルダを落とすと、ページが見つからなくなる。",
       },
       {
-        title: "URLが出たら完成",
+        title: "URLが出たら完成", visual: "done-netlify",
         body: "数秒待つと `〇〇〇.netlify.app` というURLが出る。押して、ちゃんと表示されるか見る。スマホでも開いてみる。",
       },
       {
@@ -53,7 +53,7 @@ export const ROUTES: Route[] = [
     ],
     update: [
       {
-        title: "直したフォルダを、もう一度落とす",
+        title: "直したフォルダを、もう一度落とす", visual: "redrop",
         body: "Netlify でそのサイトを開き、［Deploys］のページを開く。下のほうにある枠に、直したフォルダをドラッグする。同じURLのまま、中身が新しくなる。",
       },
     ],
@@ -72,7 +72,7 @@ export const ROUTES: Route[] = [
     need: ["GitHub のアカウント（無料）", "GitHub Desktop（無料のアプリ）", "Vercel のアカウント（無料）"],
     steps: [
       {
-        title: "上げてはいけないものを確かめる",
+        title: "上げてはいけないものを確かめる", visual: "gitignore",
         body: "フォルダの中に `.env` や、APIキーを書いたファイルがないか見る。あれば、AIに「GitHubに上げても大丈夫な状態にして」と頼む。",
         warn: "`node_modules` と `.env` は上げない。.gitignore というファイルに書いておけば、自動で外される。わからなければ、下の「プロンプト集」のお願い文を使う。",
       },
@@ -81,31 +81,31 @@ export const ROUTES: Route[] = [
         body: "https://github.com でアカウントを作る。次に https://desktop.github.com から GitHub Desktop を入れて、同じアカウントでログインする。",
       },
       {
-        title: "サイトのフォルダを GitHub Desktop に入れる",
+        title: "サイトのフォルダを GitHub Desktop に入れる", visual: "addrepo",
         body: "メニューの［File］→［Add local repository］を選ぶ。［Choose...］でサイトのフォルダを選んで、［Add repository］を押す。",
         tip: "「Git のリポジトリではありません」と出たら、その中の［create a repository］を押して、そのまま作る。",
       },
       {
-        title: "GitHub に送る",
+        title: "GitHub に送る", visual: "publish",
         body: "上のほうにある［Publish repository］を押す。名前を決めて、もう一度［Publish Repository］を押す。",
         tip: "「非公開（private）」のままで大丈夫。コードは他人に見えず、Vercel からは公開できる。",
       },
       {
-        title: "Vercel に登録する",
+        title: "Vercel に登録する", visual: "vercel-signup",
         body: "https://vercel.com を開いて、［Sign Up］から［Continue with GitHub］で登録する。GitHub と同じアカウントでつながる。",
         warn: "Vercel の無料プラン（Hobby）は、個人の非商用だけ。お金を受け取るサイトや、広告を載せるサイトは有料プランか、ほかのサービスを使う。",
       },
       {
-        title: "リポジトリを選んで公開する",
+        title: "リポジトリを選んで公開する", visual: "import",
         body: "https://vercel.com/new を開く。さっき送ったリポジトリが一覧に出るので、選ぶ。設定はそのままで［Deploy］を押す。",
         tip: "一覧に出ないときは、GitHub へのアクセスを許可する画面が出ている。そのリポジトリを選んで許可する。",
       },
       {
-        title: "APIキーを使っているなら、ここで入れる",
+        title: "APIキーを使っているなら、ここで入れる", visual: "env",
         body: "プロジェクトの［Settings］→［Environment Variables］を開く。`.env` に書いていた名前と値を、1つずつ入れて保存する。入れたら、もう一度公開しなおす。",
       },
       {
-        title: "URLが出たら完成",
+        title: "URLが出たら完成", visual: "done-vercel",
         body: "［Continue to Dashboard］などから、`〇〇〇.vercel.app` のURLを開く。スマホでも開いてみる。",
       },
     ],
@@ -115,11 +115,11 @@ export const ROUTES: Route[] = [
         body: "いつもどおり、AIなどでファイルを直して保存する。",
       },
       {
-        title: "GitHub Desktop で記録する",
+        title: "GitHub Desktop で記録する", visual: "commit",
         body: "GitHub Desktop を開くと、変わったファイルが左に並んでいる。左下の［Summary］に「見出しを直した」などと書いて、［Commit to main］を押す。",
       },
       {
-        title: "送る",
+        title: "送る", visual: "push",
         body: "上の［Push origin］を押す。1〜2分で、同じURLのサイトが自動で新しくなる。",
       },
     ],
@@ -138,7 +138,7 @@ export const ROUTES: Route[] = [
     need: ["ファイルを読めるAI（Claude Code のデスクトップアプリなど）"],
     steps: [
       {
-        title: "AIにフォルダを見せる",
+        title: "AIにフォルダを見せる", visual: "askai",
         body: "Claude Code のデスクトップアプリなら、サイトのフォルダを開いた状態で話しかける。ブラウザのAIなら、フォルダの中身の一覧か、スクリーンショットを渡す。",
       },
       {

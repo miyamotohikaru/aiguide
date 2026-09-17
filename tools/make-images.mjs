@@ -5,29 +5,30 @@
 import puppeteer from "puppeteer-core";
 import { writeFileSync } from "node:fs";
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const FONT = `<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700&family=IBM+Plex+Mono:wght@600&display=block" rel="stylesheet">`;
+const FONT = `<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&family=IBM+Plex+Mono:wght@600&display=block" rel="stylesheet">`;
 
 const ICON = (size) => `<!doctype html><html><head>${FONT}<style>
 html,body{margin:0;background:transparent}
-.c{width:${size}px;height:${size}px;border-radius:50%;background:#1b1b1d;display:flex;align-items:center;justify-content:center;
+.c{width:${size}px;height:${size}px;border-radius:50%;background:#23233f;display:flex;align-items:center;justify-content:center;
 color:#fff;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:${size * 0.5}px;letter-spacing:-${size * 0.02}px}
 </style></head><body><div class="c">AI</div></body></html>`;
 
 const OG = `<!doctype html><html><head>${FONT}<style>
 html,body{margin:0}
-.w{width:1200px;height:630px;box-sizing:border-box;background:#f6f4ee;border:14px solid #1b1b1d;padding:70px 80px;position:relative;font-family:'Zen Kaku Gothic New',sans-serif;color:#1b1b1d}
-.tag{display:inline-block;border:4px solid #1b1b1d;border-radius:999px;background:#fdf1c9;padding:6px 26px;font-size:30px;font-weight:700}
-h1{margin:34px 0 0;font-size:112px;line-height:1.1;letter-spacing:-2px}
-.sub{margin-top:28px;font-size:40px;font-weight:700}
-.dots{position:absolute;right:80px;bottom:70px;display:flex;gap:18px}
-.dots span{width:46px;height:46px;border-radius:50%;border:4px solid #1b1b1d}
-.bar{position:absolute;left:80px;bottom:78px;font-family:'IBM Plex Mono',monospace;font-size:30px;border:4px solid #1b1b1d;border-radius:999px;background:#e6ecfd;padding:6px 26px}
-</style></head><body><div class="w">
-<span class="tag">ターミナルを使わない人のための</span>
+.w{width:1200px;height:630px;box-sizing:border-box;background:#fffaf1;padding:72px 84px;position:relative;overflow:hidden;font-family:'M PLUS Rounded 1c',sans-serif;color:#23233f}
+.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(35,35,63,.12) 2px,transparent 2.4px);background-size:28px 28px}
+.sun{position:absolute;right:-120px;top:-120px;width:520px;height:520px;border-radius:50%;background:#fff1c2}
+.tag{position:relative;display:inline-block;border-radius:999px;background:#fff;padding:8px 28px;font-size:30px;box-shadow:0 6px 20px -10px rgba(35,35,63,.5)}
+h1{position:relative;margin:30px 0 0;font-size:104px;line-height:1.1;letter-spacing:-2px;white-space:nowrap}
+.sub{position:relative;margin-top:18px;font-size:42px}
+.sub b{background:linear-gradient(transparent 58%,#f5b10088 58%)}
+.chips{position:absolute;left:84px;bottom:66px;display:flex;gap:14px}
+.chips span{border-radius:18px;padding:10px 22px;font-size:28px;color:#fff;box-shadow:0 5px 0 #23233f}
+</style></head><body><div class="w"><div class="dots"></div><div class="sun"></div>
+<span class="tag">ターミナルを使ったことがない人へ</span>
 <h1>はじめてのAIガイド</h1>
-<p class="sub">作ったサイトを、みんなに届けるまで。</p>
-<div class="bar">https://your-site.vercel.app</div>
-<div class="dots"><span style="background:#2f5be0"></span><span style="background:#13875c"></span><span style="background:#f0b400"></span><span style="background:#d9486f"></span></div>
+<p class="sub">作ったサイトを、<b>みんなに</b>届けよう。</p>
+<div class="chips"><span style="background:#f0533f">AIの選び方</span><span style="background:#3d6ff5">公開</span><span style="background:#7a55e6">ターミナル</span><span style="background:#0f9f76">コマンド</span><span style="background:#e0487a">プロンプト</span></div>
 </div></body></html>`;
 
 const b = await puppeteer.launch({ executablePath: CHROME, args: ["--headless=new"] });
