@@ -12,6 +12,7 @@ import AiChooser from "@/components/ai/AiChooser";
 import ToolDex from "@/components/ai/ToolDex";
 import Combos from "@/components/ai/Combos";
 import { AI_CHECKED, TOOLS } from "@/data/ai";
+import { PURPOSES } from "@/data/purposes";
 
 export const metadata: Metadata = {
   title: "AIの選び方",
@@ -34,7 +35,33 @@ export default function AiPage() {
         <TypeMap />
       </Section>
 
-      <Section id="choose" icon="search" tone="coral" kicker="STEP 2" title="目的から選ぶ" lead="3つの質問に答えると、合いそうな道具を2つ出します。" wide>
+      <Section id="purpose" icon="star" tone="coral" kicker="目的から" title="やりたいことで選ぶ" lead="資料づくり、リサーチ、画像、アプリ。目的ごとに、いちばんいいAIと、うまく作る手順をまとめました。" wide>
+        <ul className="grid grid-cols-[minmax(0,1fr)] gap-3 min-[380px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+          {PURPOSES.map((p) => (
+            <li key={p.id}>
+              <Link href={`/ai/purpose#${p.id}`} className="ag-card group flex h-full items-center gap-3 p-4 transition-transform hover:-translate-y-1">
+                <span className="flex h-11 w-11 flex-none items-center justify-center rounded-2xl bg-coral-bg text-[1.4rem]" aria-hidden>
+                  {p.emoji}
+                </span>
+                <span className="min-w-0">
+                  <span className="block font-round text-[0.95rem] font-extrabold leading-snug">
+                    <J text={p.label} />
+                  </span>
+                  <span className="block text-[0.78rem] font-bold text-coral">🏆 {p.best.tool}</span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-6">
+          <Link href="/ai/purpose" className="ag-btn bg-coral text-white">
+            目的別のくわしい手順を見る
+            <Icon name="arrow" className="h-4 w-4" strokeWidth={3} />
+          </Link>
+        </div>
+      </Section>
+
+      <Section id="choose" icon="search" tone="coral" kicker="STEP 2" title="3つの質問で選ぶ" lead="3つの質問に答えると、合いそうな道具を2つ出します。" wide>
         <AiChooser />
       </Section>
 

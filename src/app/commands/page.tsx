@@ -87,7 +87,7 @@ export default function CommandsPage() {
             <Reveal as="li" key={c.cmd} delay={i * 40} className="ag-card flex flex-col p-4">
               <div className="flex items-center justify-between gap-2">
                 <span className="font-mono text-[1.05rem] font-semibold text-mint">{c.cmd}</span>
-                <Copy text={c.cmd} label="写す" />
+                <Copy text={c.cmd} />
               </div>
               <p className="mt-2 text-[0.9rem]">
                 <J text={c.desc} />

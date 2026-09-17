@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Icon from "../illust/Icons";
 import J from "../J";
 import { TYPES, type Tool } from "@/data/ai";
@@ -60,15 +61,15 @@ export default function ToolCard({ tool, why }: { tool: Tool; why?: string }) {
           </div>
         </dl>
         {tool.note && <p className="mt-2 text-[0.85rem] font-bold text-coral">{tool.note}</p>}
-        <a
-          href={tool.url}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-auto inline-flex items-center gap-1 self-start pt-4 text-[0.9rem] font-bold underline decoration-2 underline-offset-4 hover:text-coral"
-        >
-          公式サイト
-          <Icon name="arrow" className="h-4 w-4" />
-        </a>
+        <div className="mt-auto flex flex-wrap items-center gap-2 pt-4">
+          <Link href={`/ai/${tool.id}`} className={`inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-[0.9rem] font-bold text-white ${tone.solid} hover:-translate-y-0.5`}>
+            くわしく見る
+            <Icon name="arrow" className="h-4 w-4" strokeWidth={2.8} />
+          </Link>
+          <a href={tool.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 px-2 text-[0.85rem] font-bold text-soft underline decoration-2 underline-offset-4 hover:text-coral">
+            公式サイト
+          </a>
+        </div>
       </div>
     </article>
   );

@@ -115,6 +115,18 @@ export const TOOLS: Tool[] = [
     url: "https://gemini.google",
   },
   {
+    id: "notebook",
+    name: "Gemini Notebook（旧 NotebookLM）",
+    maker: "Google",
+    type: "chat",
+    one: "入れた資料だけをもとに答える。音声解説・スライド・クイズも作れる。",
+    free: true,
+    price: "無料あり（上限は時間ごとに回復）",
+    noTerminal: "yes",
+    easy: 3,
+    url: "https://notebooklm.google",
+  },
+  {
     id: "v0",
     name: "v0",
     maker: "Vercel",
@@ -252,11 +264,12 @@ export const TOOLS: Tool[] = [
     name: "Gemini CLI",
     maker: "Google",
     type: "agent",
-    one: "ターミナルで動くエージェント。個人の Google アカウントで無料枠あり。",
-    free: true,
-    price: "無料枠あり",
+    one: "ターミナルで動くエージェント。個人アカウントでは、2026年6月に使えなくなった。",
+    free: false,
+    price: "個人アカウントは利用終了（企業ライセンスか有料APIキーのみ）",
     noTerminal: "no",
     easy: 1,
+    note: "個人で使うなら、後継の Antigravity を選ぶ。",
     url: "https://github.com/google-gemini/gemini-cli",
   },
 ];
@@ -296,7 +309,7 @@ export function recommend(goal: Goal, budget: Budget, term: Term): { id: string;
         ];
   return term === "yes"
     ? [
-        { id: budget === "paid" ? "claudecode" : "geminicli", why: "たくさんのファイルを、まとめて任せられる。" },
+        { id: budget === "paid" ? "claudecode" : "antigravity", why: "たくさんのファイルを、まとめて任せられる。" },
         { id: "cursor", why: "AIの変更を、目で見て確かめられる。" },
       ]
     : [
