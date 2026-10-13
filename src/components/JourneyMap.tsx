@@ -15,6 +15,7 @@ const STEP_NOTE: Record<string, string> = {
   "/commands": "困ったら",
   "/words": "困ったら",
   "/prompts": "いつでも",
+  "/links": "もっと先へ",
 };
 
 export default function JourneyMap() {

@@ -82,11 +82,12 @@ export default function AiPage() {
       </Section>
 
       <Section id="next" icon="rocket" tone="coral" title="作ったら、公開しよう" wide>
-        <div className="grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { href: "/setup#route-a", t: "HTMLができた", b: "フォルダをドラッグして公開する（ルートA）。", tone: "bg-sky-bg", fg: "text-sky", icon: "folder" as const },
             { href: "/setup#route-b", t: "何度も直していきたい", b: "GitHub と Vercel で、自動で公開する（ルートB）。", tone: "bg-sky-bg", fg: "text-sky", icon: "github" as const },
             { href: "/prompts", t: "AIへの頼み方に迷う", b: "そのまま貼れるお願い文を使う。", tone: "bg-pink-bg", fg: "text-pink", icon: "chat" as const },
+            { href: "/links", t: "もっとくわしく知りたい", b: "公式の手引きや、スキルの配布サイトを見る。", tone: "bg-mint-bg", fg: "text-mint", icon: "globe" as const },
           ].map((x) => (
             <Link key={x.href} href={x.href} className={`group flex flex-col rounded-3xl p-6 transition-transform hover:-translate-y-1 ${x.tone}`}>
               <span className={`flex h-11 w-11 items-center justify-center rounded-2xl bg-card ${x.fg}`}>

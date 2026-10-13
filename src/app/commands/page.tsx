@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Section from "@/components/Section";
 import CommandsView from "@/components/CommandsView";
@@ -103,7 +104,10 @@ export default function CommandsPage() {
           <J text={`${COMMANDS_CHECKED}に、公式ドキュメントと照らし合わせました。◇プランや使う場所（ターミナル・デスクトップアプリ・VS Code）によって、出ないコマンドもあります。`} />{" "}
           <a href={COMMANDS_SOURCE} target="_blank" rel="noreferrer" className="font-bold underline underline-offset-4">
             公式の一覧（英語）
-          </a>
+          </a>{" "}
+          <Link href="/links" className="font-bold underline underline-offset-4">
+            ほかの参考リンク
+          </Link>
         </p>
       </Section>
     </>

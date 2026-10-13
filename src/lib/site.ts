@@ -11,6 +11,7 @@ export const SECTIONS = [
   { href: "/commands", label: "スラッシュコマンド", short: "コマンド", en: "COMMANDS", tone: "mint", icon: "slash", desc: "「/」で始まる◆命令の一覧。" },
   { href: "/words", label: "用語集", short: "用語", en: "WORDS", tone: "sun", icon: "book", desc: "デザインとHPの◆言葉の意味。" },
   { href: "/prompts", label: "プロンプト集", short: "プロンプト", en: "PROMPTS", tone: "pink", icon: "chat", desc: "AIにそのまま渡せる◆頼み方。" },
+  { href: "/links", label: "参考リンク", short: "リンク", en: "LINKS", tone: "mint", icon: "globe", desc: "もっと知るための◆外のサイト。" },
 ] as const;
 
 export type SectionIcon = (typeof SECTIONS)[number]["icon"];
