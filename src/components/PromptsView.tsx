@@ -5,13 +5,10 @@ import { PROMPTS, CATS, type PromptCat } from "@/data/prompts";
 import Chips from "./Chips";
 import Copy from "./Copy";
 import J from "./J";
-import Icon, { type IconName } from "./illust/Icons";
 
 type Filter = "all" | PromptCat;
 
-const CAT_ICON: Record<PromptCat, IconName> = { publish: "rocket", make: "spark", design: "heart", fix: "warn", talk: "chat" };
-
-/** 【 】の中は「書き換える所」なので色を付ける */
+/** 【 】の中は「書き換える所」。色は使わず、うすい地で示す */
 function Body({ text }: { text: string }) {
   // 1行ずつ組む。行の中は J で「、」「。」の切れ目でだけ折る（コピーされる中身は元の文のまま）
   return (
@@ -21,7 +18,7 @@ function Body({ text }: { text: string }) {
           {li > 0 && "\n"}
           {line.split(/(【[^】]*】)/).map((p, i) =>
             p.startsWith("【") ? (
-              <mark key={i} className="rounded-md bg-sun-bg px-1 font-bold text-ink ring-2 ring-sun/60">
+              <mark key={i} className="bg-paper-2 px-1 text-ink">
                 {p}
               </mark>
             ) : (
@@ -44,32 +41,25 @@ export default function PromptsView() {
 
   return (
     <div>
-      <Chips items={chips} value={f} onChange={setF} label="目的でしぼる" active="bg-pink text-white" />
-      <ul className="mt-7 grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-2">
+      <Chips items={chips} value={f} onChange={setF} label="目的でしぼる" />
+      <ul className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-2">
         {list.map((p) => (
-          <li key={p.id} id={p.id} className="ag-card flex scroll-mt-28 flex-col overflow-hidden">
-            <div className="flex items-start gap-3 px-5 pt-5 sm:px-6 sm:pt-6">
-              <span className="flex h-11 w-11 flex-none items-center justify-center rounded-2xl bg-pink-bg text-pink">
-                <Icon name={CAT_ICON[p.cat]} className="h-5 w-5" strokeWidth={2.4} />
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="text-[0.8rem] font-bold text-pink">{CATS.find((c) => c.id === p.cat)!.label}</p>
-                <h3 className="text-[1.15rem] font-extrabold leading-snug">
-                  <J text={p.title} />
-                </h3>
-                <p className="mt-0.5 text-[0.88rem] text-soft">
-                  <J text={p.when} />
-                </p>
+          <li key={p.id} id={p.id} className="flex scroll-mt-24 flex-col">
+            <p className="ag-label">{CATS.find((c) => c.id === p.cat)!.label}</p>
+            <h3 className="mt-2 text-[1.2rem] leading-snug">
+              <J text={p.title} />
+            </h3>
+            <p className="mt-1 text-[0.9rem] text-soft">
+              <span className="mr-2 text-[0.72rem] tracking-[0.18em]">使いどき</span>
+              <J text={p.when} />
+            </p>
+            <div className="ag-box mt-4 flex flex-1 flex-col">
+              <div className="flex justify-end border-b border-line-soft px-4 py-2.5">
+                <Copy text={p.body} label="コピー" />
               </div>
-            </div>
-            {/* 吹き出し */}
-            <div className="relative mx-5 mb-5 mt-4 flex-1 rounded-3xl rounded-tl-md bg-paper-2 sm:mx-6 sm:mb-6">
-              <pre className="whitespace-pre-wrap break-words px-5 pb-16 pt-4 font-sans text-[0.95rem] leading-[1.85]">
+              <pre className="flex-1 whitespace-pre-wrap break-words px-5 py-5 font-serif text-[0.95rem] leading-[1.95]">
                 <Body text={p.body} />
               </pre>
-              <div className="absolute bottom-3 right-3">
-                <Copy text={p.body} label="コピーする" />
-              </div>
             </div>
           </li>
         ))}

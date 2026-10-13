@@ -1,84 +1,55 @@
 @import "tailwindcss";
 
 /* ============================================================
-   はじめてのAIガイド v2 — デザイントークン
-   「見やすい」を先に。黒い太枠はやめて、やわらかい色の面で区切る。
-   ワクワクはイラスト（太めの線＋明るい塗り）とちょっとした動きで出す。
-   章の色: 公開=sky / ターミナル=grape / AI=coral / コマンド=mint / 用語=sun / プロンプト=pink
+   はじめてのAIガイド v3 — 静かな版面
+   生成りの紙・黒・細い罫線だけ。色、影、角丸、イラストは使わない。
+   和文は明朝、欧文もセリフ。差は「字の大きさ」と「余白」でつける。
    ============================================================ */
 :root {
-  --ag-paper: #fffaf1;
-  --ag-paper-2: #fbf1df;
-  --ag-card: #ffffff;
-  --ag-ink: #23233f;
-  --ag-soft: #56566f; /* 紙の地でコントラスト比 7 以上 */
-  --ag-line: #ece3d1;
-
-  --ag-sky: #3d6ff5;
-  --ag-sky-bg: #e6eeff;
-  --ag-mint: #0f9f76;
-  --ag-mint-bg: #d9f5ea;
-  --ag-sun: #f5b100;
-  --ag-sun-bg: #fff1c2;
-  --ag-coral: #f0533f;
-  --ag-coral-bg: #ffe3dd;
-  --ag-grape: #7a55e6;
-  --ag-grape-bg: #ece6ff;
-  --ag-pink: #e0487a;
-  --ag-pink-bg: #ffe2ec;
-
-  --ag-shadow: 0 1px 0 rgba(35, 35, 63, 0.06), 0 12px 32px -14px rgba(35, 35, 63, 0.28);
+  --ag-paper: #f7f6f1;
+  --ag-paper-2: #f0eee7;
+  --ag-ink: #171614;
+  --ag-soft: #5f5d57; /* 紙の地でコントラスト比 7 以上 */
+  --ag-line: #d8d4c9;
+  --ag-line-soft: #e7e3da;
 }
 
 @theme inline {
   --color-paper: var(--ag-paper);
   --color-paper-2: var(--ag-paper-2);
-  --color-card: var(--ag-card);
   --color-ink: var(--ag-ink);
   --color-soft: var(--ag-soft);
   --color-line: var(--ag-line);
-  --color-sky: var(--ag-sky);
-  --color-sky-bg: var(--ag-sky-bg);
-  --color-mint: var(--ag-mint);
-  --color-mint-bg: var(--ag-mint-bg);
-  --color-sun: var(--ag-sun);
-  --color-sun-bg: var(--ag-sun-bg);
-  --color-coral: var(--ag-coral);
-  --color-coral-bg: var(--ag-coral-bg);
-  --color-grape: var(--ag-grape);
-  --color-grape-bg: var(--ag-grape-bg);
-  --color-pink: var(--ag-pink);
-  --color-pink-bg: var(--ag-pink-bg);
-  --font-sans: var(--font-zen-kaku), "Hiragino Sans", "Noto Sans JP", sans-serif;
-  --font-round: var(--font-rounded), var(--font-zen-kaku), "Hiragino Maru Gothic ProN", sans-serif;
+  --color-line-soft: var(--ag-line-soft);
+  --font-serif: var(--font-garamond), var(--font-noto-serif), "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
 html {
   color-scheme: light;
   scroll-behavior: smooth;
-  scroll-padding-top: 88px;
+  scroll-padding-top: 76px;
 }
 
 body {
+  /* 書体の変数は、next/font のクラスが付く body で定義する（:root だとまだ存在しない） */
+  --ag-serif: var(--font-garamond), var(--font-noto-serif), "Hiragino Mincho ProN", "Yu Mincho", YuMincho, serif;
+  --ag-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
   background: var(--ag-paper);
   color: var(--ag-ink);
-  font-family: var(--font-sans);
-  font-size: 17px;
-  line-height: 1.9;
+  font-family: var(--ag-serif);
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.02em;
   -webkit-font-smoothing: antialiased;
-}
-@media (max-width: 620px) {
-  body {
-    font-size: 16px;
-  }
 }
 
 h1,
 h2,
 h3,
-.font-round {
-  font-family: var(--font-round);
+h4 {
+  font-weight: 400;
+  line-height: 1.5;
   letter-spacing: 0.01em;
 }
 
@@ -100,108 +71,130 @@ h3,
   }
 }
 
-/* 部品のクラスは components レイヤーに入れる（bg-sky などのユーティリティで上書きできるように） */
 @layer components {
-/* ---------- 面 ---------- */
-.ag-card {
-  background: var(--ag-card);
-  border-radius: 24px;
-  box-shadow: var(--ag-shadow);
-}
+  /* 小さな見出しラベル（LINKS / SETUP など） */
+  .ag-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ag-soft);
+  }
 
-/* 番号の丸 */
-.ag-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: none;
-  width: 2.3em;
-  height: 2.3em;
-  border-radius: 999px;
-  background: var(--ag-ink);
-  color: #fff;
-  font-weight: 800;
-  font-family: var(--font-round);
-  line-height: 1;
-}
+  /* 罫線で仕切る。影も角丸もつけない */
+  .ag-box {
+    border: 1px solid var(--ag-line);
+    background: transparent;
+  }
 
-/* 画面のボタン名 */
-.ag-key {
-  display: inline-block;
-  padding: 0 0.55em;
-  margin: 0 0.15em;
-  border: 1.5px solid rgba(35, 35, 63, 0.35);
-  border-bottom-width: 3px;
-  border-radius: 8px;
-  background: #fff;
-  font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: 0.88em;
-  line-height: 1.7;
-  overflow-wrap: anywhere;
-}
-.ag-code {
-  font-family: var(--font-mono);
-  font-size: 0.88em;
-  background: rgba(35, 35, 63, 0.07);
-  border-radius: 6px;
-  padding: 0.1em 0.4em;
-  overflow-wrap: anywhere;
-}
+  /* 本文中のボタン名・ファイル名 */
+  .ag-key {
+    display: inline-block;
+    padding: 0 0.35em;
+    border: 1px solid var(--ag-line);
+    font-family: var(--ag-serif);
+    font-size: 0.92em;
+    overflow-wrap: anywhere;
+  }
+  .ag-code {
+    font-family: var(--ag-mono);
+    font-size: 0.86em;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
+  }
 
-/* 蛍光ペン */
-.ag-mark {
-  background: linear-gradient(transparent 60%, var(--ag-sun-bg) 60%);
-}
+  /* リンク */
+  .ag-link {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--ag-line);
+    transition: text-decoration-color 0.2s;
+  }
+  .ag-link:hover {
+    text-decoration-color: var(--ag-ink);
+  }
 
-/* ボタン */
-.ag-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  border-radius: 999px;
-  padding: 0.7em 1.5em;
-  font-weight: 800;
-  font-family: var(--font-round);
-  line-height: 1.3;
-  transition: transform 0.15s, box-shadow 0.15s;
-  box-shadow: 0 4px 0 rgba(35, 35, 63, 0.9);
-}
-.ag-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 0 rgba(35, 35, 63, 0.9);
-}
-.ag-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 rgba(35, 35, 63, 0.9);
-}
+  /* 枠だけのボタン */
+  .ag-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    border: 1px solid var(--ag-ink);
+    padding: 0.65em 1.6em;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+    transition: background 0.2s, color 0.2s;
+  }
+  .ag-btn:hover {
+    background: var(--ag-ink);
+    color: var(--ag-paper);
+  }
+  .ag-btn-solid {
+    background: var(--ag-ink);
+    color: var(--ag-paper);
+  }
+  .ag-btn-solid:hover {
+    background: transparent;
+    color: var(--ag-ink);
+  }
 
-/* コピーボタン */
-.ag-copy {
-  font-weight: 700;
-  font-size: 0.85rem;
-  border-radius: 999px;
-  padding: 0.35em 1.05em;
-  background: var(--ag-ink);
-  color: #fff;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: transform 0.1s, background 0.15s;
-}
-.ag-copy:hover {
-  background: #3a3a63;
-}
-.ag-copy:active {
-  transform: translateY(1px);
-}
-.ag-copy[data-state="done"] {
-  background: var(--ag-mint);
-}
+  /* 選択式（絞り込み・質問の選択肢） */
+  .ag-pick {
+    border: 1px solid var(--ag-line);
+    padding: 0.35em 1.1em;
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .ag-pick:hover {
+    border-color: var(--ag-ink);
+  }
+  .ag-pick[aria-pressed="true"],
+  .ag-pick[aria-checked="true"] {
+    background: var(--ag-ink);
+    border-color: var(--ag-ink);
+    color: var(--ag-paper);
+  }
 
+  /* コピーボタン */
+  .ag-copy {
+    border: 1px solid var(--ag-line);
+    padding: 0.25em 1em;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .ag-copy:hover {
+    border-color: var(--ag-ink);
+  }
+  .ag-copy[data-state="done"] {
+    background: var(--ag-ink);
+    border-color: var(--ag-ink);
+    color: var(--ag-paper);
+  }
+
+  /* 注記（ヒント・注意） */
+  .ag-note {
+    border-left: 1px solid var(--ag-line);
+    padding-left: 1.1em;
+    color: var(--ag-soft);
+    font-size: 0.95rem;
+  }
+
+  /* 番号（手順） */
+  .ag-num {
+    font-family: var(--ag-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--ag-soft);
+  }
 }
 
 :focus-visible {
-  outline: 3px solid var(--ag-sky);
+  outline: 1px solid var(--ag-ink);
   outline-offset: 3px;
 }
 
@@ -212,126 +205,17 @@ details > summary {
 details > summary::-webkit-details-marker {
   display: none;
 }
-details[open] .ag-chev {
-  transform: rotate(90deg);
+details[open] .ag-plus {
+  transform: rotate(45deg);
 }
 
-/* ---------- 背景の飾り ---------- */
-.ag-dots {
-  background-image: radial-gradient(rgba(35, 35, 63, 0.11) 1.4px, transparent 1.6px);
-  background-size: 22px 22px;
-}
-
-/* ---------- 動き ---------- */
-@keyframes ag-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-@keyframes ag-wiggle {
-  0%,
-  100% {
-    transform: rotate(-8deg);
-  }
-  50% {
-    transform: rotate(10deg);
-  }
-}
-@keyframes ag-blink {
-  0%,
-  92%,
-  100% {
-    transform: scaleY(1);
-  }
-  95% {
-    transform: scaleY(0.1);
-  }
-}
-@keyframes ag-caret {
-  50% {
-    opacity: 0;
-  }
-}
-@keyframes ag-pop {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@keyframes ag-dash {
-  to {
-    stroke-dashoffset: -40;
-  }
-}
-@keyframes ag-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-.ag-float {
-  animation: ag-float 4s ease-in-out infinite;
-}
-.ag-float-slow {
-  animation: ag-float 6s ease-in-out infinite;
-}
-.ag-wiggle {
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  animation: ag-wiggle 1.4s ease-in-out infinite;
-}
-.ag-blink {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: ag-blink 4s infinite;
-}
-.ag-caret {
-  animation: ag-caret 1s steps(1) infinite;
-}
-.ag-dash {
-  animation: ag-dash 1.6s linear infinite;
-}
-.ag-spin {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: ag-spin 12s linear infinite;
-}
-
-/* スクロールで出てくる（JSが動くときだけ隠す。動かなければ最初から見える） */
-.js .ag-reveal {
-  opacity: 0;
-}
-.js .ag-reveal[data-shown] {
-  animation: ag-pop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-.js .ag-reveal[data-static] {
-  opacity: 1;
+::selection {
+  background: var(--ag-ink);
+  color: var(--ag-paper);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .ag-float,
-  .ag-float-slow,
-  .ag-wiggle,
-  .ag-blink,
-  .ag-caret,
-  .ag-dash,
-  .ag-spin {
-    animation: none;
-  }
-  .js .ag-reveal {
-    opacity: 1;
-  }
-  .js .ag-reveal[data-shown] {
-    animation: none;
   }
 }

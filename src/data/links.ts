@@ -4,9 +4,6 @@
  * 開けなかったサイト（OpenAI のヘルプなど、アクセスが拒否されたもの）は載せていない。
  * 移転していたURLは、最後にたどり着いたURLを書いている。
  */
-import type { Tone } from "@/lib/site";
-import type { IconName } from "@/components/illust/Icons";
-
 export const LINKS_CHECKED = "2026年10月13日";
 
 export type LinkItem = {
@@ -19,13 +16,13 @@ export type LinkItem = {
   note?: string;
 };
 
-export const LINK_CATS: { id: string; label: string; lead: string; icon: IconName; tone: Tone }[] = [
-  { id: "official", label: "公式の手引き", lead: "まず正しい情報を見たいとき。各社が自分で書いているページです。", icon: "book", tone: "sky" },
-  { id: "skills", label: "スキル・プロンプトの配布", lead: "AIへの頼み方や、作業の手順そのものを配っているところ。", icon: "spark", tone: "coral" },
-  { id: "hosting", label: "公開サービスの手引き", lead: "サイトを置く場所の、公式の説明。困ったときの一次情報。", icon: "rocket", tone: "mint" },
-  { id: "learn", label: "学習・入門", lead: "HTML・CSS・JavaScript を、基礎から学びたい人へ。", icon: "star", tone: "grape" },
-  { id: "design", label: "デザインの素材と道具", lead: "配色、フォント、アイコン、写真。使ってよい条件も確かめました。", icon: "heart", tone: "pink" },
-  { id: "news", label: "新しい情報を追う", lead: "AIは毎月変わります。公式のお知らせを見るのがいちばん早いです。", icon: "refresh", tone: "sun" },
+export const LINK_CATS: { id: string; label: string; lead: string }[] = [
+  { id: "official", label: "公式の手引き", lead: "まず正しい情報を見たいとき。各社が自分で書いているページです。" },
+  { id: "skills", label: "スキル・プロンプトの配布", lead: "AIへの頼み方や、作業の手順そのものを配っているところ。" },
+  { id: "hosting", label: "公開サービスの手引き", lead: "サイトを置く場所の、公式の説明。困ったときの一次情報。" },
+  { id: "learn", label: "学習・入門", lead: "HTML・CSS・JavaScript を、基礎から学びたい人へ。" },
+  { id: "design", label: "デザインの素材と道具", lead: "配色、フォント、アイコン、写真。使ってよい条件も確かめました。" },
+  { id: "news", label: "新しい情報を追う", lead: "AIは毎月変わります。公式のお知らせを見るのがいちばん早いです。" },
 ];
 
 export const LINKS: LinkItem[] = [

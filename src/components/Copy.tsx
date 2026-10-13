@@ -2,10 +2,7 @@
 
 import { useState } from "react";
 
-/**
- * 写す。押した手応えを必ず返す。
- * クリップボードが使えない場面でも黙って失敗しない。
- */
+/** 写す。押した手応えを必ず返す */
 export default function Copy({ text, label = "コピー" }: { text: string; label?: string }) {
   const [state, setState] = useState<"idle" | "done" | "fail">("idle");
 
@@ -33,7 +30,7 @@ export default function Copy({ text, label = "コピー" }: { text: string; labe
 
   return (
     <button type="button" className="ag-copy" onClick={run} data-state={state} aria-live="polite">
-      {state === "done" ? "コピーしました" : state === "fail" ? "コピーできませんでした" : label}
+      {state === "done" ? "コピーしました" : state === "fail" ? "できませんでした" : label}
     </button>
   );
 }

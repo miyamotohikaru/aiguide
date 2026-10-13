@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import J from "./J";
-import Robot from "./illust/Robot";
-import Icon from "./illust/Icons";
 
 type A = "yes" | "no" | "idk";
 type Key = "pkg" | "env" | "upd";
@@ -41,15 +39,14 @@ const QS: { key: Key; q: string; hint: string; opts: { v: A; label: string }[] }
 ];
 
 const RESULT = {
-  a: { tag: "ROUTE A", name: "ドラッグで置く", why: "HTMLだけのサイトなので、フォルダを置くだけで公開できます。いちばん早い方法です。", href: "#route-a", icon: "folder" },
-  b: { tag: "ROUTE B", name: "GitHub につないで自動で公開", why: "ビルドも、秘密の設定も、くり返しの更新も、Vercel がまとめて引き受けてくれます。", href: "#route-b", icon: "github" },
-  c: { tag: "ROUTE C", name: "AI に手伝ってもらう", why: "まずAIにフォルダを見てもらって、どの形か確かめるのが近道です。", href: "#route-c", icon: "robot" },
+  a: { tag: "ROUTE A", name: "ドラッグで置く", why: "HTMLだけのサイトなので、フォルダを置くだけで公開できます。いちばん早い方法です。", href: "#route-a" },
+  b: { tag: "ROUTE B", name: "GitHub につないで自動で公開", why: "ビルドも、秘密の設定も、くり返しの更新も、Vercel がまとめて引き受けてくれます。", href: "#route-b" },
+  c: { tag: "ROUTE C", name: "AI に手伝ってもらう", why: "まずAIにフォルダを見てもらって、どの形か確かめるのが近道です。", href: "#route-c" },
 } as const;
 
 export default function RouteFinder({ base = "" }: { base?: string }) {
   const [ans, setAns] = useState<Partial<Record<Key, A>>>({});
-  const step = QS.findIndex((q) => !ans[q.key]);
-  const done = step === -1;
+  const done = QS.every((q) => ans[q.key]);
   const result =
     ans.pkg === "idk" || ans.env === "idk"
       ? RESULT.c
@@ -58,75 +55,67 @@ export default function RouteFinder({ base = "" }: { base?: string }) {
         : RESULT.a;
 
   return (
-    <div className="ag-card overflow-hidden">
-      <div className="grid md:grid-cols-[1fr_280px]">
-        <ol className="grid gap-6 p-6 sm:p-8">
-          {QS.map((q, i) => {
-            const active = i === step;
-            const answered = !!ans[q.key];
-            return (
-              <li key={q.key} className={`transition-opacity ${!answered && !active ? "opacity-40" : ""}`}>
-                <p className="flex items-start gap-3 font-round text-[1.1rem] font-extrabold leading-snug">
-                  <span className={`ag-num text-[0.85rem] ${answered ? "bg-mint" : active ? "bg-coral" : ""}`}>
-                    {answered ? <Icon name="check" className="h-4 w-4" strokeWidth={3.2} /> : `Q${i + 1}`}
-                  </span>
-                  <span className="pt-1.5">
-                    <J text={q.q} />
-                  </span>
+    <div className="ag-box">
+      <ol className="grid grid-cols-[minmax(0,1fr)]">
+        {QS.map((q, i) => (
+          <li key={q.key} className="border-b border-line-soft px-6 py-7 sm:px-8">
+            <div className="grid gap-x-8 gap-y-2 sm:grid-cols-[3rem_minmax(0,1fr)]">
+              <p className="ag-num pt-1">Q{i + 1}</p>
+              <div className="min-w-0">
+                <p className="text-[1.08rem] leading-snug">
+                  <J text={q.q} />
                 </p>
                 {q.hint && (
-                  <p className="mt-1 pl-[3.2rem] text-[0.9rem] text-soft">
+                  <p className="mt-1 text-[0.9rem] text-soft">
                     <J text={q.hint} />
                   </p>
                 )}
-                <div className="mt-3 flex flex-wrap gap-2 pl-[3.2rem]" role="radiogroup" aria-label={q.q}>
-                  {q.opts.map((o) => {
-                    const on = ans[q.key] === o.v;
-                    return (
-                      <button
-                        key={o.v}
-                        type="button"
-                        role="radio"
-                        aria-checked={on}
-                        onClick={() => setAns({ ...ans, [q.key]: o.v })}
-                        className={`rounded-full px-5 py-2 font-bold transition-all ${
-                          on ? "bg-ink text-white shadow-[0_3px_0_#0f9f76]" : "bg-paper-2 hover:-translate-y-0.5 hover:bg-sun-bg"
-                        }`}
-                      >
-                        {o.label}
-                      </button>
-                    );
-                  })}
+                <div className="mt-4 flex flex-wrap gap-2" role="radiogroup" aria-label={q.q}>
+                  {q.opts.map((o) => (
+                    <button
+                      key={o.v}
+                      type="button"
+                      role="radio"
+                      aria-checked={ans[q.key] === o.v}
+                      onClick={() => setAns({ ...ans, [q.key]: o.v })}
+                      className="ag-pick"
+                    >
+                      {o.label}
+                    </button>
+                  ))}
                 </div>
-              </li>
-            );
-          })}
-        </ol>
-        <div className={`flex flex-col items-center justify-center gap-3 p-6 text-center transition-colors sm:p-8 ${done ? "bg-sky-bg" : "bg-paper-2"}`} aria-live="polite">
-          <Robot pose={done ? "cheer" : "think"} body={done ? "#3d6ff5" : "#7a55e6"} className="h-32 w-32" />
-          {done ? (
-            <>
-              <p className="text-[0.8rem] font-bold tracking-[0.15em] text-sky">{result.tag}</p>
-              <p className="font-round text-[1.3rem] font-extrabold leading-snug">
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <div className="px-6 py-8 sm:px-8" aria-live="polite">
+        {done ? (
+          <div className="grid gap-x-8 gap-y-3 sm:grid-cols-[3rem_minmax(0,1fr)]">
+            <p className="ag-label pt-1">A</p>
+            <div className="min-w-0">
+              <p className="ag-label">{result.tag}</p>
+              <p className="mt-1 text-[1.3rem] leading-snug">
                 <J text={result.name} />
               </p>
-              <p className="text-[0.92rem] text-soft">
+              <p className="mt-2 max-w-[34em] text-soft">
                 <J text={result.why} />
               </p>
-              <a href={`${base}${result.href}`} className="ag-btn mt-2 bg-coral text-white">
-                手順を見る
-                <Icon name="arrow" className="h-4 w-4" strokeWidth={3} />
-              </a>
-              <button type="button" onClick={() => setAns({})} className="text-[0.85rem] font-bold text-soft underline underline-offset-4">
-                もう一度
-              </button>
-            </>
-          ) : (
-            <p className="font-bold text-soft">
-              <J text={`あと${QS.length - Object.keys(ans).length}問で、◇おすすめが出ます。`} />
-            </p>
-          )}
-        </div>
+              <div className="mt-6 flex flex-wrap items-center gap-5">
+                <a href={`${base}${result.href}`} className="ag-btn ag-btn-solid">
+                  手順を見る
+                </a>
+                <button type="button" onClick={() => setAns({})} className="ag-link text-[0.9rem] text-soft">
+                  もう一度
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <p className="text-soft">
+            <J text={`あと${QS.length - Object.keys(ans).length}問で、おすすめが出ます。`} />
+          </p>
+        )}
       </div>
     </div>
   );

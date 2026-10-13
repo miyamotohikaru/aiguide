@@ -29,42 +29,54 @@ export default function CommandsView() {
   return (
     <div>
       <SearchBox value={q} onChange={setQ} placeholder="さがす（例：戻す、モデル、compact）" />
-      <div className={`mt-4 transition-opacity ${q ? "pointer-events-none opacity-40" : ""}`}>
-        <Chips items={chips} value={f} onChange={setF} label="種類でしぼる" active="bg-mint text-white" />
+      <div className={`mt-6 ${q ? "pointer-events-none opacity-40" : ""}`}>
+        <Chips items={chips} value={f} onChange={setF} label="種類でしぼる" />
       </div>
-      <p className="mt-5 text-[0.9rem] font-bold text-soft" aria-live="polite">
+      <p className="mt-8 text-[0.85rem] text-soft" aria-live="polite">
         {q ? `「${q}」で ${list.length} 件` : `${list.length} 件`}
       </p>
-      <ul className="mt-3 grid grid-cols-[minmax(0,1fr)] gap-3 md:grid-cols-2 xl:grid-cols-3">
-        {list.map((c) => (
-          <li key={c.cmd} className="ag-card flex flex-col p-5">
-            <div className="flex items-start justify-between gap-3">
-              <p className="min-w-0 break-all">
-                <span className="rounded-lg bg-ink px-2 py-0.5 font-mono text-[1.02rem] font-semibold text-[#7ff0c8]">{c.cmd}</span>
-                {c.args && <span className="ml-1.5 font-mono text-[0.8rem] text-soft">{c.args}</span>}
-              </p>
-              <Copy text={c.cmd} />
-            </div>
-            <p className="mt-3 text-[0.97rem]">
-              {c.star && <span className="mr-1 text-sun" aria-label="まず覚える">★</span>}
-              <J text={c.desc} />
-            </p>
-            {c.ex && (
-              <p className="mt-2.5 rounded-xl bg-mint-bg px-3 py-1.5 text-[0.88rem]">
-                <span className="mr-1.5 font-bold text-mint">使いどき</span>
-                <J text={c.ex} />
-              </p>
-            )}
-            {c.alias && (
-              <p className="mt-auto pt-3 text-[0.8rem] text-soft">
-                同じ意味：<span className="font-mono">{c.alias}</span>
-              </p>
-            )}
-          </li>
-        ))}
-      </ul>
+
+      <div className="mt-3 border-t border-line">
+        <p className="ag-label hidden border-b border-line-soft py-2 md:grid md:grid-cols-[14rem_minmax(0,1fr)] md:gap-8">
+          <span>コマンド</span>
+          <span>説明</span>
+        </p>
+        <ul className="grid grid-cols-[minmax(0,1fr)]">
+          {list.map((c) => (
+            <li key={c.cmd} className="grid gap-x-8 gap-y-2 border-b border-line-soft py-5 md:grid-cols-[14rem_minmax(0,1fr)]">
+              <div className="flex items-baseline justify-between gap-3 md:pr-4">
+                <p className="min-w-0">
+                  <span className="ag-code text-[1rem]">{c.cmd}</span>
+                  {c.args && <span className="ag-code ml-1.5 text-soft">{c.args}</span>}
+                </p>
+                <span className="shrink-0">
+                  <Copy text={c.cmd} />
+                </span>
+              </div>
+              <div className="min-w-0">
+                <p>
+                  <J text={c.desc} />
+                </p>
+                {c.ex && (
+                  <p className="mt-1 text-[0.9rem] text-soft">
+                    <span className="mr-2 text-[0.72rem] tracking-[0.18em]">使いどき</span>
+                    <J text={c.ex} />
+                  </p>
+                )}
+                {c.alias && (
+                  <p className="mt-1 text-[0.85rem] text-soft">
+                    <span className="mr-2 text-[0.72rem] tracking-[0.18em]">同じ意味</span>
+                    <span className="ag-code">{c.alias}</span>
+                  </p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       {list.length === 0 && (
-        <p className="ag-card mt-3 p-8 text-center text-soft">
+        <p className="py-10 text-soft">
           <J text="見つかりませんでした。◇Claude Code で「/」だけ打つと、使える候補が出ます。" />
         </p>
       )}

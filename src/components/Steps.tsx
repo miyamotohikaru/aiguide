@@ -1,43 +1,31 @@
 import J from "./J";
 import Rich from "./Rich";
-import Callout from "./Callout";
-import Reveal from "./Reveal";
-import { TONE, type Tone } from "@/lib/site";
+import Note from "./Note";
 
-export type StepItem = { title: string; body: string; tip?: string; warn?: string; visual?: React.ReactNode };
+export type StepItem = { title: string; body: string; tip?: string; warn?: string };
 
-/**
- * 手順を1本の道に並べる。番号の玉を線でつなぎ、
- * 図（画面の見本など）があれば右（スマホでは下）に置く。
- */
-export default function Steps({ steps, tone = "sky" }: { steps: StepItem[]; tone?: Tone }) {
-  const t = TONE[tone];
+/** 手順。番号・見出し・本文を、細い罫線で区切って並べる */
+export default function Steps({ steps, start = 1 }: { steps: StepItem[]; start?: number }) {
   return (
-    <ol className="relative grid grid-cols-[minmax(0,1fr)] gap-6">
+    <ol className="grid grid-cols-[minmax(0,1fr)]">
       {steps.map((s, i) => (
-        <Reveal as="li" key={s.title} className="relative flex gap-4 sm:gap-6">
-          <div className="flex flex-none flex-col items-center">
-            <span className={`ag-num z-10 text-[1rem] ${t.solid}`}>{i + 1}</span>
-            {i < steps.length - 1 && <span className="mt-2 w-1 flex-1 rounded-full bg-line" aria-hidden />}
+        <li key={s.title} className="grid gap-x-10 gap-y-2 border-t border-line-soft py-7 first:border-t-0 first:pt-0 sm:grid-cols-[4rem_minmax(0,1fr)]">
+          <p className="ag-num pt-1">{String(start + i).padStart(2, "0")}</p>
+          <div className="min-w-0">
+            <h3 className="text-[1.15rem] leading-snug">
+              <J text={s.title} />
+            </h3>
+            <p className="mt-2 max-w-[38em]">
+              <Rich text={s.body} />
+            </p>
+            {(s.tip || s.warn) && (
+              <div className="mt-4 grid max-w-[38em] gap-3">
+                {s.tip && <Note kind="tip" text={s.tip} />}
+                {s.warn && <Note kind="warn" text={s.warn} />}
+              </div>
+            )}
           </div>
-          <div className={`ag-card min-w-0 flex-1 p-5 sm:p-7 ${s.visual ? "lg:grid lg:grid-cols-[1fr_300px] lg:gap-7" : ""}`}>
-            <div className="min-w-0">
-              <h4 className="font-round text-[1.18rem] font-extrabold leading-snug">
-                <J text={s.title} />
-              </h4>
-              <p className="mt-2">
-                <Rich text={s.body} />
-              </p>
-              {(s.tip || s.warn) && (
-                <div className="mt-4 grid gap-2.5">
-                  {s.tip && <Callout kind="tip" text={s.tip} />}
-                  {s.warn && <Callout kind="warn" text={s.warn} />}
-                </div>
-              )}
-            </div>
-            {s.visual && <div className="mt-5 lg:mt-0">{s.visual}</div>}
-          </div>
-        </Reveal>
+        </li>
       ))}
     </ol>
   );

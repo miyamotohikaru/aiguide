@@ -1,136 +1,121 @@
 import Link from "next/link";
 import J from "@/components/J";
 import RouteFinder from "@/components/RouteFinder";
-import JourneyMap from "@/components/JourneyMap";
-import Reveal from "@/components/Reveal";
-import HeroScene from "@/components/illust/HeroScene";
-import Robot from "@/components/illust/Robot";
-import Icon from "@/components/illust/Icons";
+import { SECTIONS } from "@/lib/site";
 import { COMMANDS } from "@/data/commands";
 import { WORDS } from "@/data/words";
 import { PROMPTS } from "@/data/prompts";
+import { TOOLS } from "@/data/ai";
+import { LINKS } from "@/data/links";
 
-const STATS = [
-  { n: "3", unit: "ルート", label: "公開のしかた", tone: "text-sky" },
-  { n: String(COMMANDS.length), unit: "個", label: "スラッシュコマンド", tone: "text-mint" },
-  { n: String(WORDS.length), unit: "語", label: "用語", tone: "text-[#9a6b00]" },
-  { n: String(PROMPTS.length), unit: "本", label: "プロンプト", tone: "text-pink" },
+const COUNT: Record<string, string> = {
+  "/ai": `${TOOLS.length}のツール`,
+  "/setup": "3つのルート",
+  "/terminal": "8つの命令",
+  "/commands": `${COMMANDS.length}個`,
+  "/words": `${WORDS.length}語`,
+  "/prompts": `${PROMPTS.length}本`,
+  "/links": `${LINKS.length}件`,
+};
+
+const GUIDE = [
+  { t: "準備をたしかめる", b: "「公開のしかた」の、5つのチェックだけ読む。", href: "/setup#check" },
+  { t: "AIに見てもらう", b: "「公開していい状態か、見てもらう」を貼る。", href: "/prompts#check-before-publish" },
+  { t: "言葉を引く", b: "わからない言葉が出たら、用語集で調べる。", href: "/words" },
 ];
 
 export default function Home() {
   return (
     <>
-      {/* ---------- ヒーロー ---------- */}
-      <section className="relative overflow-hidden">
-        <div className="ag-dots pointer-events-none absolute inset-0 opacity-50" aria-hidden />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-6 px-5 pb-10 pt-10 sm:px-8 md:grid-cols-[1.05fr_1fr] md:pb-16 md:pt-16">
-          <div>
-            <p className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-1.5 text-[0.88rem] font-bold shadow-[0_4px_14px_-8px_rgba(35,35,63,0.4)]">
-              <span className="h-2 w-2 rounded-full bg-mint" aria-hidden />
-              ターミナルを使ったことがない人へ
-            </p>
-            <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.22] sm:text-[3.6rem]">
-              <span className="j-s">作ったサイトを、</span>
-              <br />
-              <span className="j-s relative">
-                <span className="relative z-10">みんなに</span>
-                <span className="absolute inset-x-0 bottom-1 -z-0 h-4 rounded-full bg-sun/60 sm:h-5" aria-hidden />
-              </span>
-              <span className="j-s">届けよう。</span>
-            </h1>
-            <p className="mt-6 max-w-xl text-[1.05rem] text-soft sm:text-[1.15rem]">
-              <J text="AIと一緒に作ったサイトを、URLで誰でも見られるようにするまでの道案内。◇AIの選び方から、わからない言葉まで、ぜんぶここにあります。" />
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/setup" className="ag-btn bg-coral text-white">
-                <Icon name="rocket" className="h-5 w-5" />
-                公開のしかたを見る
+      {/* ---------- 扉 ---------- */}
+      <section className="mx-auto max-w-[1180px] px-6 pb-16 pt-16 sm:px-10 sm:pb-24 sm:pt-24">
+        <p className="ag-label">A GUIDE FOR BEGINNERS</p>
+        <h1 className="mt-7 max-w-[16em] text-[2.3rem] leading-[1.45] sm:text-[3.4rem]">
+          <J text="作ったサイトを、◇みんなに届けよう。" />
+        </h1>
+        <div className="mt-10 grid gap-10 md:grid-cols-[minmax(0,34em)_minmax(0,1fr)] md:items-end">
+          <p className="text-soft">
+            <J text="ターミナルを使ったことがなくても大丈夫です。AIと一緒に作ったサイトを、URLで誰でも見られるようにするまでを、はじめから順に案内します。◇AIの選び方、わからない言葉、AIへの頼み方も、ここにまとめました。" />
+          </p>
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 md:justify-end">
+            <Link href="/setup" className="ag-btn ag-btn-solid">
+              公開のしかたを見る
+            </Link>
+            <a href="#finder" className="ag-link text-[0.95rem]">
+              30秒で診断する
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- 目次 ---------- */}
+      <section className="mx-auto max-w-[1180px] px-6 sm:px-10">
+        <p className="ag-label border-t border-line pt-8">CONTENTS</p>
+        <ol className="mt-6">
+          {SECTIONS.map((s, i) => (
+            <li key={s.href} className="border-b border-line-soft first:border-t first:border-line-soft">
+              <Link href={s.href} className="group grid items-baseline gap-x-8 gap-y-1 py-6 sm:grid-cols-[3rem_minmax(0,13rem)_minmax(0,1fr)_auto]">
+                <span className="ag-num">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-[1.25rem] leading-snug">
+                  <span className="group-hover:border-b group-hover:border-ink">{s.label}</span>
+                </span>
+                <span className="text-[0.95rem] text-soft">
+                  <J text={s.desc} />
+                </span>
+                <span className="whitespace-nowrap text-[0.85rem] text-soft">{COUNT[s.href]}</span>
               </Link>
-              <a href="#finder" className="ag-btn bg-card text-ink">
-                30秒で診断する
-              </a>
-            </div>
-          </div>
-          <HeroScene className="mx-auto w-full max-w-[520px]" />
-        </div>
-      </section>
-
-      {/* ---------- 数字 ---------- */}
-      <section className="mx-auto max-w-6xl px-5 sm:px-8">
-        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {STATS.map((s, i) => (
-            <Reveal as="li" key={s.label} delay={i * 60} className="ag-card px-5 py-4 text-center">
-              <p className={`font-round text-[2.2rem] font-extrabold leading-none ${s.tone}`}>
-                {s.n}
-                <span className="ml-0.5 text-[1rem]">{s.unit}</span>
-              </p>
-              <p className="mt-1.5 text-[0.9rem] font-bold text-soft">{s.label}</p>
-            </Reveal>
+            </li>
           ))}
-        </ul>
-      </section>
-
-      {/* ---------- 冒険マップ ---------- */}
-      <section className="mx-auto max-w-6xl px-5 pt-20 sm:px-8 sm:pt-28">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="font-bold text-coral">MAP</p>
-            <h2 className="text-[1.8rem] font-extrabold leading-snug sm:text-[2.4rem]">
-              <J text="このサイトの歩きかた" />
-            </h2>
-            <p className="mt-2 text-soft">
-              <J text="上から順に読めば、公開までたどり着きます。◆気になるところから開いてもOK。" />
-            </p>
-          </div>
-        </div>
-        <div className="mt-8">
-          <JourneyMap />
-        </div>
+        </ol>
       </section>
 
       {/* ---------- 診断 ---------- */}
-      <section id="finder" className="mx-auto max-w-6xl px-5 pt-20 sm:px-8 sm:pt-28">
-        <p className="font-bold text-sky">QUIZ</p>
-        <h2 className="text-[1.8rem] font-extrabold leading-snug sm:text-[2.4rem]">
-          <J text="あなたに合う公開の方法は？" />
-        </h2>
-        <p className="mt-2 text-soft">
-          <J text="3つ答えるだけ。おすすめのルートと、手順のページに案内します。" />
-        </p>
-        <div className="mt-8">
-          <RouteFinder base="/setup" />
+      <section id="finder" className="mx-auto max-w-[1180px] scroll-mt-24 px-6 pt-20 sm:px-10 sm:pt-28">
+        <div className="border-t border-line pt-8 sm:pt-10">
+          <div className="grid gap-x-10 gap-y-4 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
+            <div>
+              <p className="ag-label">QUIZ</p>
+              <h2 className="mt-1 text-[1.4rem] leading-snug sm:text-[1.7rem]">
+                <J text="あなたに合う公開の方法は？" />
+              </h2>
+            </div>
+            <div className="min-w-0">
+              <p className="max-w-[36em] text-soft">
+                <J text="3つ答えるだけ。おすすめのルートと、手順のページに案内します。" />
+              </p>
+              <div className="mt-8">
+                <RouteFinder base="/setup" />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ---------- 迷ったら ---------- */}
-      <section className="mx-auto max-w-6xl px-5 pt-20 sm:px-8 sm:pt-28">
-        <div className="relative overflow-hidden rounded-[32px] bg-ink p-7 text-white sm:p-12">
-          <div className="grid items-center gap-8 md:grid-cols-[1fr_200px]">
+      <section className="mx-auto max-w-[1180px] px-6 pt-20 sm:px-10 sm:pt-28">
+        <div className="border-t border-line pt-8 sm:pt-10">
+          <div className="grid gap-x-10 gap-y-4 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
             <div>
-              <h2 className="text-[1.6rem] font-extrabold sm:text-[2rem]">迷ったら、この3ステップ。</h2>
-              <ol className="mt-7 grid gap-5 sm:grid-cols-3">
-                {[
-                  { t: "準備をたしかめる", b: "「公開のしかた」の、5つのチェックだけ読む。", href: "/setup#check", c: "#3d6ff5" },
-                  { t: "AIに見てもらう", b: "「公開していい状態か、見てもらう」を貼る。", href: "/prompts#check-before-publish", c: "#e0487a" },
-                  { t: "言葉を引く", b: "わからない言葉が出たら、用語集で調べる。", href: "/words", c: "#f5b100" },
-                ].map((x, i) => (
-                  <li key={x.t}>
-                    <Link href={x.href} className="group block h-full rounded-2xl bg-white/8 p-5 transition-colors hover:bg-white/15">
-                      <span className="ag-num text-[0.95rem]" style={{ background: x.c }}>
-                        {i + 1}
-                      </span>
-                      <p className="mt-3 font-round text-[1.1rem] font-extrabold">{x.t}</p>
-                      <p className="mt-1 text-[0.93rem] text-white/80">
-                        <J text={x.b} />
-                      </p>
-                    </Link>
-                  </li>
-                ))}
-              </ol>
+              <p className="ag-label">WHERE TO START</p>
+              <h2 className="mt-1 text-[1.4rem] leading-snug sm:text-[1.7rem]">
+                <J text="迷ったら、この3つから。" />
+              </h2>
             </div>
-            <div className="mx-auto hidden h-48 w-48 items-center justify-center rounded-full bg-sun-bg md:flex">
-              <Robot pose="point" body="#0f9f76" className="w-36" />
-            </div>
+            <ol className="min-w-0">
+              {GUIDE.map((g, i) => (
+                <li key={g.t} className="border-b border-line-soft first:border-t first:border-line-soft">
+                  <Link href={g.href} className="group grid items-baseline gap-x-8 gap-y-1 py-6 sm:grid-cols-[3rem_minmax(0,11rem)_minmax(0,1fr)]">
+                    <span className="ag-num">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-[1.08rem]">
+                      <span className="group-hover:border-b group-hover:border-ink">{g.t}</span>
+                    </span>
+                    <span className="text-[0.95rem] text-soft">
+                      <J text={g.b} />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>

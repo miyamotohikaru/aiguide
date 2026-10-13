@@ -4,9 +4,6 @@
  * 料金は変わりやすいので「無料あり／有料は月$20〜」くらいの粒度にとどめる。
  * 確認できなかった値（v0 の有料プランの価格、Claude Max の段階など）は載せない。
  */
-import type { Tone } from "@/lib/site";
-import type { IconName } from "@/components/illust/Icons";
-
 export const AI_CHECKED = "2026年9月17日";
 
 export type AiType = "chat" | "nocode" | "editor" | "agent";
@@ -14,12 +11,13 @@ export type AiType = "chat" | "nocode" | "editor" | "agent";
 export const TYPES: {
   id: AiType;
   label: string;
-  tone: Tone;
-  icon: IconName;
   one: string;
   like: string;
-  x: number; // 0=かんたん … 1=自由に作りこめる
-  y: number; // 0=話して教わる … 1=おまかせで作ってくれる
+  /** 以下は旧デザイン（2軸マップ）の名残。いまは使っていない */
+  tone?: string;
+  icon?: string;
+  x?: number;
+  y?: number;
 }[] = [
   {
     id: "chat",
@@ -319,7 +317,7 @@ export function recommend(goal: Goal, budget: Budget, term: Term): { id: string;
 }
 
 /** おすすめの組み合わせ */
-export const COMBOS: { title: string; lead: string; steps: { tool: string; act: string; tone: Tone; icon: IconName }[] }[] = [
+export const COMBOS: { title: string; lead: string; steps: { tool: string; act: string; tone?: string; icon?: string }[] }[] = [
   {
     title: "最短コース",
     lead: "コードを見ずに、今日公開する。",

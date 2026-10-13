@@ -17,13 +17,13 @@ export const DEMO_HELLO: TermLine[] = [
 
 export const DEMO_DEPLOY: TermLine[] = [
   { cmd: "cd Desktop/mysite", out: [] },
-  { cmd: "npx vercel", out: ["? Set up and deploy? yes", "🔍 Preview: https://mysite-abc123.vercel.app"] },
-  { cmd: "npx vercel --prod", out: ["✅ Production: https://mysite.vercel.app"] },
+  { cmd: "npx vercel", out: ["? Set up and deploy? yes", "Preview: https://mysite-abc123.vercel.app"] },
+  { cmd: "npx vercel --prod", out: ["Production: https://mysite.vercel.app"] },
 ];
 
 export const DEMO_CLAUDE: TermLine[] = [
   { cmd: "cd Desktop/mysite", out: [] },
-  { cmd: "claude", out: ["✻ Welcome to Claude Code!", "> このサイトをスマホでも見やすくして"] },
+  { cmd: "claude", out: ["Welcome to Claude Code!", "> このサイトをスマホでも見やすくして"] },
 ];
 
 /** 開きかた */
