@@ -5,6 +5,7 @@ import Section from "@/components/Section";
 import CommandsView from "@/components/CommandsView";
 import Copy from "@/components/Copy";
 import J from "@/components/J";
+import { Slash } from "@/components/doodle/Doodles";
 import { COMMANDS, COMMANDS_CHECKED, COMMANDS_SOURCE } from "@/data/commands";
 
 export const metadata: Metadata = {
@@ -22,6 +23,10 @@ export default function CommandsPage() {
   const stars = COMMANDS.filter((c) => c.star);
   return (
     <>
+      <div className="mx-auto max-w-[1180px] px-6 pt-12 sm:px-10 sm:pt-16">
+        <Slash className="w-24 sm:w-28" />
+      </div>
+
       <PageHead
         en="Slash Commands"
         title="「/」で始まる、◆AIの操作ボタン。"

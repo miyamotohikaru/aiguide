@@ -1,6 +1,7 @@
 import Link from "next/link";
 import J from "../J";
 import { TYPES, type Tool } from "@/data/ai";
+import { thumbForTool } from "@/data/thumbs";
 
 const TERM = { yes: "ターミナル不要", partly: "アプリならターミナル不要", no: "ターミナルを使う" };
 export const EASY = { 3: "はじめてでも", 2: "すこし慣れが要る", 1: "なれてから" } as const;
@@ -8,8 +9,19 @@ export const EASY = { 3: "はじめてでも", 2: "すこし慣れが要る", 1:
 /** 枠で囲んだ小さな紹介。おすすめの結果などで使う */
 export default function ToolCard({ tool, why }: { tool: Tool; why?: string }) {
   const type = TYPES.find((t) => t.id === tool.type)!;
+  const thumb = thumbForTool(tool.id);
   return (
     <article className="ag-box flex h-full flex-col p-6">
+      {thumb && (
+        <img
+          src={thumb}
+          alt=""
+          width={480}
+          height={300}
+          loading="lazy"
+          className="mb-5 w-full border border-line-soft object-cover"
+        />
+      )}
       <p className="ag-label">{type.label}</p>
       <h3 className="mt-2 text-[1.2rem] leading-snug">
         <J text={tool.name} />

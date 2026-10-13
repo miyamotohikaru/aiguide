@@ -7,6 +7,7 @@ import RouteFinder from "@/components/RouteFinder";
 import RouteTabs from "@/components/RouteTabs";
 import J from "@/components/J";
 import Rich from "@/components/Rich";
+import { Laptop, Cloud, Phone } from "@/components/doodle/Doodles";
 import { ROUTES, AI_PROMPT, CHECKS, HOSTS, TROUBLES } from "@/data/setup";
 
 export const metadata: Metadata = {
@@ -24,7 +25,9 @@ const INDEX = [
   ["#trouble", "困ったとき"],
 ];
 
-/** 01 のしくみ。図はやめて、3つの欄で見せる */
+/** 01 のしくみ。3つの欄の上に、手描きの絵をひとつずつ */
+const FLOW_ART = [Laptop, Cloud, Phone];
+
 const FLOW = [
   { term: "自分のパソコン", sub: "ローカル", body: "いま作ったファイルがある場所。ここにあるうちは、自分にしか見えない。" },
   { term: "置き場所", sub: "ホスティング", body: "ネットにつながりっぱなしの預け先。ここにコピーすることを「公開」という。" },
@@ -54,18 +57,22 @@ export default function SetupPage() {
 
       <Section id="how" no="01" title="公開って、何をすること？" lead="自分のパソコンにあるファイルを、ネット上の「置き場所」にコピーすることです。">
         <dl className="grid grid-cols-[minmax(0,1fr)] md:grid-cols-3 md:gap-x-10">
-          {FLOW.map((f, i) => (
-            <div key={f.term} className="border-t border-line-soft py-6 first:border-t-0 first:pt-0 md:border-t-0 md:pt-0">
-              <dt>
-                <span className="ag-num">{`0${i + 1}`}</span>
-                <span className="mt-1 block text-[1.15rem]">{f.term}</span>
-                <span className="ag-label">{f.sub}</span>
-              </dt>
-              <dd className="mt-3 text-[0.97rem] text-soft">
-                <J text={f.body} />
-              </dd>
-            </div>
-          ))}
+          {FLOW.map((f, i) => {
+            const Art = FLOW_ART[i];
+            return (
+              <div key={f.term} className="border-t border-line-soft py-6 first:border-t-0 first:pt-0 md:border-t-0 md:pt-0">
+                <dt>
+                  <Art className="mb-4 w-14" />
+                  <span className="ag-num">{`0${i + 1}`}</span>
+                  <span className="mt-1 block text-[1.15rem]">{f.term}</span>
+                  <span className="ag-label">{f.sub}</span>
+                </dt>
+                <dd className="mt-3 text-[0.97rem] text-soft">
+                  <J text={f.body} />
+                </dd>
+              </div>
+            );
+          })}
         </dl>
         <p className="mt-10 max-w-[38em]">
           <J text="いま作ったサイトは、あなたのパソコンの中にだけあります。◇だから、URLを送っても、ほかの人には開けません。◇ネットにずっとつながっている「置き場所」にコピーすると、はじめて誰でも見られるようになります。" />

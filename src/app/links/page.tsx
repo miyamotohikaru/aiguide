@@ -3,6 +3,8 @@ import PageHead from "@/components/PageHead";
 import Section from "@/components/Section";
 import J from "@/components/J";
 import { LINKS, LINK_CATS, LINKS_CHECKED } from "@/data/links";
+import { thumbForUrl } from "@/data/thumbs";
+import { Map } from "@/components/doodle/Doodles";
 
 export const metadata: Metadata = {
   title: "参考リンク",
@@ -18,11 +20,14 @@ const CARE = [
 export default function LinksPage() {
   return (
     <>
-      <PageHead
-        en="LINKS"
-        title="知りたくなったら、◇ここから。"
-        lead={`公式の手引き、スキルやプロンプトの配布、学習サイト、素材集。${LINKS.length}件を実際に開いて、何が載っているかを確かめました。`}
-      />
+      <div className="relative">
+        <PageHead
+          en="LINKS"
+          title="知りたくなったら、◇ここから。"
+          lead={`公式の手引き、スキルやプロンプトの配布、学習サイト、素材集。${LINKS.length}件を実際に開いて、何が載っているかを確かめました。`}
+        />
+        <Map className="pointer-events-none absolute right-6 top-14 w-20 sm:right-10 sm:top-20 sm:w-28" />
+      </div>
 
       <nav aria-label="このページの目次" className="mx-auto max-w-[1180px] px-6 sm:px-10">
         <ul className="flex flex-wrap gap-x-7 gap-y-2 border-t border-line pt-6 text-[0.95rem]">
@@ -41,35 +46,48 @@ export default function LinksPage() {
         return (
           <Section key={c.id} id={c.id} no={String(ci + 1).padStart(2, "0")} title={c.label} lead={c.lead}>
             <ul>
-              {items.map((l) => (
-                <li key={l.url} className="border-b border-line-soft first:border-t first:border-line-soft">
-                  <a href={l.url} target="_blank" rel="noreferrer" className="group grid gap-x-8 gap-y-2 py-6 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
-                    <div>
-                      <p className="text-[1.08rem] leading-snug">
-                        <span className="group-hover:border-b group-hover:border-ink">
-                          <J text={l.name} />
-                        </span>
-                      </p>
-                      <p className="mt-1.5 text-[0.85rem] text-soft">
-                        {l.lang}　{l.cost}
-                      </p>
-                    </div>
-                    <div className="min-w-0">
-                      <p className="max-w-[34em]">
-                        <J text={l.desc} />
-                      </p>
-                      {l.note && (
-                        <p className="mt-1 max-w-[34em] text-[0.92rem] text-soft">
-                          <J text={l.note} />
-                        </p>
+              {items.map((l) => {
+                const thumb = thumbForUrl(l.url);
+                return (
+                  <li key={l.url} className="border-b border-line-soft first:border-t first:border-line-soft">
+                    <a href={l.url} target="_blank" rel="noreferrer" className="group grid gap-x-8 gap-y-4 py-7 md:grid-cols-[13rem_minmax(0,1fr)]">
+                      {thumb ? (
+                        <img
+                          src={thumb}
+                          alt=""
+                          width={480}
+                          height={300}
+                          loading="lazy"
+                          className="w-full max-w-[13rem] border border-line-soft object-cover"
+                        />
+                      ) : (
+                        <span className="hidden md:block" />
                       )}
-                      <p className="mt-2 font-mono text-[0.76rem] tracking-normal text-soft">
-                        {l.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
-                      </p>
-                    </div>
-                  </a>
-                </li>
-              ))}
+                      <div className="min-w-0">
+                        <p className="text-[1.08rem] leading-snug">
+                          <span className="group-hover:border-b group-hover:border-ink">
+                            <J text={l.name} />
+                          </span>
+                        </p>
+                        <p className="mt-1.5 text-[0.85rem] text-soft">
+                          {l.lang}　{l.cost}
+                        </p>
+                        <p className="mt-2 max-w-[34em]">
+                          <J text={l.desc} />
+                        </p>
+                        {l.note && (
+                          <p className="mt-1 max-w-[34em] text-[0.92rem] text-soft">
+                            <J text={l.note} />
+                          </p>
+                        )}
+                        <p className="mt-2 font-mono text-[0.76rem] tracking-normal text-soft">
+                          {l.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+                        </p>
+                      </div>
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </Section>
         );

@@ -3,6 +3,7 @@ import PageHead from "@/components/PageHead";
 import Section from "@/components/Section";
 import PromptsView from "@/components/PromptsView";
 import J from "@/components/J";
+import { Bubble } from "@/components/doodle/Doodles";
 import { PROMPTS } from "@/data/prompts";
 
 export const metadata: Metadata = {
@@ -19,6 +20,10 @@ const TIPS: { t: string; bad: string; good: string }[] = [
 export default function PromptsPage() {
   return (
     <>
+      <div className="mx-auto max-w-[1180px] px-6 pt-12 sm:px-10 sm:pt-16">
+        <Bubble className="w-24 sm:w-28" />
+      </div>
+
       <PageHead
         en="Prompts"
         title="コピーして、◆貼るだけ。"

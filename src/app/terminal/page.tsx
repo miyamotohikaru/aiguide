@@ -9,6 +9,7 @@ import J from "@/components/J";
 import Rich from "@/components/Rich";
 import Tabs from "@/components/terminal/Tabs";
 import Term from "@/components/terminal/Term";
+import { Window } from "@/components/doodle/Doodles";
 import {
   DEMO_HELLO,
   DEMO_DEPLOY,
@@ -74,6 +75,10 @@ function OpenPanel({ way }: { way: (typeof OPEN_WAYS)[keyof typeof OPEN_WAYS] })
 export default function TerminalPage() {
   return (
     <>
+      <div className="mx-auto max-w-[1180px] px-6 pt-12 sm:px-10 sm:pt-16">
+        <Window className="w-24 sm:w-28" />
+      </div>
+
       <PageHead
         en="Terminal"
         title="黒い画面は、◆こわくない。"

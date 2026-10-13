@@ -3,6 +3,7 @@ import PageHead from "@/components/PageHead";
 import Section from "@/components/Section";
 import WordsView from "@/components/WordsView";
 import J from "@/components/J";
+import { Book } from "@/components/doodle/Doodles";
 import { WORDS } from "@/data/words";
 
 export const metadata: Metadata = {
@@ -26,6 +27,10 @@ const PARTS: { name: string; where: string; note: string }[] = [
 export default function WordsPage() {
   return (
     <>
+      <div className="mx-auto max-w-[1180px] px-6 pt-12 sm:px-10 sm:pt-16">
+        <Book className="w-24 sm:w-28" />
+      </div>
+
       <PageHead
         en="Words"
         title="言葉がわかると、◆頼み方が変わる。"

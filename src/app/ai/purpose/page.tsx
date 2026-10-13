@@ -7,7 +7,14 @@ import Note from "@/components/Note";
 import Copy from "@/components/Copy";
 import J from "@/components/J";
 import { PURPOSES } from "@/data/purposes";
+import { Map } from "@/components/doodle/Doodles";
 import { TOOLS, AI_CHECKED } from "@/data/ai";
+import { thumbForTool, thumbForUrl } from "@/data/thumbs";
+
+/** その候補のサムネ。ツールの id があればそれを、無ければURLから探す */
+function thumbOf(id: string | undefined, url: string): string | null {
+  return (id ? thumbForTool(id) : null) ?? thumbForUrl(url);
+}
 
 export const metadata: Metadata = {
   title: "目的別：いちばんいいAI",
@@ -39,11 +46,14 @@ function PromptBody({ text }: { text: string }) {
 export default function PurposePage() {
   return (
     <>
-      <PageHead
-        en="Best AI for you"
-        title="やりたいことから、◆AIを選ぶ。"
-        lead="資料、リサーチ、画像、Webサイト。目的ごとに「いちばんいいAI」と、うまく作る手順、そのまま使えるお願い文をまとめました。"
-      />
+      <div className="relative">
+        <PageHead
+          en="Best AI for you"
+          title="やりたいことから、◆AIを選ぶ。"
+          lead="資料、リサーチ、画像、Webサイト。目的ごとに「いちばんいいAI」と、うまく作る手順、そのまま使えるお願い文をまとめました。"
+        />
+        <Map className="pointer-events-none absolute right-6 top-14 w-20 sm:right-10 sm:top-20 sm:w-28" />
+      </div>
 
       <Section no="00" title="なにをしたい？" lead="押すと、その目的の説明にとびます。">
         <ul className="grid grid-cols-[minmax(0,1fr)] gap-x-12 sm:grid-cols-2">
@@ -63,9 +73,11 @@ export default function PurposePage() {
 
       {PURPOSES.map((p, i) => {
         const bestTool = TOOLS.find((t) => t.id === p.best.id);
+        const bestThumb = thumbOf(p.best.id, p.best.url);
         return (
           <Section key={p.id} id={p.id} no={String(i + 1).padStart(2, "0")} title={p.label}>
-            <div className="ag-box p-6 sm:p-8">
+            <div className="ag-box grid gap-x-10 gap-y-6 p-6 sm:p-8 md:grid-cols-[minmax(0,1fr)_16rem] md:items-start">
+              <div className="min-w-0">
               <p className="ag-label">いちばんのおすすめ</p>
               <p className="mt-2 text-[1.5rem] leading-snug">
                 <J text={p.best.tool} />
@@ -83,6 +95,17 @@ export default function PurposePage() {
                   </Link>
                 )}
               </p>
+              </div>
+              {bestThumb && (
+                <img
+                  src={bestThumb}
+                  alt=""
+                  width={480}
+                  height={300}
+                  loading="lazy"
+                  className="w-full max-w-[16rem] border border-line-soft object-cover"
+                />
+              )}
             </div>
 
             <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-x-12 gap-y-10 lg:grid-cols-2">
@@ -91,8 +114,22 @@ export default function PurposePage() {
                 <ul className="mt-3 grid grid-cols-[minmax(0,1fr)]">
                   {p.also.map((a) => {
                     const t = TOOLS.find((x) => x.id === a.id);
+                    const alsoThumb = thumbOf(a.id, a.url);
                     return (
-                      <li key={a.tool} className="border-t border-line-soft py-4">
+                      <li key={a.tool} className="grid gap-x-5 gap-y-3 border-t border-line-soft py-4 sm:grid-cols-[8rem_minmax(0,1fr)]">
+                        {alsoThumb ? (
+                          <img
+                            src={alsoThumb}
+                            alt=""
+                            width={480}
+                            height={300}
+                            loading="lazy"
+                            className="w-full max-w-[8rem] border border-line-soft object-cover"
+                          />
+                        ) : (
+                          <span className="hidden sm:block" />
+                        )}
+                        <div className="min-w-0">
                         <p>
                           {t ? (
                             <Link href={`/ai/${t.id}`} className="ag-link">
@@ -107,6 +144,7 @@ export default function PurposePage() {
                         <p className="mt-1 text-[0.95rem] text-soft">
                           <J text={a.why} />
                         </p>
+                        </div>
                       </li>
                     );
                   })}

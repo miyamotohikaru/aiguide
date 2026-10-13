@@ -5,6 +5,7 @@ import Section from "@/components/Section";
 import Note from "@/components/Note";
 import J from "@/components/J";
 import AiChooser from "@/components/ai/AiChooser";
+import { Tools } from "@/components/doodle/Doodles";
 import ToolDex from "@/components/ai/ToolDex";
 import { AI_CHECKED, COMBOS, TOOLS, TYPES } from "@/data/ai";
 import { PURPOSES } from "@/data/purposes";
@@ -17,11 +18,14 @@ export const metadata: Metadata = {
 export default function AiPage() {
   return (
     <>
-      <PageHead
-        en="Choose AI"
-        title="どのAIを使う？◆まずはタイプから。"
-        lead="AIの道具は、たくさんあって迷います。でも、タイプは4つだけ。自分に合うタイプがわかれば、選ぶのはかんたんです。"
-      />
+      <div className="relative">
+        <PageHead
+          en="Choose AI"
+          title="どのAIを使う？◆まずはタイプから。"
+          lead="AIの道具は、たくさんあって迷います。でも、タイプは4つだけ。自分に合うタイプがわかれば、選ぶのはかんたんです。"
+        />
+        <Tools className="pointer-events-none absolute right-6 top-14 w-20 sm:right-10 sm:top-20 sm:w-28" />
+      </div>
 
       <Section id="types" no="01" title="AIには、4つのタイプがある" lead="チャット型とノーコード生成型は、気軽に始められる。エディタ型とエージェント型は、自由で強力。">
         <dl className="grid grid-cols-[minmax(0,1fr)]">

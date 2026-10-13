@@ -7,6 +7,7 @@ import J from "@/components/J";
 import { TOOLS, TYPES, AI_CHECKED } from "@/data/ai";
 import { DETAILS } from "@/data/ai-details";
 import { PURPOSES } from "@/data/purposes";
+import { thumbForTool } from "@/data/thumbs";
 import type { Mode } from "@/data/ai-detail-types";
 import { EASY } from "@/components/ai/ToolCard";
 
@@ -104,12 +105,23 @@ export default async function ToolPage({ params }: { params: Promise<{ id: strin
   const next = TOOLS[(idx + 1) % TOOLS.length];
   const purposes = d.bestFor.map((p) => PURPOSES.find((x) => x.id === p)).filter((p) => p !== undefined);
   const levels = d.thinkingKind === "levels";
+  const thumb = thumbForTool(tool.id);
 
   return (
     <>
       <PageHead en={`${type.label}　${tool.maker}`} title={tool.name} lead={tool.one} />
 
       <div className="mx-auto max-w-[1180px] px-6 sm:px-10">
+        {thumb && (
+          <img
+            src={thumb}
+            alt=""
+            width={480}
+            height={300}
+            loading="lazy"
+            className="mb-12 w-full max-w-[22rem] border border-line-soft object-cover"
+          />
+        )}
         <dl className="grid grid-cols-[minmax(0,1fr)] border-t border-line sm:grid-cols-3">
           {[
             ["料金", tool.price],

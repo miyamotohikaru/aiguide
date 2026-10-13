@@ -5,6 +5,7 @@ import { useState } from "react";
 import Chips from "../Chips";
 import J from "../J";
 import { TOOLS, TYPES, type AiType } from "@/data/ai";
+import { thumbForTool } from "@/data/thumbs";
 import { EASY } from "./ToolCard";
 
 type F = "all" | AiType;
@@ -27,10 +28,22 @@ export default function ToolDex() {
         {list.length} 件
       </p>
       <ul className="mt-2 grid grid-cols-[minmax(0,1fr)]">
-        {list.map((t) => (
+        {list.map((t) => {
+          const thumb = thumbForTool(t.id);
+          return (
           <li key={t.id} className="border-t border-line-soft py-6">
-            <div className="grid gap-x-10 gap-y-3 md:grid-cols-[minmax(0,14rem)_minmax(0,1fr)_minmax(0,12rem)]">
+            <div className="grid gap-x-10 gap-y-3 md:grid-cols-[minmax(0,14rem)_minmax(0,1fr)_minmax(0,10rem)]">
               <div>
+                {thumb && (
+                  <img
+                    src={thumb}
+                    alt=""
+                    width={480}
+                    height={300}
+                    loading="lazy"
+                    className="mb-3 w-full max-w-[13rem] border border-line-soft object-cover"
+                  />
+                )}
                 <h3 className="text-[1.12rem] leading-snug">
                   <Link href={`/ai/${t.id}`} className="ag-link">
                     <J text={t.name} />
@@ -63,7 +76,8 @@ export default function ToolDex() {
               </p>
             </div>
           </li>
-        ))}
+          );
+        })}
       </ul>
     </div>
   );

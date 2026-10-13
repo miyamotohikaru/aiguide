@@ -7,6 +7,7 @@ import { WORDS } from "@/data/words";
 import { PROMPTS } from "@/data/prompts";
 import { TOOLS } from "@/data/ai";
 import { LINKS } from "@/data/links";
+import { PaperPlane } from "@/components/doodle/Doodles";
 
 const COUNT: Record<string, string> = {
   "/ai": `${TOOLS.length}のツール`,
@@ -29,10 +30,16 @@ export default function Home() {
     <>
       {/* ---------- 扉 ---------- */}
       <section className="mx-auto max-w-[1180px] px-6 pb-16 pt-16 sm:px-10 sm:pb-24 sm:pt-24">
-        <p className="ag-label">A GUIDE FOR BEGINNERS</p>
-        <h1 className="mt-7 max-w-[16em] text-[2.3rem] leading-[1.45] sm:text-[3.4rem]">
-          <J text="作ったサイトを、◇みんなに届けよう。" />
-        </h1>
+        <PaperPlane className="mb-6 w-16 sm:hidden" />
+        <div className="flex items-start justify-between gap-8">
+          <div>
+            <p className="ag-label">A GUIDE FOR BEGINNERS</p>
+            <h1 className="mt-7 max-w-[16em] text-[2.3rem] leading-[1.45] sm:text-[3.4rem]">
+              <J text="作ったサイトを、◇みんなに届けよう。" />
+            </h1>
+          </div>
+          <PaperPlane className="mt-2 hidden w-32 flex-none sm:block" />
+        </div>
         <div className="mt-10 grid gap-10 md:grid-cols-[minmax(0,34em)_minmax(0,1fr)] md:items-end">
           <p className="text-soft">
             <J text="ターミナルを使ったことがなくても大丈夫です。AIと一緒に作ったサイトを、URLで誰でも見られるようにするまでを、はじめから順に案内します。◇AIの選び方、わからない言葉、AIへの頼み方も、ここにまとめました。" />
