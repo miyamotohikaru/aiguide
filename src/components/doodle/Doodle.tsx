@@ -22,12 +22,16 @@ export const C = {
 /**
  * 粒（紙の目）と、揺れた輪郭のフィルター。
  * seed を変えると粒の出方が変わるので、絵ごとに違う値を渡す。
+ *
+ * filterUnits="userSpaceOnUse" は必須。
+ * 既定（図形の外接矩形を基準）だと、まっすぐな縦線・横線は矩形の幅か高さが0になり、
+ * フィルターの適用範囲も0になって、線ごと消えてしまう。
  */
 export function DoodleDefs({ seed = 3 }: { seed?: number }) {
   return (
     <defs>
       {/* 塗り: ノイズでまだらに抜いて、クレヨンの粒を作る */}
-      <filter id={`grain-${seed}`} x="-15%" y="-15%" width="130%" height="130%">
+      <filter id={`grain-${seed}`} filterUnits="userSpaceOnUse" x="-20" y="-20" width="160" height="160">
         <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" seed={seed} result="n" />
         <feColorMatrix
           in="n"
@@ -41,7 +45,7 @@ export function DoodleDefs({ seed = 3 }: { seed?: number }) {
         <feComposite in="SourceGraphic" in2="a" operator="in" />
       </filter>
       {/* 線: すこし揺らして、定規で引いていない線にする */}
-      <filter id={`wobble-${seed}`} x="-15%" y="-15%" width="130%" height="130%">
+      <filter id={`wobble-${seed}`} filterUnits="userSpaceOnUse" x="-20" y="-20" width="160" height="160">
         <feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="2" seed={seed + 11} result="w" />
         <feDisplacementMap in="SourceGraphic" in2="w" scale="3.2" xChannelSelector="R" yChannelSelector="G" />
       </filter>

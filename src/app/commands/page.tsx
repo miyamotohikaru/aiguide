@@ -6,6 +6,7 @@ import CommandsView from "@/components/CommandsView";
 import Copy from "@/components/Copy";
 import J from "@/components/J";
 import { Slash } from "@/components/doodle/Doodles";
+import { CMD_DOODLE } from "@/components/doodle/CommandDoodles";
 import { COMMANDS, COMMANDS_CHECKED, COMMANDS_SOURCE } from "@/data/commands";
 
 export const metadata: Metadata = {
@@ -53,8 +54,11 @@ export default function CommandsPage() {
 
       <Section no="02" title="まず覚える10個" lead="この10個を知っていれば、たいていのことは足ります。">
         <ul className="grid grid-cols-[minmax(0,1fr)] border-t border-line">
-          {stars.map((c) => (
-            <li key={c.cmd} className="grid gap-x-8 gap-y-1 border-b border-line-soft py-4 sm:grid-cols-[12rem_minmax(0,1fr)]">
+          {stars.map((c) => {
+            const Pic = CMD_DOODLE[c.cmd];
+            return (
+            <li key={c.cmd} className="grid gap-x-8 gap-y-2 border-b border-line-soft py-5 sm:grid-cols-[4rem_12rem_minmax(0,1fr)]">
+              <div>{Pic && <Pic className="w-14" />}</div>
               <div className="flex items-baseline justify-between gap-3 sm:pr-4">
                 <span className="ag-code text-[1rem]">{c.cmd}</span>
                 <span className="shrink-0">
@@ -65,7 +69,8 @@ export default function CommandsPage() {
                 <J text={c.desc} />
               </p>
             </li>
-          ))}
+            );
+          })}
         </ul>
       </Section>
 
