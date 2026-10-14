@@ -55,35 +55,29 @@ export default function CommandsView() {
                 <span className="ml-auto text-[0.85rem] text-soft">{g.items.length} 個</span>
               </div>
             )}
-            <ul className={`grid grid-cols-[minmax(0,1fr)] ${g.cat ? "" : "border-t border-line"}`}>
+            <ul className="mt-7 grid grid-cols-2 gap-x-6 gap-y-7 sm:grid-cols-3 lg:grid-cols-5">
               {g.items.map((c) => (
-                <li key={c.cmd} className="grid gap-x-8 gap-y-2 border-b border-line-soft py-5 md:grid-cols-[14rem_minmax(0,1fr)]">
-                  <div className="flex items-baseline justify-between gap-3 md:pr-4">
-                    <p className="min-w-0">
-                      <span className="ag-code text-[1rem]">{c.cmd}</span>
-                      {c.args && <span className="ag-code ml-1.5 text-soft">{c.args}</span>}
+                <li key={c.cmd} className="flex flex-col border-t border-line-soft pt-4">
+                  <p className="break-all">
+                    <span className="ag-code text-[0.95rem]">{c.cmd}</span>
+                  </p>
+                  {c.args && <p className="ag-code mt-0.5 block text-[0.75rem] text-soft">{c.args}</p>}
+                  <p className="mt-2 text-[0.92rem] leading-[1.8]">
+                    <J text={c.desc} />
+                  </p>
+                  {c.ex && (
+                    <p className="mt-1.5 text-[0.82rem] leading-[1.7] text-soft">
+                      <J text={c.ex} />
                     </p>
-                    <span className="shrink-0">
-                      <Copy text={c.cmd} />
-                    </span>
-                  </div>
-                  <div className="min-w-0">
-                    <p>
-                      <J text={c.desc} />
+                  )}
+                  {c.alias && (
+                    <p className="mt-1.5 text-[0.78rem] text-soft">
+                      <span className="ag-code">{c.alias}</span>
                     </p>
-                    {c.ex && (
-                      <p className="mt-1 text-[0.9rem] text-soft">
-                        <span className="mr-2 text-[0.72rem] tracking-[0.18em]">使いどき</span>
-                        <J text={c.ex} />
-                      </p>
-                    )}
-                    {c.alias && (
-                      <p className="mt-1 text-[0.85rem] text-soft">
-                        <span className="mr-2 text-[0.72rem] tracking-[0.18em]">同じ意味</span>
-                        <span className="ag-code">{c.alias}</span>
-                      </p>
-                    )}
-                  </div>
+                  )}
+                  <p className="mt-auto pt-3">
+                    <Copy text={c.cmd} />
+                  </p>
                 </li>
               ))}
             </ul>
