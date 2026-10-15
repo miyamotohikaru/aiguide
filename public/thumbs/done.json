@@ -280,5 +280,115 @@
     "url": "https://github.com/google-gemini/gemini-cli",
     "name": "geminicli",
     "at": "2026-10-13"
+  },
+  "websae-net-homepage-part-name": {
+    "ok": true,
+    "url": "https://websae.net/homepage-part-name/",
+    "at": "2026-10-15"
+  },
+  "claude-ai-public-artifacts-0df6cfae-aad7-4971-8b3b-d6d377ea5": {
+    "ok": true,
+    "url": "https://claude.ai/public/artifacts/0df6cfae-aad7-4971-8b3b-d6d377ea5325",
+    "at": "2026-10-15"
+  },
+  "21st-dev": {
+    "ok": true,
+    "url": "https://21st.dev/",
+    "at": "2026-10-15"
+  },
+  "www-pxbee-com-ai-image-extender": {
+    "ok": true,
+    "url": "https://www.pxbee.com/ai-image-extender/",
+    "at": "2026-10-15"
+  },
+  "www-awwwards-com": {
+    "ok": true,
+    "url": "https://www.awwwards.com/",
+    "at": "2026-10-15"
+  },
+  "www-evoworx-co-jp-blog-awwwards": {
+    "ok": true,
+    "url": "https://www.evoworx.co.jp/blog/awwwards/",
+    "at": "2026-10-15"
+  },
+  "sankoudesign-com-category-parallax": {
+    "ok": true,
+    "url": "https://sankoudesign.com/category/parallax/",
+    "at": "2026-10-15"
+  },
+  "rico-supply-categories-cards": {
+    "ok": true,
+    "url": "https://rico.supply/categories/cards",
+    "at": "2026-10-15"
+  },
+  "www-mr-pandas-psychologically-safe-portfolio-com": {
+    "ok": true,
+    "url": "https://www.mr-pandas-psychologically-safe-portfolio.com/",
+    "at": "2026-10-15"
+  },
+  "skills-kosukuma-com": {
+    "ok": true,
+    "url": "https://skills.kosukuma.com/",
+    "at": "2026-10-15"
+  },
+  "freefrontend-com-javascript-mouse-interaction": {
+    "ok": true,
+    "url": "https://freefrontend.com/javascript-mouse-interaction/",
+    "at": "2026-10-15"
+  },
+  "animista-net-play-basic": {
+    "ok": true,
+    "url": "https://animista.net/play/basic",
+    "at": "2026-10-15"
+  },
+  "goworkship-com-magazine-css-javascript-cursor-effects": {
+    "ok": true,
+    "url": "https://goworkship.com/magazine/css-javascript-cursor-effects/",
+    "at": "2026-10-15"
+  },
+  "speckyboy-com-css-javascript-cursor-effects": {
+    "ok": true,
+    "url": "https://speckyboy.com/css-javascript-cursor-effects/",
+    "at": "2026-10-15"
+  },
+  "speckyboy-com-repelling-effect-in-web-design": {
+    "ok": true,
+    "url": "https://speckyboy.com/repelling-effect-in-web-design/",
+    "at": "2026-10-15"
+  },
+  "codepen-io-collection-aamxqd": {
+    "ok": true,
+    "url": "https://codepen.io/collection/Aamxqd",
+    "at": "2026-10-15"
+  },
+  "codepen-io-collection-xpwony": {
+    "ok": true,
+    "url": "https://codepen.io/collection/XpwONy",
+    "at": "2026-10-15"
+  },
+  "experiments-withgoogle-com-search-q-particles": {
+    "ok": true,
+    "url": "https://experiments.withgoogle.com/search?q=Particles",
+    "at": "2026-10-15"
+  },
+  "cruip-com-how-to-create-a-beautiful-particle-animation-with-": {
+    "ok": true,
+    "url": "https://cruip.com/how-to-create-a-beautiful-particle-animation-with-html-canvas/",
+    "at": "2026-10-15"
+  },
+  "tympanus-net-codrops-2018-12-06-interactive-repulsion-effect": {
+    "ok": true,
+    "url": "https://tympanus.net/codrops/2018/12/06/interactive-repulsion-effect-with-three-js/",
+    "at": "2026-10-15"
+  },
+  "www-cssscript-com-ts-particles": {
+    "ok": true,
+    "url": "https://www.cssscript.com/ts-particles/",
+    "at": "2026-10-15"
+  },
+  "www-cssscript-com-interactive-photo-particle": {
+    "ok": true,
+    "url": "https://www.cssscript.com/interactive-photo-particle/",
+    "at": "2026-10-15"
   }
 }

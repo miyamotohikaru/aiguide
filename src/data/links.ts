@@ -1,10 +1,11 @@
 /**
  * 参考リンク集（/links）。
- * すべて 2026年10月13日に実際に開いて、内容・日本語の有無・無料かを確かめたもの。
+ * すべて実際に開いて、内容・日本語の有無・無料かを確かめたもの。
+ * 2026年10月13日に31件、10月15日に見本・動きの見本などを追加。
  * 開けなかったサイト（OpenAI のヘルプなど、アクセスが拒否されたもの）は載せていない。
  * 移転していたURLは、最後にたどり着いたURLを書いている。
  */
-export const LINKS_CHECKED = "2026年10月13日";
+export const LINKS_CHECKED = "2026年10月15日";
 
 export type LinkItem = {
   category: string;
@@ -22,6 +23,8 @@ export const LINK_CATS: { id: string; label: string; lead: string }[] = [
   { id: "hosting", label: "公開サービスの手引き", lead: "サイトを置く場所の、公式の説明。困ったときの一次情報。" },
   { id: "learn", label: "学習・入門", lead: "HTML・CSS・JavaScript を、基礎から学びたい人へ。" },
   { id: "design", label: "デザインの素材と道具", lead: "配色、フォント、アイコン、写真。使ってよい条件も確かめました。" },
+  { id: "inspire", label: "見本・ギャラリー", lead: "「こんな感じで」とAIに伝えるための、よいサイトの見本。" },
+  { id: "motion", label: "動きの見本", lead: "マウスやスクロールで動く演出。気に入ったら、そのURLや名前をAIに渡して「これと同じ動きを」と頼めます。" },
   { id: "news", label: "新しい情報を追う", lead: "AIは毎月変わります。公式のお知らせを見るのがいちばん早いです。" },
 ];
 
@@ -203,6 +206,25 @@ export const LINKS: LinkItem[] = [
     note: "無料は入門部分まで。",
   },
 
+  {
+    category: "learn",
+    name: "ホームページの各部の名前",
+    url: "https://websae.net/homepage-part-name/",
+    desc: "ヘッダー、ヒーロー、フッター。ページの部品の呼び名を、図で説明している記事。",
+    lang: "日本語",
+    cost: "無料",
+    note: "このサイトの用語集の「ページの部位の名前」と合わせて読むと、AIに場所を伝えやすくなります。",
+  },
+  {
+    category: "learn",
+    name: "Web制作の用語の全体マップ",
+    url: "https://claude.ai/public/artifacts/0df6cfae-aad7-4971-8b3b-d6d377ea5325",
+    desc: "HTML・CSSから、CMS、ホスティング、セキュリティ、SEOまで。Web制作の言葉を分野ごとに並べた一覧。",
+    lang: "日本語",
+    cost: "無料",
+    note: "Claude で作って公開されたページです。辞書のように、必要なときに開きます。",
+  },
+
   // ---------- デザインの素材と道具 ----------
   {
     category: "design",
@@ -257,6 +279,179 @@ export const LINKS: LinkItem[] = [
     lang: "英語",
     cost: "無料",
     note: "AIの学習に使うことは禁止されています。",
+  },
+
+  {
+    category: "design",
+    name: "21st.dev",
+    url: "https://21st.dev/",
+    desc: "ボタン、ヒーロー、背景の動きなど、React の部品が1万点以上。見本を見て、コードやAIへの頼み文をコピーできる。",
+    lang: "英語",
+    cost: "無料あり（有料プランも）",
+    note: "見るだけなら無料。たくさんコピーするには有料プランが要ります。",
+  },
+  {
+    category: "design",
+    name: "PxBee AI画像拡張",
+    url: "https://www.pxbee.com/ai-image-extender/",
+    desc: "写真の外側を、AIが描き足して広げてくれる。横長のヒーロー画像を作りたいときに。",
+    lang: "英語",
+    cost: "無料あり（有料プランも）",
+    note: "登録なしで試せます。人が写った写真を使うときは、本人の許可を確かめます。",
+  },
+
+  // ---------- 見本・ギャラリー ----------
+  {
+    category: "inspire",
+    name: "Awwwards",
+    url: "https://www.awwwards.com/",
+    desc: "世界中のすぐれたWebサイトを、毎日選んで紹介している賞のサイト。",
+    lang: "英語",
+    cost: "無料",
+    note: "「ヘッダー」など部位や種類でしぼって、受賞サイトを見られます。",
+  },
+  {
+    category: "inspire",
+    name: "Awwwards とは（エヴォワークス）",
+    url: "https://www.evoworx.co.jp/blog/awwwards/",
+    desc: "Awwwards の見方と、賞のしくみを日本語で説明した記事。",
+    lang: "日本語",
+    cost: "無料",
+  },
+  {
+    category: "inspire",
+    name: "SANKOU!（パララックス）",
+    url: "https://sankoudesign.com/category/parallax/",
+    desc: "スクロールで奥行きが出る「パララックス」を使った、日本のサイトの見本集。",
+    lang: "日本語",
+    cost: "無料",
+  },
+  {
+    category: "inspire",
+    name: "Rico Supply（カード）",
+    url: "https://rico.supply/categories/cards",
+    desc: "カードを並べた画面の、動く見本。静かで整った見せ方の参考に。",
+    lang: "英語",
+    cost: "無料あり（有料プランも）",
+    note: "見るのは無料。テンプレートは有料で売られています。",
+  },
+  {
+    category: "inspire",
+    name: "Mr. Panda's Portfolio",
+    url: "https://www.mr-pandas-psychologically-safe-portfolio.com/",
+    desc: "かわいい絵と動きで作られた、ポートフォリオのサイト。",
+    lang: "英語",
+    cost: "無料",
+    note: "「こんな雰囲気で」とAIに伝えるときの見本に。",
+  },
+
+  // ---------- 動きの見本 ----------
+  {
+    category: "motion",
+    name: "FX Skillbook Explorer",
+    url: "https://skills.kosukuma.com/",
+    desc: "Webの演出376種を、その場で動かして見られる台帳。テキスト、スクロール、カーソル、3Dなどでしぼれる。",
+    lang: "日本語",
+    cost: "無料",
+  },
+  {
+    category: "motion",
+    name: "FreeFrontend（マウスの動き）",
+    url: "https://freefrontend.com/javascript-mouse-interaction/",
+    desc: "マウスについてくる、よける、光る。マウスに反応する動きの見本集。",
+    lang: "英語",
+    cost: "無料",
+    note: "どれもコードつきで、すぐに試せます。",
+  },
+  {
+    category: "motion",
+    name: "Animista",
+    url: "https://animista.net/play/basic",
+    desc: "出てくる、消える、ゆれる。CSSのアニメーションを、選んで動きを確かめられる。",
+    lang: "英語",
+    cost: "無料",
+    note: "気に入った動きの名前（scale-up-center など）を、そのままAIに伝えられます。",
+  },
+  {
+    category: "motion",
+    name: "Workship（カーソルの演出8選）",
+    url: "https://goworkship.com/magazine/css-javascript-cursor-effects/",
+    desc: "マウスのカーソルを変える演出を、8つ紹介した記事。",
+    lang: "日本語",
+    cost: "無料",
+  },
+  {
+    category: "motion",
+    name: "Speckyboy（カーソルの演出）",
+    url: "https://speckyboy.com/css-javascript-cursor-effects/",
+    desc: "光るカーソル、スポットライトなど、変わったカーソルの見本8つ。",
+    lang: "英語",
+    cost: "無料",
+  },
+  {
+    category: "motion",
+    name: "Speckyboy（よける動き）",
+    url: "https://speckyboy.com/repelling-effect-in-web-design/",
+    desc: "文字や点が、マウスから逃げるように動く見本集。",
+    lang: "英語",
+    cost: "無料",
+  },
+  {
+    category: "motion",
+    name: "CodePen：Mouse Effects",
+    url: "https://codepen.io/collection/Aamxqd",
+    desc: "マウスの動きの作例を集めたコレクション。ブラウザでそのまま動かせる。",
+    lang: "英語",
+    cost: "無料",
+  },
+  {
+    category: "motion",
+    name: "CodePen：Mouse Cursor Effects",
+    url: "https://codepen.io/collection/XpwONy",
+    desc: "カーソルが吸いつく、形が変わるなどの作例を集めたコレクション。",
+    lang: "英語",
+    cost: "無料",
+  },
+  {
+    category: "motion",
+    name: "Experiments with Google（Particles）",
+    url: "https://experiments.withgoogle.com/search?q=Particles",
+    desc: "細かい粒（パーティクル）を使った、Google の実験作品の一覧。",
+    lang: "英語",
+    cost: "無料",
+  },
+  {
+    category: "motion",
+    name: "Cruip（粒のアニメーション）",
+    url: "https://cruip.com/how-to-create-a-beautiful-particle-animation-with-html-canvas/",
+    desc: "マウスに反応する粒のアニメーションの作り方。反応の速さやなめらかさの決め方が参考になる。",
+    lang: "英語",
+    cost: "無料",
+  },
+  {
+    category: "motion",
+    name: "Codrops（よける3Dの動き）",
+    url: "https://tympanus.net/codrops/2018/12/06/interactive-repulsion-effect-with-three-js/",
+    desc: "並んだ立体が、マウスでよけていく動きの作り方と見本。",
+    lang: "英語",
+    cost: "無料",
+    note: "少しむずかしめです。見本のページを開いて、AIに「これと同じ動き」と頼む使い方が手軽です。",
+  },
+  {
+    category: "motion",
+    name: "tsParticles",
+    url: "https://www.cssscript.com/ts-particles/",
+    desc: "粒の背景を作る道具の紹介。マウスで集まる、はじけるなどの動きを選べる。",
+    lang: "英語",
+    cost: "無料",
+  },
+  {
+    category: "motion",
+    name: "Photo Particle",
+    url: "https://www.cssscript.com/interactive-photo-particle/",
+    desc: "写真を粒に分けて、マウスで散らすと元に戻る動きの道具。",
+    lang: "英語",
+    cost: "無料",
   },
 
   // ---------- 新しい情報を追う ----------
