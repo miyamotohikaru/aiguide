@@ -80,7 +80,7 @@ export default function LinksPage() {
                             <J text={l.note} />
                           </p>
                         )}
-                        <p className="mt-2 font-mono text-[0.76rem] tracking-normal text-soft">
+                        <p className="mt-2 font-mono text-[0.76rem] tracking-normal text-soft [overflow-wrap:anywhere]">
                           {l.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
                         </p>
                       </div>
