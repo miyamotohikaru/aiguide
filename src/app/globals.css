@@ -80,11 +80,11 @@ h4 {
     color: var(--ag-soft);
   }
 
-  /* 絵つきブロックの名前。墨の地に白抜きで、下の説明文と見分ける */
+  /* 絵つきブロックの名前。灰色の地に白抜きで、下の説明文と見分ける（墨だと強すぎる） */
   .ag-tag {
     display: inline;
     padding: 0.08em 0.4em;
-    background: var(--ag-ink);
+    background: var(--ag-soft);
     color: var(--ag-paper);
     line-height: 1.7;
     -webkit-box-decoration-break: clone;
