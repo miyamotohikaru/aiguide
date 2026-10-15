@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+/* ============================================================
+   はじめてのAIガイド v3 — 静かな版面
+   生成りの紙・黒・細い罫線だけ。色、影、角丸、イラストは使わない。
+   和文は明朝、欧文もセリフ。差は「字の大きさ」と「余白」でつける。
+   ============================================================ */
+:root {
+  --ag-paper: #f7f6f1;
+  --ag-paper-2: #f0eee7;
+  --ag-ink: #171614;
+  --ag-soft: #5f5d57; /* 紙の地でコントラスト比 7 以上 */
+  --ag-line: #d8d4c9;
+  --ag-line-soft: #e7e3da;
+}
+
+@theme inline {
+  --color-paper: var(--ag-paper);
+  --color-paper-2: var(--ag-paper-2);
+  --color-ink: var(--ag-ink);
+  --color-soft: var(--ag-soft);
+  --color-line: var(--ag-line);
+  --color-line-soft: var(--ag-line-soft);
+  --font-serif: var(--font-garamond), var(--font-noto-serif), "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+}
+
+body {
+  /* 書体の変数は、next/font のクラスが付く body で定義する（:root だとまだ存在しない） */
+  --ag-serif: var(--font-garamond), var(--font-noto-serif), "Hiragino Mincho ProN", "Yu Mincho", YuMincho, serif;
+  --ag-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  background: var(--ag-paper);
+  color: var(--ag-ink);
+  font-family: var(--ag-serif);
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- 和文の折り方（J コンポーネント） ---------- */
+.j-s {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.j-w {
+  white-space: nowrap;
+}
+.mobile-break {
+  display: none;
+}
+@media screen and (max-width: 620px) {
+  .mobile-break {
+    display: inline;
+  }
+}
+
+@layer components {
+  /* 小さな見出しラベル（LINKS / SETUP など） */
+  .ag-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ag-soft);
+  }
+
+  /* 罫線で仕切る。影も角丸もつけない */
+  .ag-box {
+    border: 1px solid var(--ag-line);
+    background: transparent;
+  }
+
+  /* 本文中のボタン名・ファイル名 */
+  .ag-key {
+    display: inline-block;
+    padding: 0 0.35em;
+    border: 1px solid var(--ag-line);
+    font-family: var(--ag-serif);
+    font-size: 0.92em;
+    overflow-wrap: anywhere;
+  }
+  .ag-code {
+    font-family: var(--ag-mono);
+    font-size: 0.86em;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* リンク */
+  .ag-link {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--ag-line);
+    transition: text-decoration-color 0.2s;
+  }
+  .ag-link:hover {
+    text-decoration-color: var(--ag-ink);
+  }
+
+  /* 枠だけのボタン */
+  .ag-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    border: 1px solid var(--ag-ink);
+    padding: 0.65em 1.6em;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+    transition: background 0.2s, color 0.2s;
+  }
+  .ag-btn:hover {
+    background: var(--ag-ink);
+    color: var(--ag-paper);
+  }
+  .ag-btn-solid {
+    background: var(--ag-ink);
+    color: var(--ag-paper);
+  }
+  .ag-btn-solid:hover {
+    background: transparent;
+    color: var(--ag-ink);
+  }
+
+  /* 選択式（絞り込み・質問の選択肢） */
+  .ag-pick {
+    border: 1px solid var(--ag-line);
+    padding: 0.35em 1.1em;
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .ag-pick:hover {
+    border-color: var(--ag-ink);
+  }
+  .ag-pick[aria-pressed="true"],
+  .ag-pick[aria-checked="true"] {
+    background: var(--ag-ink);
+    border-color: var(--ag-ink);
+    color: var(--ag-paper);
+  }
+
+  /* コピーボタン */
+  .ag-copy {
+    border: 1px solid var(--ag-line);
+    padding: 0.25em 1em;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .ag-copy:hover {
+    border-color: var(--ag-ink);
+  }
+  .ag-copy[data-state="done"] {
+    background: var(--ag-ink);
+    border-color: var(--ag-ink);
+    color: var(--ag-paper);
+  }
+
+  /* 注記（ヒント・注意） */
+  .ag-note {
+    border-left: 1px solid var(--ag-line);
+    padding-left: 1.1em;
+    color: var(--ag-soft);
+    font-size: 0.95rem;
+  }
+
+  /* 番号（手順） */
+  .ag-num {
+    font-family: var(--ag-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--ag-soft);
+  }
+}
+
+:focus-visible {
+  outline: 1px solid var(--ag-ink);
+  outline-offset: 3px;
+}
+
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .ag-plus {
+  transform: rotate(45deg);
+}
+
+::selection {
+  background: var(--ag-ink);
+  color: var(--ag-paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
