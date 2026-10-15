@@ -11,6 +11,7 @@ export default function Section({
   lead,
   children,
   wide = false,
+  pic,
 }: {
   id?: string;
   no?: string;
@@ -19,6 +20,8 @@ export default function Section({
   children: React.ReactNode;
   /** 見出しを上に出して、中身を紙幅いっぱいに使う（一覧やブロック並びのとき） */
   wide?: boolean;
+  /** 見出しの下に添える絵（左の列に置く。wide のときは使わない） */
+  pic?: React.ReactNode;
 }) {
   return (
     <section id={id} className="mx-auto max-w-[1180px] scroll-mt-24 px-6 pt-16 sm:px-10 sm:pt-24">
@@ -47,6 +50,7 @@ export default function Section({
               <h2 className="mt-1 text-[1.4rem] leading-snug sm:text-[1.7rem]">
                 <J text={title} />
               </h2>
+              {pic && <div className="mt-5 md:mt-8">{pic}</div>}
             </div>
             <div className="min-w-0">
               {lead && (

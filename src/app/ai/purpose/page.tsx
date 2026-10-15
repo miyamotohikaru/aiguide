@@ -8,6 +8,7 @@ import Copy from "@/components/Copy";
 import J from "@/components/J";
 import { PURPOSES } from "@/data/purposes";
 import { Map } from "@/components/doodle/Doodles";
+import { PURPOSE_DOODLE } from "@/components/doodle/AiDoodles";
 import { TOOLS, AI_CHECKED } from "@/data/ai";
 import { thumbForTool, thumbForUrl } from "@/data/thumbs";
 
@@ -74,8 +75,15 @@ export default function PurposePage() {
       {PURPOSES.map((p, i) => {
         const bestTool = TOOLS.find((t) => t.id === p.best.id);
         const bestThumb = thumbOf(p.best.id, p.best.url);
+        const Pic = PURPOSE_DOODLE[p.id];
         return (
-          <Section key={p.id} id={p.id} no={String(i + 1).padStart(2, "0")} title={p.label}>
+          <Section
+            key={p.id}
+            id={p.id}
+            no={String(i + 1).padStart(2, "0")}
+            title={p.label}
+            pic={Pic && <Pic className="w-24 md:w-36" />}
+          >
             <div className="ag-box grid gap-x-10 gap-y-6 p-6 sm:p-8 md:grid-cols-[minmax(0,1fr)_16rem] md:items-start">
               <div className="min-w-0">
               <p className="ag-label">いちばんのおすすめ</p>
