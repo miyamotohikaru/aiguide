@@ -4,10 +4,15 @@
  * 撮れなかったリンクは、この一覧に入らないので、ページ側では文字だけで出す。
  */
 export const THUMBS = new Set<string>([
+  "21st-dev",
+  "animista-net-play-basic",
   "blog-google-intl-ja-jp",
   "claude-com-resources-articles",
   "code-claude-com-docs-ja-overview",
+  "codepen-io-collection-aamxqd",
+  "codepen-io-collection-xpwony",
   "coolors-co",
+  "cruip-com-how-to-create-a-beautiful-particle-animation-with-",
   "cursor-com-docs",
   "developer-mozilla-org-ja-docs-learn-web-development",
   "developers-cloudflare-com-pages",
@@ -15,10 +20,13 @@ export const THUMBS = new Set<string>([
   "docs-github-com-ja-desktop",
   "docs-github-com-ja-pages",
   "docs-netlify-com",
+  "experiments-withgoogle-com-search-q-particles",
   "fonts-google-com",
+  "freefrontend-com-javascript-mouse-interaction",
   "github-com-anthropics-claude-code-blob-main-changelog-md",
   "github-com-anthropics-claude-cookbooks",
   "github-com-anthropics-skills",
+  "goworkship-com-magazine-css-javascript-cursor-effects",
   "ja-javascript-info",
   "jsprimer-net",
   "lucide-dev",
@@ -26,7 +34,12 @@ export const THUMBS = new Set<string>([
   "platform-claude-com-docs-ja-home",
   "platform-claude-com-docs-ja-release-notes-overview",
   "progate-com",
+  "rico-supply-categories-cards",
+  "sankoudesign-com-category-parallax",
   "skillry-dev",
+  "skills-kosukuma-com",
+  "speckyboy-com-css-javascript-cursor-effects",
+  "speckyboy-com-repelling-effect-in-web-design",
   "support-claude-com-ja",
   "support-google-com-gemini-hl-ja",
   "tool-aistudio",
@@ -45,12 +58,16 @@ export const THUMBS = new Set<string>([
   "tool-notebook",
   "tool-replit",
   "tool-v0",
+  "tympanus-net-codrops-2018-12-06-interactive-repulsion-effect",
   "undraw-co-illustrations",
   "unsplash-com-ja",
   "vercel-com-changelog",
   "vercel-com-docs",
   "web-dev-learn-hl-ja",
-  "www-pexels-com-ja-jp"
+  "www-awwwards-com",
+  "www-evoworx-co-jp-blog-awwwards",
+  "www-pexels-com-ja-jp",
+  "www-pxbee-com-ai-image-extender"
 ]);
 
 /** URL からサムネのファイル名を作る（撮影スクリプトと同じ決まり） */
