@@ -64,7 +64,9 @@ export default function SetupPage() {
                 <dt>
                   <Art className="mb-4 w-14" />
                   <span className="ag-num">{`0${i + 1}`}</span>
-                  <span className="mt-1 block text-[1.15rem]">{f.term}</span>
+                  <span className="mt-1.5 block text-[1.15rem]">
+                    <span className="ag-tag">{f.term}</span>
+                  </span>
                   <span className="ag-label">{f.sub}</span>
                 </dt>
                 <dd className="mt-3 text-[0.97rem] text-soft">

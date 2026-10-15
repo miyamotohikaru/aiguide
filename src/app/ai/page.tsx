@@ -37,7 +37,9 @@ export default function AiPage() {
               <li key={t.id} className="flex min-w-0 flex-col border-t border-line-soft pt-5">
                 {Pic && <Pic className="w-full max-w-[11rem]" />}
                 <p className="ag-label mt-4">{i < 2 ? "気軽に始める" : "自由で強力"}</p>
-                <h3 className="mt-1.5 text-[1.08rem]">{t.label}</h3>
+                <h3 className="mt-1.5 text-[1.08rem]">
+                  <span className="ag-tag">{t.label}</span>
+                </h3>
                 <p className="mt-2 text-[0.95rem] leading-[1.7]">
                   <J text={t.one} />
                 </p>

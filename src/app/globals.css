@@ -80,6 +80,17 @@ h4 {
     color: var(--ag-soft);
   }
 
+  /* 絵つきブロックの名前。墨の地に白抜きで、下の説明文と見分ける */
+  .ag-tag {
+    display: inline;
+    padding: 0.08em 0.4em;
+    background: var(--ag-ink);
+    color: var(--ag-paper);
+    line-height: 1.7;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
   /* 罫線で仕切る。影も角丸もつけない */
   .ag-box {
     border: 1px solid var(--ag-line);

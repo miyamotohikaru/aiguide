@@ -2,13 +2,21 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SECTIONS, SITE_NAME } from "@/lib/site";
 
 export default function Header() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
-  useEffect(() => setOpen(false), [path]);
+  /** メニューから移ったとき。ヘッダーが上に貼りついているので、Next はページの頭まで戻してくれないことがある */
+  const fromMenu = useRef(false);
+  useEffect(() => {
+    setOpen(false);
+    if (fromMenu.current) {
+      fromMenu.current = false;
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+  }, [path]);
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-sm">
@@ -49,7 +57,18 @@ export default function Header() {
           <ul className="mx-auto max-w-[1180px] px-6 sm:px-10">
             {SECTIONS.map((s) => (
               <li key={s.href} className="border-b border-line-soft last:border-0">
-                <Link href={s.href} className="flex items-baseline justify-between py-3.5">
+                <Link
+                  href={s.href}
+                  onClick={() => {
+                    fromMenu.current = true;
+                    // いまいるページを選んだときは path が変わらないので、ここで戻す
+                    if (path === s.href) {
+                      setOpen(false);
+                      window.scrollTo({ top: 0, behavior: "instant" });
+                    }
+                  }}
+                  className="flex items-baseline justify-between py-3.5"
+                >
                   <span>{s.label}</span>
                   <span className="ag-label">{s.en}</span>
                 </Link>
