@@ -47,11 +47,13 @@ const COMPARE = [
 function OpenPanel({ way }: { way: (typeof OPEN_WAYS)[keyof typeof OPEN_WAYS] }) {
   return (
     <div>
+      {/* すぐ上の Mac / Windows の切り替えボタンと見分けるため、枠ではなく地の色でキーを示す */}
       <p className="flex flex-wrap items-center gap-2">
+        <span className="ag-label mr-2">押すキー</span>
         {way.keys.map((k, i) => (
           <span key={k} className="flex items-center gap-2">
             {i > 0 && <span className="text-soft">＋</span>}
-            <span className="ag-key px-3 py-1 text-[0.95rem]">{k}</span>
+            <kbd className="bg-paper-2 px-2.5 py-0.5 font-serif text-[0.95rem]">{k}</kbd>
           </span>
         ))}
       </p>
