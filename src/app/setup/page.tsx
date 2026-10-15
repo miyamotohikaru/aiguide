@@ -165,7 +165,7 @@ export default function SetupPage() {
                     <p className="ag-label">AIに貼るお願い文</p>
                     <Copy text={AI_PROMPT} />
                   </div>
-                  <pre className="whitespace-pre-wrap break-words px-5 py-6 font-serif text-[0.97rem] leading-[2] sm:px-7">{AI_PROMPT}</pre>
+                  <pre className="whitespace-pre-wrap break-words px-5 py-6 font-serif text-[0.97rem] leading-[1.75] sm:px-7">{AI_PROMPT}</pre>
                 </div>
               )}
 

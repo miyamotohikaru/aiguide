@@ -62,11 +62,11 @@ export default function CommandsView() {
                     <span className="ag-code text-[0.95rem]">{c.cmd}</span>
                   </p>
                   {c.args && <p className="ag-code mt-0.5 block text-[0.75rem] text-soft">{c.args}</p>}
-                  <p className="mt-2 text-[0.92rem] leading-[1.8]">
+                  <p className="mt-2 text-[0.92rem] leading-[1.65]">
                     <J text={c.desc} />
                   </p>
                   {c.ex && (
-                    <p className="mt-1.5 text-[0.82rem] leading-[1.7] text-soft">
+                    <p className="mt-1.5 text-[0.82rem] leading-[1.55] text-soft">
                       <J text={c.ex} />
                     </p>
                   )}

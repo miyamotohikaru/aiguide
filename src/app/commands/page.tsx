@@ -62,7 +62,7 @@ export default function CommandsPage() {
                 <p className="mt-3 break-all">
                   <span className="ag-code text-[0.98rem]">{c.cmd}</span>
                 </p>
-                <p className="mt-2 text-[0.92rem] leading-[1.8]">
+                <p className="mt-2 text-[0.92rem] leading-[1.65]">
                   <J text={c.desc} />
                 </p>
                 <p className="mt-auto pt-3">
