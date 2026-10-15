@@ -27,11 +27,14 @@ export const C = {
  * 既定（図形の外接矩形を基準）だと、まっすぐな縦線・横線は矩形の幅か高さが0になり、
  * フィルターの適用範囲も0になって、線ごと消えてしまう。
  */
-export function DoodleDefs({ seed = 3 }: { seed?: number }) {
+export function DoodleDefs({ seed = 3, size = 120 }: { seed?: number; size?: number }) {
+  // フィルターの効く範囲。既定は 120 四方の絵に合わせてある。大きな絵は size で広げる
+  const pad = 20;
+  const area = { x: -pad, y: -pad, width: size + pad * 2, height: size + pad * 2 };
   return (
     <defs>
       {/* 塗り: ノイズでまだらに抜いて、クレヨンの粒を作る */}
-      <filter id={`grain-${seed}`} filterUnits="userSpaceOnUse" x="-20" y="-20" width="160" height="160">
+      <filter id={`grain-${seed}`} filterUnits="userSpaceOnUse" {...area}>
         <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" seed={seed} result="n" />
         <feColorMatrix
           in="n"
@@ -45,7 +48,7 @@ export function DoodleDefs({ seed = 3 }: { seed?: number }) {
         <feComposite in="SourceGraphic" in2="a" operator="in" />
       </filter>
       {/* 線: すこし揺らして、定規で引いていない線にする */}
-      <filter id={`wobble-${seed}`} filterUnits="userSpaceOnUse" x="-20" y="-20" width="160" height="160">
+      <filter id={`wobble-${seed}`} filterUnits="userSpaceOnUse" {...area}>
         <feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="2" seed={seed + 11} result="w" />
         <feDisplacementMap in="SourceGraphic" in2="w" scale="3.2" xChannelSelector="R" yChannelSelector="G" />
       </filter>
@@ -92,19 +95,22 @@ export default function Doodle({
   viewBox,
   className = "",
   seed = 3,
+  size,
   title,
   children,
 }: {
   viewBox: string;
   className?: string;
   seed?: number;
+  /** 絵の大きさ（viewBox の長い辺）。120 より大きい絵のときだけ渡す */
+  size?: number;
   title?: string;
   children: React.ReactNode;
 }) {
   return (
     <svg viewBox={viewBox} className={className} role={title ? "img" : undefined} aria-hidden={title ? undefined : true}>
       {title && <title>{title}</title>}
-      <DoodleDefs seed={seed} />
+      <DoodleDefs seed={seed} size={size} />
       {children}
     </svg>
   );
