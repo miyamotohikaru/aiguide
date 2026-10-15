@@ -39,7 +39,7 @@ body {
   color: var(--ag-ink);
   font-family: var(--ag-serif);
   font-size: 16px;
-  line-height: 2;
+  line-height: 1.75;
   letter-spacing: 0.02em;
   -webkit-font-smoothing: antialiased;
 }
@@ -78,6 +78,17 @@ h4 {
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--ag-soft);
+  }
+
+  /* 絵つきブロックの名前。灰色の地に白抜きで、下の説明文と見分ける（墨だと強すぎる） */
+  .ag-tag {
+    display: inline;
+    padding: 0.08em 0.4em;
+    background: var(--ag-soft);
+    color: var(--ag-paper);
+    line-height: 1.7;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
 
   /* 罫線で仕切る。影も角丸もつけない */

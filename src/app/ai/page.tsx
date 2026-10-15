@@ -37,11 +37,13 @@ export default function AiPage() {
               <li key={t.id} className="flex min-w-0 flex-col border-t border-line-soft pt-5">
                 {Pic && <Pic className="w-full max-w-[11rem]" />}
                 <p className="ag-label mt-4">{i < 2 ? "気軽に始める" : "自由で強力"}</p>
-                <h3 className="mt-1.5 text-[1.08rem]">{t.label}</h3>
-                <p className="mt-2 text-[0.95rem] leading-[1.8]">
+                <h3 className="mt-1.5 text-[1.08rem]">
+                  <span className="ag-tag">{t.label}</span>
+                </h3>
+                <p className="mt-2 text-[0.95rem] leading-[1.7]">
                   <J text={t.one} />
                 </p>
-                <p className="mt-2 text-[0.88rem] leading-[1.7] text-soft">
+                <p className="mt-2 text-[0.88rem] leading-[1.6] text-soft">
                   <J text={`たとえるなら、${t.like}`} />
                 </p>
               </li>
@@ -58,10 +60,10 @@ export default function AiPage() {
               <li key={p.id} className="min-w-0 border-t border-line-soft">
                 <Link href={`/ai/purpose#${p.id}`} className="group flex h-full flex-col pt-4">
                   {Pic && <Pic className="w-20 flex-none" />}
-                  <span className="mt-3 text-[0.98rem] leading-[1.7] group-hover:underline">
+                  <span className="mt-3 text-[0.98rem] leading-[1.6] group-hover:underline">
                     <J text={p.label} />
                   </span>
-                  <span className="mt-1.5 text-[0.82rem] leading-[1.6] text-soft">
+                  <span className="mt-1.5 text-[0.82rem] leading-[1.5] text-soft">
                     いちばん：<J text={p.best.tool} />
                   </span>
                 </Link>

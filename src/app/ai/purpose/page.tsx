@@ -190,7 +190,7 @@ export default function PurposePage() {
                 <p className="ag-label">お願い文の例</p>
                 <Copy text={p.prompt} />
               </div>
-              <pre className="whitespace-pre-wrap break-words px-5 py-5 font-serif text-[0.97rem] leading-[2] sm:px-6">
+              <pre className="whitespace-pre-wrap break-words px-5 py-5 font-serif text-[0.97rem] leading-[1.75] sm:px-6">
                 <PromptBody text={p.prompt} />
               </pre>
             </div>

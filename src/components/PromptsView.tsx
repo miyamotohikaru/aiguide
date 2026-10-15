@@ -57,7 +57,7 @@ export default function PromptsView() {
               <div className="flex justify-end border-b border-line-soft px-4 py-2.5">
                 <Copy text={p.body} label="コピー" />
               </div>
-              <pre className="flex-1 whitespace-pre-wrap break-words px-5 py-5 font-serif text-[0.95rem] leading-[1.95]">
+              <pre className="flex-1 whitespace-pre-wrap break-words px-5 py-5 font-serif text-[0.95rem] leading-[1.75]">
                 <Body text={p.body} />
               </pre>
             </div>
