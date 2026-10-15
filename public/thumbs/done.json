@@ -281,16 +281,6 @@
     "name": "geminicli",
     "at": "2026-10-13"
   },
-  "websae-net-homepage-part-name": {
-    "ok": true,
-    "url": "https://websae.net/homepage-part-name/",
-    "at": "2026-10-15"
-  },
-  "claude-ai-public-artifacts-0df6cfae-aad7-4971-8b3b-d6d377ea5": {
-    "ok": true,
-    "url": "https://claude.ai/public/artifacts/0df6cfae-aad7-4971-8b3b-d6d377ea5325",
-    "at": "2026-10-15"
-  },
   "21st-dev": {
     "ok": true,
     "url": "https://21st.dev/",
@@ -319,11 +309,6 @@
   "rico-supply-categories-cards": {
     "ok": true,
     "url": "https://rico.supply/categories/cards",
-    "at": "2026-10-15"
-  },
-  "www-mr-pandas-psychologically-safe-portfolio-com": {
-    "ok": true,
-    "url": "https://www.mr-pandas-psychologically-safe-portfolio.com/",
     "at": "2026-10-15"
   },
   "skills-kosukuma-com": {
@@ -379,16 +364,6 @@
   "tympanus-net-codrops-2018-12-06-interactive-repulsion-effect": {
     "ok": true,
     "url": "https://tympanus.net/codrops/2018/12/06/interactive-repulsion-effect-with-three-js/",
-    "at": "2026-10-15"
-  },
-  "www-cssscript-com-ts-particles": {
-    "ok": true,
-    "url": "https://www.cssscript.com/ts-particles/",
-    "at": "2026-10-15"
-  },
-  "www-cssscript-com-interactive-photo-particle": {
-    "ok": true,
-    "url": "https://www.cssscript.com/interactive-photo-particle/",
     "at": "2026-10-15"
   }
 }

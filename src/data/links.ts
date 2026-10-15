@@ -206,24 +206,6 @@ export const LINKS: LinkItem[] = [
     note: "無料は入門部分まで。",
   },
 
-  {
-    category: "learn",
-    name: "ホームページの各部の名前",
-    url: "https://websae.net/homepage-part-name/",
-    desc: "ヘッダー、ヒーロー、フッター。ページの部品の呼び名を、図で説明している記事。",
-    lang: "日本語",
-    cost: "無料",
-    note: "このサイトの用語集の「ページの部位の名前」と合わせて読むと、AIに場所を伝えやすくなります。",
-  },
-  {
-    category: "learn",
-    name: "Web制作の用語の全体マップ",
-    url: "https://claude.ai/public/artifacts/0df6cfae-aad7-4971-8b3b-d6d377ea5325",
-    desc: "HTML・CSSから、CMS、ホスティング、セキュリティ、SEOまで。Web制作の言葉を分野ごとに並べた一覧。",
-    lang: "日本語",
-    cost: "無料",
-    note: "Claude で作って公開されたページです。辞書のように、必要なときに開きます。",
-  },
 
   // ---------- デザインの素材と道具 ----------
   {
@@ -335,15 +317,6 @@ export const LINKS: LinkItem[] = [
     cost: "無料あり（有料プランも）",
     note: "見るのは無料。テンプレートは有料で売られています。",
   },
-  {
-    category: "inspire",
-    name: "Mr. Panda's Portfolio",
-    url: "https://www.mr-pandas-psychologically-safe-portfolio.com/",
-    desc: "かわいい絵と動きで作られた、ポートフォリオのサイト。",
-    lang: "英語",
-    cost: "無料",
-    note: "「こんな雰囲気で」とAIに伝えるときの見本に。",
-  },
 
   // ---------- 動きの見本 ----------
   {
@@ -436,22 +409,6 @@ export const LINKS: LinkItem[] = [
     lang: "英語",
     cost: "無料",
     note: "少しむずかしめです。見本のページを開いて、AIに「これと同じ動き」と頼む使い方が手軽です。",
-  },
-  {
-    category: "motion",
-    name: "tsParticles",
-    url: "https://www.cssscript.com/ts-particles/",
-    desc: "粒の背景を作る道具の紹介。マウスで集まる、はじけるなどの動きを選べる。",
-    lang: "英語",
-    cost: "無料",
-  },
-  {
-    category: "motion",
-    name: "Photo Particle",
-    url: "https://www.cssscript.com/interactive-photo-particle/",
-    desc: "写真を粒に分けて、マウスで散らすと元に戻る動きの道具。",
-    lang: "英語",
-    cost: "無料",
   },
 
   // ---------- 新しい情報を追う ----------

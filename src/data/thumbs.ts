@@ -7,7 +7,6 @@ export const THUMBS = new Set<string>([
   "21st-dev",
   "animista-net-play-basic",
   "blog-google-intl-ja-jp",
-  "claude-ai-public-artifacts-0df6cfae-aad7-4971-8b3b-d6d377ea5",
   "claude-com-resources-articles",
   "code-claude-com-docs-ja-overview",
   "codepen-io-collection-aamxqd",
@@ -65,12 +64,8 @@ export const THUMBS = new Set<string>([
   "vercel-com-changelog",
   "vercel-com-docs",
   "web-dev-learn-hl-ja",
-  "websae-net-homepage-part-name",
   "www-awwwards-com",
-  "www-cssscript-com-interactive-photo-particle",
-  "www-cssscript-com-ts-particles",
   "www-evoworx-co-jp-blog-awwwards",
-  "www-mr-pandas-psychologically-safe-portfolio-com",
   "www-pexels-com-ja-jp",
   "www-pxbee-com-ai-image-extender"
 ]);
