@@ -7,6 +7,7 @@ import J from "@/components/J";
 import AiChooser from "@/components/ai/AiChooser";
 import { Tools } from "@/components/doodle/Doodles";
 import ToolDex from "@/components/ai/ToolDex";
+import { PURPOSE_DOODLE, TYPE_DOODLE } from "@/components/doodle/AiDoodles";
 import { AI_CHECKED, COMBOS, TOOLS, TYPES } from "@/data/ai";
 import { PURPOSES } from "@/data/purposes";
 
@@ -28,33 +29,45 @@ export default function AiPage() {
       </div>
 
       <Section id="types" no="01" title="AIには、4つのタイプがある" lead="チャット型とノーコード生成型は、気軽に始められる。エディタ型とエージェント型は、自由で強力。">
-        <dl className="grid grid-cols-[minmax(0,1fr)]">
-          {TYPES.map((t) => (
-            <div key={t.id} className="grid gap-x-10 gap-y-1 border-t border-line-soft py-6 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)]">
-              <dt className="text-[1.08rem]">{t.label}</dt>
-              <dd className="min-w-0">
-                <J text={t.one} />
-                <span className="mt-1 block text-[0.92rem] text-soft">
+        {/* 左の2つは気軽に、右の2つは本格的に。スマホでも上の段と下の段で分かれる */}
+        <ul className="grid grid-cols-2 gap-x-5 gap-y-10 lg:grid-cols-4 lg:gap-x-6">
+          {TYPES.map((t, i) => {
+            const Pic = TYPE_DOODLE[t.id];
+            return (
+              <li key={t.id} className="flex min-w-0 flex-col border-t border-line-soft pt-5">
+                {Pic && <Pic className="w-full max-w-[11rem]" />}
+                <p className="ag-label mt-4">{i < 2 ? "気軽に始める" : "自由で強力"}</p>
+                <h3 className="mt-1.5 text-[1.08rem]">{t.label}</h3>
+                <p className="mt-2 text-[0.95rem] leading-[1.8]">
+                  <J text={t.one} />
+                </p>
+                <p className="mt-2 text-[0.88rem] leading-[1.7] text-soft">
                   <J text={`たとえるなら、${t.like}`} />
-                </span>
-              </dd>
-            </div>
-          ))}
-        </dl>
+                </p>
+              </li>
+            );
+          })}
+        </ul>
       </Section>
 
       <Section id="purpose" no="02" title="やりたいことで選ぶ" lead="資料づくり、リサーチ、画像、アプリ。目的ごとに、いちばんいいAIと、うまく作る手順をまとめました。">
-        <ul className="grid grid-cols-[minmax(0,1fr)] gap-x-12 sm:grid-cols-2">
-          {PURPOSES.map((p) => (
-            <li key={p.id} className="border-t border-line-soft">
-              <Link href={`/ai/purpose#${p.id}`} className="flex items-start justify-between gap-5 py-3.5">
-                <span className="min-w-0">
-                  <J text={p.label} />
-                </span>
-                <span className="shrink-0 text-[0.85rem] text-soft">{p.best.tool}</span>
-              </Link>
-            </li>
-          ))}
+        <ul className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
+          {PURPOSES.map((p) => {
+            const Pic = PURPOSE_DOODLE[p.id];
+            return (
+              <li key={p.id} className="min-w-0 border-t border-line-soft">
+                <Link href={`/ai/purpose#${p.id}`} className="group flex h-full flex-col pt-4">
+                  {Pic && <Pic className="w-20 flex-none" />}
+                  <span className="mt-3 text-[0.98rem] leading-[1.7] group-hover:underline">
+                    <J text={p.label} />
+                  </span>
+                  <span className="mt-1.5 text-[0.82rem] leading-[1.6] text-soft">
+                    いちばん：<J text={p.best.tool} />
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
         <p className="mt-8">
           <Link href="/ai/purpose" className="ag-btn">
