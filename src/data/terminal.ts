@@ -23,7 +23,7 @@ export const DEMO_DEPLOY: TermLine[] = [
 
 export const DEMO_CLAUDE: TermLine[] = [
   { cmd: "cd Desktop/mysite", out: [] },
-  { cmd: "claude", out: ["Welcome to Claude Code!", "> このサイトをスマホでも見やすくして"] },
+  { cmd: "claude", out: ["Welcome to Claude Code!", "> （例）このサイトをスマホでも見やすくして"] },
 ];
 
 /** 開きかた */

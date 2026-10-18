@@ -64,7 +64,9 @@ export default function SetupPage() {
                 <dt>
                   <Art className="mb-4 w-14" />
                   <span className="ag-num">{`0${i + 1}`}</span>
-                  <span className="mt-1 block text-[1.15rem]">{f.term}</span>
+                  <span className="mt-1.5 block text-[1.15rem]">
+                    <span className="ag-tag">{f.term}</span>
+                  </span>
                   <span className="ag-label">{f.sub}</span>
                 </dt>
                 <dd className="mt-3 text-[0.97rem] text-soft">
@@ -165,7 +167,7 @@ export default function SetupPage() {
                     <p className="ag-label">AIに貼るお願い文</p>
                     <Copy text={AI_PROMPT} />
                   </div>
-                  <pre className="whitespace-pre-wrap break-words px-5 py-6 font-serif text-[0.97rem] leading-[2] sm:px-7">{AI_PROMPT}</pre>
+                  <pre className="whitespace-pre-wrap break-words px-5 py-6 font-serif text-[0.97rem] leading-[1.75] sm:px-7">{AI_PROMPT}</pre>
                 </div>
               )}
 
