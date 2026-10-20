@@ -62,8 +62,8 @@ export default function LinksPage() {
                           className="aspect-[8/5] w-full border border-line-soft object-cover"
                         />
                       )}
-                      <p className={`${thumb ? "mt-4" : ""} text-[1.02rem] leading-snug`}>
-                        <span className="group-hover:border-b group-hover:border-ink">
+                      <p className={`${thumb ? "mt-4" : ""} text-[1.02rem] leading-[1.9]`}>
+                        <span className="ag-tag transition-colors group-hover:bg-ink">
                           <J text={l.name} />
                         </span>
                       </p>
