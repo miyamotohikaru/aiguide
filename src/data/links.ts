@@ -22,9 +22,11 @@ export const LINK_CATS: { id: string; label: string; lead: string }[] = [
   { id: "skills", label: "スキル・プロンプトの配布", lead: "AIへの頼み方や、作業の手順そのものを配っているところ。" },
   { id: "hosting", label: "公開サービスの手引き", lead: "サイトを置く場所の、公式の説明。困ったときの一次情報。" },
   { id: "learn", label: "学習・入門", lead: "HTML・CSS・JavaScript を、基礎から学びたい人へ。" },
-  { id: "design", label: "デザインの素材と道具", lead: "配色、フォント、アイコン、写真。使ってよい条件も確かめました。" },
+  { id: "design", label: "デザインの素材と道具", lead: "配色、フォント、アイコン、写真。" },
+  { id: "color", label: "色をえらぶ", lead: "サイトの色に迷ったら。気に入った色の組み合わせのカラーコードを、そのままAIに渡せます。" },
   { id: "inspire", label: "見本・ギャラリー", lead: "「こんな感じで」とAIに伝えるための、よいサイトの見本。" },
   { id: "motion", label: "動きの見本", lead: "マウスやスクロールで動く演出。気に入ったら、そのURLや名前をAIに渡して「これと同じ動きを」と頼めます。" },
+  { id: "designinfo", label: "デザインの情報", lead: "いまのデザインの話題や、作り手のインタビューを読むところ。" },
   { id: "news", label: "新しい情報を追う", lead: "AIは毎月変わります。公式のお知らせを見るのがいちばん早いです。" },
 ];
 
@@ -282,6 +284,25 @@ export const LINKS: LinkItem[] = [
     note: "登録なしで試せます。人が写った写真を使うときは、本人の許可を確かめます。",
   },
 
+  // ---------- 色をえらぶ ----------
+  {
+    category: "color",
+    name: "Color Hunt",
+    url: "https://colorhunt.co/",
+    desc: "人の手で選ばれた、4色の組み合わせ（カラーパレット）が、たくさん並んでいる。",
+    lang: "英語",
+    cost: "無料",
+    note: "色を押すと、カラーコード（#から始まる記号）をコピーできます。",
+  },
+  {
+    category: "color",
+    name: "Pigment",
+    url: "https://pigment.shapefactory.co/",
+    desc: "計算ではなく、絵の具と光の考え方で作った、あざやかな色の組み合わせを見せてくれる。",
+    lang: "英語",
+    cost: "無料",
+  },
+
   // ---------- 見本・ギャラリー ----------
   {
     category: "inspire",
@@ -409,6 +430,16 @@ export const LINKS: LinkItem[] = [
     lang: "英語",
     cost: "無料",
     note: "少しむずかしめです。見本のページを開いて、AIに「これと同じ動き」と頼む使い方が手軽です。",
+  },
+
+  // ---------- デザインの情報 ----------
+  {
+    category: "designinfo",
+    name: "JDN（ジャパンデザインネット）",
+    url: "https://www.japandesign.ne.jp/",
+    desc: "国内外のデザインのニュース、デザイナーへのインタビュー、イベントの情報。",
+    lang: "日本語",
+    cost: "無料",
   },
 
   // ---------- 新しい情報を追う ----------

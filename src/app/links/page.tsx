@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import PageHead from "@/components/PageHead";
 import Section from "@/components/Section";
 import J from "@/components/J";
-import { LINKS, LINK_CATS, LINKS_CHECKED } from "@/data/links";
+import { LINKS, LINK_CATS } from "@/data/links";
 import { thumbForUrl } from "@/data/thumbs";
 import { Map } from "@/components/doodle/Doodles";
 
 export const metadata: Metadata = {
   title: "参考リンク",
-  description: "公式ドキュメント、スキルやプロンプトの配布、公開サービスの手引き、学習サイト、デザイン素材。実際に開いて確かめた参考リンクを、やさしい説明つきでまとめました。",
+  description: "公式ドキュメント、スキルやプロンプトの配布、公開サービスの手引き、学習サイト、デザイン素材。参考リンクを、やさしい説明つきでまとめました。",
 };
 
 const CARE = [
@@ -24,7 +24,7 @@ export default function LinksPage() {
         <PageHead
           en="LINKS"
           title="知りたくなったら、◇ここから。"
-          lead={`公式の手引き、スキルやプロンプトの配布、学習サイト、素材集。${LINKS.length}件を実際に開いて、何が載っているかを確かめました。`}
+          lead="公式の手引き、スキルやプロンプトの配布、学習サイト、素材集。"
         />
         <Map className="pointer-events-none absolute right-6 top-14 w-20 sm:right-10 sm:top-20 sm:w-28" />
       </div>
@@ -44,46 +44,43 @@ export default function LinksPage() {
       {LINK_CATS.map((c, ci) => {
         const items = LINKS.filter((l) => l.category === c.id);
         return (
-          <Section key={c.id} id={c.id} no={String(ci + 1).padStart(2, "0")} title={c.label} lead={c.lead}>
-            <ul>
+          <Section key={c.id} id={c.id} no={String(ci + 1).padStart(2, "0")} title={c.label} lead={c.lead} wide>
+            {/* PCは横4列、タブレットは2列、スマホは1列 */}
+            <ul className="grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
               {items.map((l) => {
                 const thumb = thumbForUrl(l.url);
                 return (
-                  <li key={l.url} className="border-b border-line-soft first:border-t first:border-line-soft">
-                    <a href={l.url} target="_blank" rel="noreferrer" className="group grid gap-x-8 gap-y-4 py-7 md:grid-cols-[13rem_minmax(0,1fr)]">
-                      {thumb ? (
+                  <li key={l.url} className="min-w-0 border-t border-line-soft pt-5">
+                    <a href={l.url} target="_blank" rel="noreferrer" className="group flex h-full flex-col">
+                      {thumb && (
                         <img
                           src={thumb}
                           alt=""
                           width={480}
                           height={300}
                           loading="lazy"
-                          className="w-full max-w-[13rem] border border-line-soft object-cover"
+                          className="aspect-[8/5] w-full border border-line-soft object-cover"
                         />
-                      ) : (
-                        <span className="hidden md:block" />
                       )}
-                      <div className="min-w-0">
-                        <p className="text-[1.08rem] leading-snug">
-                          <span className="group-hover:border-b group-hover:border-ink">
-                            <J text={l.name} />
-                          </span>
+                      <p className={`${thumb ? "mt-4" : ""} text-[1.02rem] leading-[1.9]`}>
+                        <span className="ag-tag transition-colors group-hover:bg-ink">
+                          <J text={l.name} />
+                        </span>
+                      </p>
+                      <p className="mt-1 text-[0.8rem] text-soft">
+                        {l.lang}　{l.cost}
+                      </p>
+                      <p className="mt-2 text-[0.9rem] leading-[1.65]">
+                        <J text={l.desc} />
+                      </p>
+                      {l.note && (
+                        <p className="mt-1.5 text-[0.82rem] leading-[1.6] text-soft">
+                          <J text={l.note} />
                         </p>
-                        <p className="mt-1.5 text-[0.85rem] text-soft">
-                          {l.lang}　{l.cost}
-                        </p>
-                        <p className="mt-2 max-w-[34em]">
-                          <J text={l.desc} />
-                        </p>
-                        {l.note && (
-                          <p className="mt-1 max-w-[34em] text-[0.92rem] text-soft">
-                            <J text={l.note} />
-                          </p>
-                        )}
-                        <p className="mt-2 font-mono text-[0.76rem] tracking-normal text-soft [overflow-wrap:anywhere]">
-                          {l.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
-                        </p>
-                      </div>
+                      )}
+                      <p className="mt-auto pt-3 font-mono text-[0.72rem] tracking-normal text-soft [overflow-wrap:anywhere]">
+                        {l.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+                      </p>
                     </a>
                   </li>
                 );
@@ -93,7 +90,7 @@ export default function LinksPage() {
         );
       })}
 
-      <Section no="07" title="外のサイトを見るときに">
+      <Section no={String(LINK_CATS.length + 1).padStart(2, "0")} title="外のサイトを見るときに">
         <ul className="max-w-[36em]">
           {CARE.map((t) => (
             <li key={t} className="border-b border-line-soft py-4 first:border-t first:border-line-soft">
@@ -102,7 +99,7 @@ export default function LinksPage() {
           ))}
         </ul>
         <p className="mt-6 text-[0.88rem] text-soft">
-          <J text={`${LINKS_CHECKED}に、すべて開いて確かめました。◇リンク切れや、中身の変更は起こります。`} />
+          <J text="リンク切れや、中身の変更は起こります。" />
         </p>
       </Section>
     </>
