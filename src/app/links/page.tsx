@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import PageHead from "@/components/PageHead";
 import Section from "@/components/Section";
 import J from "@/components/J";
-import { LINKS, LINK_CATS, LINKS_CHECKED } from "@/data/links";
+import { LINKS, LINK_CATS } from "@/data/links";
 import { thumbForUrl } from "@/data/thumbs";
 import { Map } from "@/components/doodle/Doodles";
 
 export const metadata: Metadata = {
   title: "参考リンク",
-  description: "公式ドキュメント、スキルやプロンプトの配布、公開サービスの手引き、学習サイト、デザイン素材。実際に開いて確かめた参考リンクを、やさしい説明つきでまとめました。",
+  description: "公式ドキュメント、スキルやプロンプトの配布、公開サービスの手引き、学習サイト、デザイン素材。参考リンクを、やさしい説明つきでまとめました。",
 };
 
 const CARE = [
@@ -24,7 +24,7 @@ export default function LinksPage() {
         <PageHead
           en="LINKS"
           title="知りたくなったら、◇ここから。"
-          lead={`公式の手引き、スキルやプロンプトの配布、学習サイト、素材集。${LINKS.length}件を実際に開いて、何が載っているかを確かめました。`}
+          lead="公式の手引き、スキルやプロンプトの配布、学習サイト、素材集。"
         />
         <Map className="pointer-events-none absolute right-6 top-14 w-20 sm:right-10 sm:top-20 sm:w-28" />
       </div>
@@ -102,7 +102,7 @@ export default function LinksPage() {
           ))}
         </ul>
         <p className="mt-6 text-[0.88rem] text-soft">
-          <J text={`${LINKS_CHECKED}に、すべて開いて確かめました。◇リンク切れや、中身の変更は起こります。`} />
+          <J text="リンク切れや、中身の変更は起こります。" />
         </p>
       </Section>
     </>

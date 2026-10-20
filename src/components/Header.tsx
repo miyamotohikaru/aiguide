@@ -8,14 +8,33 @@ import { SECTIONS, SITE_NAME } from "@/lib/site";
 export default function Header() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
-  /** メニューから移ったとき。ヘッダーが上に貼りついているので、Next はページの頭まで戻してくれないことがある */
-  const fromMenu = useRef(false);
+  /**
+   * ページを移ったら、いちばん上から見せる。
+   * html に scroll-behavior: smooth を付けているので、Next の「頭へ戻す」もゆっくり動き、
+   * スマホでは途中で止まることがある。移ったときだけ smooth を外して、一度で頭へ戻す。
+   * #付きのリンク（ページ内の目次）と、戻る・進むのときは、ブラウザに任せる。
+   */
+  const byHistory = useRef(false);
+  useEffect(() => {
+    const onPop = () => (byHistory.current = true);
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
   useEffect(() => {
     setOpen(false);
-    if (fromMenu.current) {
-      fromMenu.current = false;
-      window.scrollTo({ top: 0, behavior: "instant" });
+    if (byHistory.current) {
+      byHistory.current = false;
+      return;
     }
+    if (window.location.hash) return;
+    const html = document.documentElement;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    const id = requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      html.style.scrollBehavior = "";
+    });
+    return () => cancelAnimationFrame(id);
   }, [path]);
 
   return (
@@ -60,11 +79,12 @@ export default function Header() {
                 <Link
                   href={s.href}
                   onClick={() => {
-                    fromMenu.current = true;
-                    // いまいるページを選んだときは path が変わらないので、ここで戻す
+                    // いまいるページを選んだときは path が変わらないので、ここで閉じて頭へ戻す
                     if (path === s.href) {
                       setOpen(false);
-                      window.scrollTo({ top: 0, behavior: "instant" });
+                      document.documentElement.style.scrollBehavior = "auto";
+                      window.scrollTo(0, 0);
+                      document.documentElement.style.scrollBehavior = "";
                     }
                   }}
                   className="flex items-baseline justify-between py-3.5"

@@ -22,7 +22,7 @@ export const LINK_CATS: { id: string; label: string; lead: string }[] = [
   { id: "skills", label: "スキル・プロンプトの配布", lead: "AIへの頼み方や、作業の手順そのものを配っているところ。" },
   { id: "hosting", label: "公開サービスの手引き", lead: "サイトを置く場所の、公式の説明。困ったときの一次情報。" },
   { id: "learn", label: "学習・入門", lead: "HTML・CSS・JavaScript を、基礎から学びたい人へ。" },
-  { id: "design", label: "デザインの素材と道具", lead: "配色、フォント、アイコン、写真。使ってよい条件も確かめました。" },
+  { id: "design", label: "デザインの素材と道具", lead: "配色、フォント、アイコン、写真。" },
   { id: "inspire", label: "見本・ギャラリー", lead: "「こんな感じで」とAIに伝えるための、よいサイトの見本。" },
   { id: "motion", label: "動きの見本", lead: "マウスやスクロールで動く演出。気に入ったら、そのURLや名前をAIに渡して「これと同じ動きを」と頼めます。" },
   { id: "news", label: "新しい情報を追う", lead: "AIは毎月変わります。公式のお知らせを見るのがいちばん早いです。" },
