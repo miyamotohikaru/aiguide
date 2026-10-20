@@ -54,6 +54,15 @@ export default function WordsView() {
                   <J text={w.like} />
                 </p>
               )}
+              {w.link && (
+                <p className="mt-2 text-[0.93rem] text-soft">
+                  <span className="mr-2 text-[0.72rem] tracking-[0.18em]">おすすめ</span>
+                  <a href={w.link.url} target="_blank" rel="noreferrer" className="ag-link text-ink">
+                    {w.link.name}
+                  </a>
+                  <span className="ml-2 font-mono text-[0.76rem] [overflow-wrap:anywhere]">{w.link.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}</span>
+                </p>
+              )}
             </dd>
           </div>
         ))}
