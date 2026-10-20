@@ -11,6 +11,7 @@ export const THUMBS = new Set<string>([
   "code-claude-com-docs-ja-overview",
   "codepen-io-collection-aamxqd",
   "codepen-io-collection-xpwony",
+  "colorhunt-co",
   "coolors-co",
   "cruip-com-how-to-create-a-beautiful-particle-animation-with-",
   "cursor-com-docs",
@@ -30,6 +31,7 @@ export const THUMBS = new Set<string>([
   "ja-javascript-info",
   "jsprimer-net",
   "lucide-dev",
+  "pigment-shapefactory-co",
   "platform-claude-com-docs-ja-build-with-claude-prompt-enginee",
   "platform-claude-com-docs-ja-home",
   "platform-claude-com-docs-ja-release-notes-overview",
@@ -66,6 +68,7 @@ export const THUMBS = new Set<string>([
   "web-dev-learn-hl-ja",
   "www-awwwards-com",
   "www-evoworx-co-jp-blog-awwwards",
+  "www-japandesign-ne-jp",
   "www-pexels-com-ja-jp",
   "www-pxbee-com-ai-image-extender"
 ]);
