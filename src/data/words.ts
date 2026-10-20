@@ -12,6 +12,8 @@ export type Word = {
   group: WordGroup;
   mean: string;
   like?: string;
+  /** おすすめのサイト（なくてもよい） */
+  link?: { name: string; url: string };
 };
 
 export const GROUPS: { id: WordGroup; label: string; lead: string }[] = [
@@ -342,6 +344,7 @@ export const WORDS: Word[] = [
     read: "color palette",
     group: "design",
     mean: "サイトで使う色を、決めて並べたもの。3〜5色くらいに絞ると、まとまって見える。",
+    link: { name: "Color Hunt", url: "https://colorhunt.co/" },
   },
   {
     term: "メインカラー／アクセントカラー",
