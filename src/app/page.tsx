@@ -7,7 +7,10 @@ import { WORDS } from "@/data/words";
 import { PROMPTS } from "@/data/prompts";
 import { TOOLS } from "@/data/ai";
 import { LINKS } from "@/data/links";
-import { PaperPlane } from "@/components/doodle/Doodles";
+import { Book, Bubble, Cloud, Map, Slash, Tools, Window } from "@/components/doodle/Doodles";
+import HeroDoodles from "@/components/motion/HeroDoodles";
+import CountUp from "@/components/motion/CountUp";
+import Marquee from "@/components/motion/Marquee";
 
 const COUNT: Record<string, string> = {
   "/ai": `${TOOLS.length}のツール`,
@@ -18,6 +21,20 @@ const COUNT: Record<string, string> = {
   "/prompts": `${PROMPTS.length}本`,
   "/links": `${LINKS.length}件`,
 };
+
+/** 目次の行に乗せたときに描かれる、章ごとの絵 */
+const ROW_PIC: Record<string, (p: { className?: string }) => React.ReactElement> = {
+  "/ai": Tools,
+  "/setup": Cloud,
+  "/terminal": Window,
+  "/commands": Slash,
+  "/words": Book,
+  "/prompts": Bubble,
+  "/links": Map,
+};
+
+/** 扉の見出し。1行ずつ、行の中では折らない。1文字ずつ出す演出のために文字を分ける */
+const HERO_LINES = ["作ったサイトを、", "みんなに届けよう。"];
 
 const GUIDE = [
   { t: "準備をたしかめる", b: "「公開のしかた」の、5つのチェックだけ読む。", href: "/setup#check" },
@@ -30,21 +47,28 @@ export default function Home() {
     <>
       {/* ---------- 扉 ---------- */}
       <section className="mx-auto max-w-[1180px] px-6 pb-16 pt-16 sm:px-10 sm:pb-24 sm:pt-24">
-        <PaperPlane className="mb-6 w-16 sm:hidden" />
-        <div className="flex items-start justify-between gap-8">
-          <div>
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+          <div className="order-2 lg:order-1">
             <p className="ag-label">A GUIDE FOR BEGINNERS</p>
-            <h1 className="mt-7 max-w-[16em] text-[2.3rem] leading-[1.45] sm:text-[3.4rem]">
-              <J text="作ったサイトを、◇みんなに届けよう。" />
+            <h1 aria-label={HERO_LINES.join("")} className="ag-chars mt-7 text-[2.3rem] leading-[1.45] sm:text-[3.4rem]">
+              {HERO_LINES.map((line, li) => (
+                <span key={line} aria-hidden className="block whitespace-nowrap">
+                  {Array.from(line).map((ch, ci) => (
+                    <span key={ci} className="ag-ch" style={{ ["--i" as string]: li * 8 + ci } as React.CSSProperties}>
+                      {ch}
+                    </span>
+                  ))}
+                </span>
+              ))}
             </h1>
           </div>
-          <PaperPlane className="mt-2 hidden w-32 flex-none sm:block" />
+          <HeroDoodles className="order-1 h-36 w-full max-w-[20rem] flex-none sm:h-52 sm:max-w-[28rem] lg:order-2 lg:h-[300px] lg:w-[360px] lg:max-w-none" />
         </div>
-        <div className="mt-10 grid gap-10 md:grid-cols-[minmax(0,34em)_minmax(0,1fr)] md:items-end">
+        <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,34em)_minmax(0,1fr)] lg:items-end">
           <p className="text-soft">
             <J text="ターミナルを使ったことがなくても大丈夫です。AIと一緒に作ったサイトを、URLで誰でも見られるようにするまでを、はじめから順に案内します。◇AIの選び方、わからない言葉、AIへの頼み方も、ここにまとめました。" />
           </p>
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 md:justify-end">
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 lg:justify-end">
             <Link href="/setup" className="ag-btn ag-btn-solid">
               公開のしかたを見る
             </Link>
@@ -55,24 +79,41 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---------- 言葉の帯 ---------- */}
+      <Marquee items={WORDS.slice(0, 28).map((w) => w.term)} />
+
       {/* ---------- 目次 ---------- */}
-      <section className="mx-auto max-w-[1180px] px-6 sm:px-10">
-        <p className="ag-label border-t border-line pt-8">CONTENTS</p>
-        <ol className="mt-6">
-          {SECTIONS.map((s, i) => (
-            <li key={s.href} className="border-b border-line-soft first:border-t first:border-line-soft">
-              <Link href={s.href} className="group grid items-baseline gap-x-8 gap-y-1 py-6 sm:grid-cols-[3rem_minmax(0,13rem)_minmax(0,1fr)_auto]">
-                <span className="ag-num">{String(i + 1).padStart(2, "0")}</span>
-                <span className="text-[1.25rem] leading-snug">
-                  <span className="group-hover:border-b group-hover:border-ink">{s.label}</span>
-                </span>
-                <span className="text-[0.95rem] text-soft">
-                  <J text={s.desc} />
-                </span>
-                <span className="whitespace-nowrap text-[0.85rem] text-soft">{COUNT[s.href]}</span>
-              </Link>
-            </li>
-          ))}
+      <section className="mx-auto max-w-[1180px] px-6 pt-16 sm:px-10 sm:pt-20">
+        <p className="ag-label pt-2">CONTENTS</p>
+        <ol data-reveal-stagger className="mt-6">
+          {SECTIONS.map((s, i) => {
+            const Pic = ROW_PIC[s.href];
+            return (
+              <li key={s.href} className="border-b border-line-soft first:border-t first:border-line-soft">
+                <Link
+                  href={s.href}
+                  className="group grid items-center gap-x-8 gap-y-1 py-6 sm:grid-cols-[3rem_minmax(0,13rem)_minmax(0,1fr)_auto] md:grid-cols-[3rem_minmax(0,13rem)_minmax(0,1fr)_auto_4rem]"
+                >
+                  <span className="ag-num">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="text-[1.25rem] leading-snug">
+                    <span className="group-hover:border-b group-hover:border-ink">{s.label}</span>
+                  </span>
+                  <span className="text-[0.95rem] text-soft">
+                    <J text={s.desc} />
+                  </span>
+                  <span className="whitespace-nowrap text-[0.85rem] text-soft">
+                    <CountUp text={COUNT[s.href]} />
+                    <span className="ag-row-arrow ml-3">→</span>
+                  </span>
+                  {Pic && (
+                    <span className="ag-row-pic hidden md:block">
+                      <Pic className="w-14" />
+                    </span>
+                  )}
+                </Link>
+              </li>
+            );
+          })}
         </ol>
       </section>
 

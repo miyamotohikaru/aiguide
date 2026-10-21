@@ -30,11 +30,11 @@ export default function AiPage() {
 
       <Section id="types" no="01" title="AIには、4つのタイプがある" lead="チャット型とノーコード生成型は、気軽に始められる。エディタ型とエージェント型は、自由で強力。">
         {/* 左の2つは気軽に、右の2つは本格的に。スマホでも上の段と下の段で分かれる */}
-        <ul className="grid grid-cols-2 gap-x-5 gap-y-10 lg:grid-cols-4 lg:gap-x-6">
+        <ul data-reveal-stagger className="grid grid-cols-2 gap-x-5 gap-y-10 lg:grid-cols-4 lg:gap-x-6">
           {TYPES.map((t, i) => {
             const Pic = TYPE_DOODLE[t.id];
             return (
-              <li key={t.id} className="flex min-w-0 flex-col border-t border-line-soft pt-5">
+              <li key={t.id} className="group flex min-w-0 flex-col border-t border-line-soft pt-5">
                 {Pic && <Pic className="w-full max-w-[11rem]" />}
                 <p className="ag-label mt-4">{i < 2 ? "気軽に始める" : "自由で強力"}</p>
                 <h3 className="mt-1.5 text-[1.08rem]">
@@ -53,7 +53,7 @@ export default function AiPage() {
       </Section>
 
       <Section id="purpose" no="02" title="やりたいことで選ぶ" lead="資料づくり、リサーチ、画像、アプリ。目的ごとに、いちばんいいAIと、うまく作る手順をまとめました。">
-        <ul className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
+        <ul data-reveal-stagger className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
           {PURPOSES.map((p) => {
             const Pic = PURPOSE_DOODLE[p.id];
             return (
