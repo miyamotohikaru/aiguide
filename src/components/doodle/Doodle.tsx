@@ -58,7 +58,7 @@ export function DoodleDefs({ seed = 3, size = 120 }: { seed?: number; size?: num
 
 /** 塗り（粒つき）。手描きらしく、わざと線からはみ出させて使う */
 export function Fill({ d, fill, seed = 3, opacity = 0.92 }: { d: string; fill: string; seed?: number; opacity?: number }) {
-  return <path d={d} fill={fill} opacity={opacity} filter={`url(#grain-${seed})`} />;
+  return <path className="ag-fl" d={d} fill={fill} opacity={opacity} filter={`url(#grain-${seed})`} />;
 }
 
 /** 線（揺れつき） */
@@ -79,6 +79,9 @@ export function Line({
 }) {
   return (
     <path
+      className="ag-ln"
+      // 長さを1とみなす。動きの演出で、線を描き始めから引いていくのに使う
+      pathLength={1}
       d={d}
       fill={fill}
       stroke={color}
@@ -108,7 +111,7 @@ export default function Doodle({
   children: React.ReactNode;
 }) {
   return (
-    <svg viewBox={viewBox} className={className} role={title ? "img" : undefined} aria-hidden={title ? undefined : true}>
+    <svg viewBox={viewBox} className={`ag-doodle ${className}`} role={title ? "img" : undefined} aria-hidden={title ? undefined : true}>
       {title && <title>{title}</title>}
       <DoodleDefs seed={seed} size={size} />
       {children}

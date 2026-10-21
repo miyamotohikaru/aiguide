@@ -83,7 +83,7 @@ export default function PromptsPage() {
         <h3 className="border-b border-line pb-3 text-[1.05rem]">使うコマンド</h3>
         <ul className="grid grid-cols-[minmax(0,1fr)]">
           {RESEARCH_CMDS.map((c) => (
-            <li key={c.cmd} className="grid items-start gap-x-8 gap-y-2 border-b border-line-soft py-4 sm:grid-cols-[11rem_minmax(0,1fr)_auto]">
+            <li key={c.cmd} className="grid items-start gap-x-8 gap-y-2 border-b border-line-soft py-4 lg:grid-cols-[11rem_minmax(0,1fr)_auto]">
               <p>
                 <span className="ag-code text-[0.98rem]">{c.cmd}</span>
               </p>
@@ -105,7 +105,7 @@ export default function PromptsPage() {
         <h3 className="mt-14 border-b border-line pb-3 text-[1.05rem]">気をつけること</h3>
         <ol className="grid grid-cols-[minmax(0,1fr)]">
           {RESEARCH_TIPS.map((x, i) => (
-            <li key={x.t} className="grid gap-x-8 gap-y-1 border-b border-line-soft py-4 sm:grid-cols-[3rem_14rem_minmax(0,1fr)]">
+            <li key={x.t} className="grid gap-x-8 gap-y-1 border-b border-line-soft py-4 lg:grid-cols-[3rem_12rem_minmax(0,1fr)]">
               <p className="ag-num pt-0.5">{String(i + 1).padStart(2, "0")}</p>
               <p>
                 <J text={x.t} />

@@ -230,3 +230,173 @@ details[open] .ag-plus {
     scroll-behavior: auto;
   }
 }
+
+/* ======================================================================
+   動きの演出
+   ・html に .motion が付いているときだけ動く（layout の先頭のスクリプトで付ける）。
+     「動きを減らす」設定の人と、自動の撮影（navigator.webdriver）には付けない。
+   ・見えたかどうかは MotionObserver が見張って、.is-in を付ける。
+   ====================================================================== */
+
+/* --- スクロールで、下から静かに出る --- */
+html.motion [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+html.motion [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- 並んだブロックは、少しずつずらして出る --- */
+html.motion [data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+html.motion [data-reveal-stagger].is-in > * {
+  opacity: 1;
+  transform: none;
+}
+html.motion [data-reveal-stagger].is-in > *:nth-child(4n + 2) { transition-delay: 0.08s; }
+html.motion [data-reveal-stagger].is-in > *:nth-child(4n + 3) { transition-delay: 0.16s; }
+html.motion [data-reveal-stagger].is-in > *:nth-child(4n + 4) { transition-delay: 0.24s; }
+
+/* --- 手描きの絵は、線から描かれて、あとから色が入る --- */
+html.motion .ag-doodle .ag-ln {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+/* 塗りの濃さは opacity 属性で決めてあるので、ここでは fill-opacity だけを動かす */
+html.motion .ag-doodle .ag-fl,
+html.motion .ag-doodle circle {
+  fill-opacity: 0;
+}
+html.motion .ag-doodle.is-in .ag-ln {
+  animation: ag-draw 1.1s cubic-bezier(0.4, 0.1, 0.2, 1) forwards;
+}
+html.motion .ag-doodle.is-in .ag-fl,
+html.motion .ag-doodle.is-in circle {
+  fill-opacity: 1;
+  animation: ag-fill 0.7s ease-out 0.55s both;
+}
+@keyframes ag-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes ag-fill {
+  from { fill-opacity: 0; }
+}
+
+/* --- ブロックにマウスを乗せると、絵が少しゆれる --- */
+@media (hover: hover) {
+  html.motion .group:hover .ag-doodle.is-in {
+    animation: ag-wiggle 0.6s ease-in-out;
+  }
+}
+@keyframes ag-wiggle {
+  25% { transform: rotate(-4deg); }
+  60% { transform: rotate(3deg); }
+}
+
+/* --- ページを移ったら、ふわっと切り替わる --- */
+html.motion .ag-page {
+  animation: ag-page-in 0.5s ease-out both;
+}
+@keyframes ag-page-in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+/* --- サムネイルは、乗せると少し寄る --- */
+.ag-thumb {
+  overflow: hidden;
+}
+.ag-thumb img {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@media (hover: hover) {
+  html.motion .group:hover .ag-thumb img {
+    transform: scale(1.04);
+  }
+}
+
+/* --- トップ：見出しが1文字ずつ出る --- */
+html.motion .ag-chars .ag-ch {
+  display: inline-block;
+  animation: ag-char 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 55ms + 0.15s);
+}
+@keyframes ag-char {
+  from { opacity: 0; transform: translateY(0.4em); filter: blur(4px); }
+}
+
+/* --- トップ：浮かぶ絵（奥行きつき） --- */
+html.motion .ag-hero-pic {
+  transform: translate3d(
+    calc(var(--mx, 0) * var(--d) * 28px),
+    calc(var(--my, 0) * var(--d) * 22px - var(--sy, 0) * var(--d) * 0.12px),
+    0
+  );
+  transition: transform 0.25s ease-out;
+}
+html.motion .ag-bob {
+  animation: ag-bob 7s ease-in-out infinite;
+}
+@keyframes ag-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+/* --- トップ：言葉の帯 --- */
+html.motion .ag-marquee-track {
+  animation: ag-marquee 60s linear infinite;
+}
+@media (hover: hover) {
+  .ag-marquee:hover .ag-marquee-track {
+    animation-play-state: paused;
+  }
+}
+@keyframes ag-marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* --- トップ：目次の行に乗せると、その章の絵が描かれる --- */
+.ag-row-pic {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.35s, transform 0.35s;
+}
+@media (hover: hover) {
+  .group:hover .ag-row-pic {
+    opacity: 1;
+    transform: none;
+  }
+  html.motion .group:hover .ag-row-pic .ag-ln {
+    animation: ag-draw-again 0.8s cubic-bezier(0.4, 0.1, 0.2, 1) both;
+  }
+  html.motion .group:hover .ag-row-pic .ag-fl,
+  html.motion .group:hover .ag-row-pic circle {
+    animation: ag-fill-again 0.5s ease-out 0.35s both;
+  }
+}
+/* 名前を変えておくと、乗せるたびに頭から描き直される */
+@keyframes ag-draw-again {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes ag-fill-again {
+  from { fill-opacity: 0; }
+}
+.ag-row-arrow {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@media (hover: hover) {
+  .group:hover .ag-row-arrow {
+    transform: translateX(6px);
+  }
+}

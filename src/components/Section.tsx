@@ -25,7 +25,7 @@ export default function Section({
 }) {
   return (
     <section id={id} className="mx-auto max-w-[1180px] scroll-mt-24 px-6 pt-16 sm:px-10 sm:pt-24">
-      <div className="border-t border-line pt-8 sm:pt-10">
+      <div data-reveal className="border-t border-line pt-8 sm:pt-10">
         {wide ? (
           <>
             <div className="flex flex-wrap items-baseline gap-x-8 gap-y-2">

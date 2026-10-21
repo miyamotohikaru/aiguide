@@ -53,11 +53,11 @@ export default function CommandsPage() {
       </Section>
 
       <Section no="02" title="まず覚える10個" lead="この10個を知っていれば、たいていのことは足ります。" wide>
-        <ul className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">
+        <ul data-reveal-stagger className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">
           {stars.map((c) => {
             const Pic = CMD_DOODLE[c.cmd];
             return (
-              <li key={c.cmd} className="flex flex-col border-t border-line-soft pt-4">
+              <li key={c.cmd} className="group flex flex-col border-t border-line-soft pt-4">
                 {Pic && <Pic className="w-14" />}
                 <p className="mt-3 break-all">
                   <span className="ag-code text-[0.98rem]">{c.cmd}</span>

@@ -46,21 +46,23 @@ export default function LinksPage() {
         return (
           <Section key={c.id} id={c.id} no={String(ci + 1).padStart(2, "0")} title={c.label} lead={c.lead} wide>
             {/* PCは横4列、タブレットは2列、スマホは1列 */}
-            <ul className="grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            <ul data-reveal-stagger className="grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
               {items.map((l) => {
                 const thumb = thumbForUrl(l.url);
                 return (
                   <li key={l.url} className="min-w-0 border-t border-line-soft pt-5">
                     <a href={l.url} target="_blank" rel="noreferrer" className="group flex h-full flex-col">
                       {thumb && (
-                        <img
-                          src={thumb}
-                          alt=""
-                          width={480}
-                          height={300}
-                          loading="lazy"
-                          className="aspect-[8/5] w-full border border-line-soft object-cover"
-                        />
+                        <span className="ag-thumb block border border-line-soft">
+                          <img
+                            src={thumb}
+                            alt=""
+                            width={480}
+                            height={300}
+                            loading="lazy"
+                            className="block aspect-[8/5] w-full object-cover"
+                          />
+                        </span>
                       )}
                       <p className={`${thumb ? "mt-4" : ""} text-[1.02rem] leading-[1.9]`}>
                         <span className="ag-tag transition-colors group-hover:bg-ink">
