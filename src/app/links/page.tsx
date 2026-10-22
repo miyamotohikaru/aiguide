@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 import PageHead from "@/components/PageHead";
 import Section from "@/components/Section";
@@ -75,8 +76,17 @@ export default function LinksPage() {
                         </span>
                       )}
                       <p className={`${thumb ? "mt-4" : ""} text-[1.02rem] leading-[1.9]`}>
+                        {/*
+                          灰色の地を行ごとにつなげるため、中は inline のまま（J の inline-block は使わない）。
+                          折るのは「（」の前だけ。ほかの所では折らない。
+                        */}
                         <span className="ag-tag transition-colors group-hover:bg-ink">
-                          <J text={l.name} />
+                          {l.name.split(/(?=（)/).map((part, pi) => (
+                            <Fragment key={pi}>
+                              {pi > 0 && <wbr />}
+                              <span className="whitespace-nowrap">{part}</span>
+                            </Fragment>
+                          ))}
                         </span>
                       </p>
                       <p className="mt-1 text-[0.8rem] text-soft">
