@@ -7,7 +7,8 @@ import { WORDS } from "@/data/words";
 import { PROMPTS } from "@/data/prompts";
 import { TOOLS } from "@/data/ai";
 import { LINKS } from "@/data/links";
-import { Book, Bubble, Cloud, Map, Slash, Tools, Window } from "@/components/doodle/Doodles";
+import { Book, Bubble, Cloud, Keyboard, Map, Slash, Tools, Window } from "@/components/doodle/Doodles";
+import { SHORTCUT_GROUPS } from "@/data/shortcuts";
 import HeroDoodles from "@/components/motion/HeroDoodles";
 import CountUp from "@/components/motion/CountUp";
 import Marquee from "@/components/motion/Marquee";
@@ -18,6 +19,7 @@ const COUNT: Record<string, string> = {
   "/terminal": "8つの命令",
   "/commands": `${COMMANDS.length}個`,
   "/words": `${WORDS.length}語`,
+  "/shortcuts": `${SHORTCUT_GROUPS.reduce((n, g) => n + g.items.length, 0)}個`,
   "/prompts": `${PROMPTS.length}本`,
   "/links": `${LINKS.length}件`,
 };
@@ -29,6 +31,7 @@ const ROW_PIC: Record<string, (p: { className?: string }) => React.ReactElement>
   "/terminal": Window,
   "/commands": Slash,
   "/words": Book,
+  "/shortcuts": Keyboard,
   "/prompts": Bubble,
   "/links": Map,
 };

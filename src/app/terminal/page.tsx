@@ -171,7 +171,7 @@ export default function TerminalPage() {
         </p>
         <ol className="mt-6 grid grid-cols-[minmax(0,1fr)]">
           {GIT_FLOW.map((g, i) => (
-            <li key={g.cmd} className="grid gap-x-10 gap-y-2 border-t border-line-soft py-5 first:border-t-0 first:pt-0 sm:grid-cols-[minmax(0,20rem)_minmax(0,1fr)]">
+            <li key={g.cmd} className="grid gap-x-10 gap-y-2 border-t border-line-soft py-5 first:border-t-0 first:pt-0 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)]">
               <div className="flex flex-wrap items-baseline gap-3">
                 <span className="ag-num">{String(i + 1).padStart(2, "0")}</span>
                 <code className="ag-code text-[0.95rem]">{g.cmd}</code>

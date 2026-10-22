@@ -24,7 +24,7 @@ export default function Section({
   pic?: React.ReactNode;
 }) {
   return (
-    <section id={id} className="mx-auto max-w-[1180px] scroll-mt-24 px-6 pt-16 sm:px-10 sm:pt-24">
+    <section id={id} className="mx-auto max-w-[1180px] scroll-mt-24 px-6 pt-12 sm:px-10 sm:pt-24">
       <div data-reveal className="border-t border-line pt-8 sm:pt-10">
         {wide ? (
           <>

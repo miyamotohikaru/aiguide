@@ -170,3 +170,23 @@ export function Check({ className = "" }: { className?: string }) {
     </Doodle>
   );
 }
+
+/** キーボード（ショートカットキー） */
+export function Keyboard({ className = "" }: { className?: string }) {
+  return (
+    <Doodle viewBox="0 0 120 120" className={className} seed={293}>
+      <Fill d="M10 38 H110 V90 H10 Z" fill={C.cream} seed={293} />
+      <Fill d="M20 48 H32 V58 H20 Z M38 48 H50 V58 H38 Z M56 48 H68 V58 H56 Z" fill={C.mustard} seed={293} opacity={0.9} />
+      <Fill d="M74 48 H86 V58 H74 Z M92 48 H100 V58 H92 Z" fill={C.blue} seed={293} opacity={0.75} />
+      <Fill d="M34 74 H86 V82 H34 Z" fill={C.terracotta} seed={293} opacity={0.8} />
+      <Line d="M10 38 H110 V90 H10 Z" seed={293} />
+      <Line
+        d="M20 48 H32 V58 H20 Z M38 48 H50 V58 H38 Z M56 48 H68 V58 H56 Z M74 48 H86 V58 H74 Z M92 48 H100 V58 H92 Z M20 64 H100 M34 74 H86 V82 H34 Z"
+        seed={293}
+        width={1.6}
+      />
+      <Line d="M60 38 q4 -12 16 -14 q10 -2 14 -10" seed={293} width={2} />
+    </Doodle>
+  );
+}
+

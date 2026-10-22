@@ -27,6 +27,7 @@
 
 html {
   color-scheme: light;
+  font-size: 16px;
   scroll-behavior: smooth;
   scroll-padding-top: 76px;
 }
@@ -38,7 +39,7 @@ body {
   background: var(--ag-paper);
   color: var(--ag-ink);
   font-family: var(--ag-serif);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.75;
   letter-spacing: 0.02em;
   -webkit-font-smoothing: antialiased;
@@ -400,3 +401,15 @@ html.motion .ag-marquee-track {
     transform: translateX(6px);
   }
 }
+
+/* --- スマホでは、文字も余白も全体に小さく詰める ---
+   大きさはほぼ rem で決めてあるので、基準の文字の大きさを下げると、まとめて縮む。 */
+@media (max-width: 639px) {
+  html {
+    font-size: 14.5px;
+  }
+  body {
+    line-height: 1.68;
+  }
+}
+
