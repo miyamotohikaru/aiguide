@@ -21,7 +21,11 @@ function Keys({ keys }: { keys: string[] }) {
       {keys.map((k, i) => (
         <Fragment key={i}>
           {i > 0 && <span className="text-[0.75em] text-soft">＋</span>}
-          <kbd className="ag-key font-serif">{k}</kbd>
+          <kbd className="ag-key font-serif">
+            {k}
+            {/* 矢印だけでは何のキーか分からないと言われたので、名前を添える */}
+            {k === "⇧" && <span className="ml-0.5 text-[0.75em]">（Shiftキー）</span>}
+          </kbd>
         </Fragment>
       ))}
     </span>
@@ -54,7 +58,7 @@ export default function ShortcutsPage() {
 
       {SHORTCUT_GROUPS.map((g, gi) => (
         <Section key={g.id} id={g.id} no={String(gi + 1).padStart(2, "0")} title={g.label} lead={g.lead}>
-          <div className="hidden grid-cols-[minmax(0,1fr)_minmax(0,11rem)_minmax(0,11rem)] gap-x-6 border-b border-line pb-2 sm:grid">
+          <div className="hidden grid-cols-[minmax(0,1fr)_minmax(0,14rem)_minmax(0,14rem)] gap-x-6 border-b border-line pb-2 sm:grid">
             <span className="ag-label">すること</span>
             <span className="ag-label">Mac</span>
             <span className="ag-label">Windows</span>
@@ -63,7 +67,7 @@ export default function ShortcutsPage() {
             {g.items.map((s) => (
               <li
                 key={s.act}
-                className="grid grid-cols-2 gap-x-4 gap-y-1.5 border-b border-line-soft py-3.5 sm:grid-cols-[minmax(0,1fr)_minmax(0,11rem)_minmax(0,11rem)] sm:gap-x-6 sm:py-4"
+                className="grid grid-cols-2 gap-x-4 gap-y-1.5 border-b border-line-soft py-3.5 sm:grid-cols-[minmax(0,1fr)_minmax(0,14rem)_minmax(0,14rem)] sm:gap-x-6 sm:py-4"
               >
                 <div className="col-span-2 sm:col-span-1">
                   <p>
