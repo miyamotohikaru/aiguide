@@ -24,7 +24,9 @@ export const LINK_CATS: { id: string; label: string; lead: string }[] = [
   { id: "learn", label: "学習・入門", lead: "HTML・CSS・JavaScript を、基礎から学びたい人へ。" },
   { id: "design", label: "デザインの素材と道具", lead: "配色、フォント、アイコン、写真。" },
   { id: "color", label: "色をえらぶ", lead: "サイトの色に迷ったら。気に入った色の組み合わせのカラーコードを、そのままAIに渡せます。" },
+  { id: "taste", label: "自分の好きを見つける", lead: "気になる画像を集めていくと、自分の好みが見えてきます。集めた画像は、そのままAIへの見本になります。" },
   { id: "inspire", label: "見本・ギャラリー", lead: "「こんな感じで」とAIに伝えるための、よいサイトの見本。" },
+  { id: "awards", label: "世界のデザイン・広告の賞", lead: "その年にいちばんよかった作品が集まる場所。受賞作を見るだけでも、目がきたえられます。" },
   { id: "motion", label: "動きの見本", lead: "マウスやスクロールで動く演出。気に入ったら、そのURLや名前をAIに渡して「これと同じ動きを」と頼めます。" },
   { id: "designinfo", label: "デザインの情報", lead: "いまのデザインの話題や、作り手のインタビューを読むところ。" },
   { id: "news", label: "新しい情報を追う", lead: "AIは毎月変わります。公式のお知らせを見るのがいちばん早いです。" },
@@ -284,6 +286,43 @@ export const LINKS: LinkItem[] = [
     note: "登録なしで試せます。人が写った写真を使うときは、本人の許可を確かめます。",
   },
 
+  {
+    category: "design",
+    name: "Pixelbuddha",
+    url: "https://pixelbuddha.net/",
+    desc: "モックアップ（作品をはめこむ見本画像）、イラスト、フォント、文字の効果などの素材集。",
+    lang: "英語",
+    cost: "無料あり（有料プランも）",
+    note: "無料の素材と、有料の素材があります。",
+  },
+  {
+    category: "design",
+    name: "Haikei",
+    url: "https://app.haikei.app/",
+    desc: "波、なめらかな丸、グラデーションなどの背景画像を、色と形を選んで作れる。",
+    lang: "英語",
+    cost: "無料",
+    note: "登録なしで使えます。SVG（拡大しても荒れない画像）で書き出せます。",
+  },
+  {
+    category: "design",
+    name: "dddFont（マンガ文字素材）",
+    url: "https://dddfont.com/",
+    desc: "「ドドド」「キラーン」など、マンガの擬音の文字素材を配っている。",
+    lang: "日本語",
+    cost: "無料",
+    note: "使う前に、サイトの「ライセンス」のページで、使ってよい条件を確かめます。",
+  },
+  {
+    category: "design",
+    name: "ダ鳥獣戯画",
+    url: "https://chojugiga.com/",
+    desc: "鳥獣戯画のうさぎやかえるを、いまの場面に描き足したイラスト素材。",
+    lang: "日本語",
+    cost: "無料",
+    note: "使う前に、サイトの「ライセンス」のページで、使ってよい条件を確かめます。",
+  },
+
   // ---------- 色をえらぶ ----------
   {
     category: "color",
@@ -299,6 +338,25 @@ export const LINKS: LinkItem[] = [
     name: "Pigment",
     url: "https://pigment.shapefactory.co/",
     desc: "計算ではなく、絵の具と光の考え方で作った、あざやかな色の組み合わせを見せてくれる。",
+    lang: "英語",
+    cost: "無料",
+  },
+
+  // ---------- 自分の好きを見つける ----------
+  {
+    category: "taste",
+    name: "Pinterest",
+    url: "https://jp.pinterest.com/",
+    desc: "世界中の画像を見て、気に入ったものをボードに集められる。似た画像も次々に出てくる。",
+    lang: "日本語",
+    cost: "無料",
+    note: "ボードの画像をAIに見せて「この雰囲気で」と頼めます。",
+  },
+  {
+    category: "taste",
+    name: "Cosmos",
+    url: "https://www.cosmos.so/",
+    desc: "気になる画像を集めて、自分だけのコレクションにできる。色で画像を探すこともできる。",
     lang: "英語",
     cost: "無料",
   },
@@ -337,6 +395,40 @@ export const LINKS: LinkItem[] = [
     lang: "英語",
     cost: "無料あり（有料プランも）",
     note: "見るのは無料。テンプレートは有料で売られています。",
+  },
+
+  // ---------- 世界のデザイン・広告の賞 ----------
+  {
+    category: "awards",
+    name: "Cannes Lions",
+    url: "https://www.canneslions.com/",
+    desc: "世界でいちばん大きな、広告とクリエイティブの祭典。毎年6月にフランスのカンヌで開かれる。",
+    lang: "英語",
+    cost: "無料",
+  },
+  {
+    category: "awards",
+    name: "D&AD",
+    url: "https://www.dandad.org/",
+    desc: "イギリスの、デザインと広告の賞。いちばん上の賞は「黒い鉛筆（Black Pencil）」。",
+    lang: "英語",
+    cost: "無料",
+  },
+  {
+    category: "awards",
+    name: "The One Club（The One Show・ADC）",
+    url: "https://www.oneclub.org/",
+    desc: "アメリカの、広告とデザインの賞を開いている団体。受賞作を見られる。",
+    lang: "英語",
+    cost: "無料",
+  },
+  {
+    category: "awards",
+    name: "Pentawards",
+    url: "https://pentawards.com/live/en/page/home",
+    desc: "パッケージ（商品の箱や包み）のデザインだけを選ぶ、世界の賞。",
+    lang: "英語",
+    cost: "無料",
   },
 
   // ---------- 動きの見本 ----------
