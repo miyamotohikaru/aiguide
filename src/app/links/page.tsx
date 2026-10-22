@@ -99,6 +99,7 @@ export default function LinksPage() {
                       </p>
                       <p className="mt-1 text-[0.72rem] text-soft sm:text-[0.8rem]">
                         {l.lang}　{l.cost}
+                        {l.by && <span className="block whitespace-nowrap sm:ml-3 sm:inline">{l.by}</span>}
                       </p>
                       <p className="mt-1.5 line-clamp-3 text-[0.8rem] leading-[1.6] sm:mt-2 sm:line-clamp-none sm:text-[0.9rem] sm:leading-[1.65]">
                         <J text={l.desc} />
