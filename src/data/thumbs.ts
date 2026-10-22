@@ -47,6 +47,7 @@ export const THUMBS = new Set<string>([
   "skills-kosukuma-com",
   "speckyboy-com-css-javascript-cursor-effects",
   "speckyboy-com-repelling-effect-in-web-design",
+  "sukihakken-kosukuma-com",
   "support-claude-com-ja",
   "support-google-com-gemini-hl-ja",
   "tool-aistudio",
@@ -78,7 +79,8 @@ export const THUMBS = new Set<string>([
   "www-japandesign-ne-jp",
   "www-oneclub-org",
   "www-pexels-com-ja-jp",
-  "www-pxbee-com-ai-image-extender"
+  "www-pxbee-com-ai-image-extender",
+  "xn-ip-778e77f-kosukuma-com"
 ]);
 
 /** URL からサムネのファイル名を作る（撮影スクリプトと同じ決まり） */

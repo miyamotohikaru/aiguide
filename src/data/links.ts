@@ -15,6 +15,8 @@ export type LinkItem = {
   lang: "日本語" | "英語" | "日本語あり";
   cost: "無料" | "無料あり（有料プランも）" | "有料";
   note?: string;
+  /** 作った人（小さく添える） */
+  by?: string;
 };
 
 export const LINK_CATS: { id: string; label: string; lead: string }[] = [
@@ -361,6 +363,17 @@ export const LINKS: LinkItem[] = [
     cost: "無料",
   },
 
+  {
+    category: "taste",
+    name: "スキ発見器",
+    url: "https://sukihakken.kosukuma.com/",
+    by: "すのはらさん作",
+    desc: "2枚のカードから、ピンときた方を選んでいくだけ。配色、言葉選び、余白など49の軸で、自分の好みを測ってくれる。",
+    lang: "日本語",
+    cost: "無料",
+    note: "考えすぎず、直感で選ぶのがコツです。",
+  },
+
   // ---------- 見本・ギャラリー ----------
   {
     category: "inspire",
@@ -436,6 +449,7 @@ export const LINKS: LinkItem[] = [
     category: "motion",
     name: "FX Skillbook Explorer",
     url: "https://skills.kosukuma.com/",
+    by: "すのはらさん作",
     desc: "Webの演出376種を、その場で動かして見られる台帳。テキスト、スクロール、カーソル、3Dなどでしぼれる。",
     lang: "日本語",
     cost: "無料",
@@ -513,6 +527,16 @@ export const LINKS: LinkItem[] = [
     name: "JDN（ジャパンデザインネット）",
     url: "https://www.japandesign.ne.jp/",
     desc: "国内外のデザインのニュース、デザイナーへのインタビュー、イベントの情報。",
+    lang: "日本語",
+    cost: "無料",
+  },
+
+  {
+    category: "designinfo",
+    name: "IP研究ラボ",
+    url: "https://xn--ip-778e77f.kosukuma.com/",
+    by: "すのはらさん作",
+    desc: "ちいかわなど、SNSから生まれたキャラクターが大きく育つまでを、出典つきで調べたまとめ。",
     lang: "日本語",
     cost: "無料",
   },

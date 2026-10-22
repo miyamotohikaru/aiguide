@@ -38,7 +38,7 @@ export default function WordsView() {
 
       <dl className="mt-3 grid grid-cols-[minmax(0,1fr)] border-t border-line">
         {list.map((w) => (
-          <div key={w.term} className="grid gap-x-10 gap-y-1 border-b border-line-soft py-6 md:grid-cols-[16rem_minmax(0,1fr)]">
+          <div key={w.term} className="grid gap-x-10 gap-y-1 border-b border-line-soft py-6 lg:grid-cols-[16rem_minmax(0,1fr)]">
             <dt className="min-w-0">
               <span className="block text-[1.12rem] leading-snug">{w.term}</span>
               <span className="mt-0.5 block text-[0.82rem] text-soft">

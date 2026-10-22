@@ -8,6 +8,7 @@ export const SECTIONS = [
   { href: "/terminal", label: "ターミナル入門", short: "ターミナル", en: "TERMINAL", desc: "黒い画面、◆こわくない使い方。" },
   { href: "/commands", label: "スラッシュコマンド", short: "コマンド", en: "COMMANDS", desc: "「/」で始まる◆命令の一覧。" },
   { href: "/words", label: "用語集", short: "用語", en: "WORDS", desc: "デザインとHPの◆言葉の意味。" },
+  { href: "/shortcuts", label: "ショートカットキー", short: "ショートカット", en: "SHORTCUTS", desc: "キーの組み合わせで、◆何でも時短。" },
   { href: "/prompts", label: "プロンプト集", short: "プロンプト", en: "PROMPTS", desc: "AIにそのまま渡せる◆頼み方。" },
   { href: "/links", label: "参考リンク", short: "リンク", en: "LINKS", desc: "もっと知るための◆外のサイト。" },
 ] as const;
