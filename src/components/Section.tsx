@@ -20,7 +20,7 @@ export default function Section({
   children: React.ReactNode;
   /** 見出しを上に出して、中身を紙幅いっぱいに使う（一覧やブロック並びのとき） */
   wide?: boolean;
-  /** 見出しの下に添える絵（左の列に置く。wide のときは使わない） */
+  /** 見出しに添える絵（ふだんは見出しの下、wide のときは番号の上） */
   pic?: React.ReactNode;
 }) {
   return (
@@ -30,6 +30,7 @@ export default function Section({
           <>
             <div className="flex flex-wrap items-baseline gap-x-8 gap-y-2">
               <div>
+                {pic && <div className="mb-4">{pic}</div>}
                 {no && <p className="ag-num">{no}</p>}
                 <h2 className="mt-1 text-[1.4rem] leading-snug sm:text-[1.7rem]">
                   <J text={title} />

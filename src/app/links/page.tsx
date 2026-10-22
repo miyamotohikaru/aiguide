@@ -5,6 +5,7 @@ import J from "@/components/J";
 import { LINKS, LINK_CATS } from "@/data/links";
 import { thumbForUrl } from "@/data/thumbs";
 import { Map } from "@/components/doodle/Doodles";
+import { LINK_DOODLE } from "@/components/doodle/LinkDoodles";
 
 export const metadata: Metadata = {
   title: "参考リンク",
@@ -43,8 +44,17 @@ export default function LinksPage() {
 
       {LINK_CATS.map((c, ci) => {
         const items = LINKS.filter((l) => l.category === c.id);
+        const Pic = LINK_DOODLE[c.id];
         return (
-          <Section key={c.id} id={c.id} no={String(ci + 1).padStart(2, "0")} title={c.label} lead={c.lead} wide>
+          <Section
+            key={c.id}
+            id={c.id}
+            no={String(ci + 1).padStart(2, "0")}
+            title={c.label}
+            lead={c.lead}
+            wide
+            pic={Pic && <Pic className="w-20 sm:w-24" />}
+          >
             {/* PCは横4列、タブレットは2列、スマホは1列 */}
             <ul data-reveal-stagger className="grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
               {items.map((l) => {
