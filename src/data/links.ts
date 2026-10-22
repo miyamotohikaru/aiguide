@@ -414,23 +414,6 @@ export const LINKS: LinkItem[] = [
     lang: "英語",
     cost: "無料",
   },
-  {
-    category: "motion",
-    name: "Cruip（粒のアニメーション）",
-    url: "https://cruip.com/how-to-create-a-beautiful-particle-animation-with-html-canvas/",
-    desc: "マウスに反応する粒のアニメーションの作り方。反応の速さやなめらかさの決め方が参考になる。",
-    lang: "英語",
-    cost: "無料",
-  },
-  {
-    category: "motion",
-    name: "Codrops（よける3Dの動き）",
-    url: "https://tympanus.net/codrops/2018/12/06/interactive-repulsion-effect-with-three-js/",
-    desc: "並んだ立体が、マウスでよけていく動きの作り方と見本。",
-    lang: "英語",
-    cost: "無料",
-    note: "少しむずかしめです。見本のページを開いて、AIに「これと同じ動き」と頼む使い方が手軽です。",
-  },
 
   // ---------- デザインの情報 ----------
   {
