@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import type { Metadata } from "next";
 import PageHead from "@/components/PageHead";
 import Section from "@/components/Section";
@@ -60,12 +59,14 @@ export default function LinksPage() {
             wide
             pic={Pic && <Pic className="w-20 sm:w-24" />}
           >
-            {/* PCは横4列、タブレットは2列、スマホは1列 */}
-            <ul data-reveal-stagger className="grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            {/* PCは横4列、タブレットとスマホは2列。スマホでは説明を3行までにして、ひと目で多く見せる */}
+            <ul data-reveal-stagger className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4">
               {items.map((l) => {
                 const thumb = thumbForUrl(l.url);
+                // 「（」の前と、空白のあとで分ける（GitHub Pages ドキュメント → GitHub / Pages / ドキュメント）
+                const parts = l.name.split(/(?=（)|(?<= )/).map((t) => ({ t: t.trimEnd(), space: t.endsWith(" ") }));
                 return (
-                  <li key={l.url} className="min-w-0 border-t border-line-soft pt-5">
+                  <li key={l.url} className="min-w-0 border-t border-line-soft pt-3 sm:pt-5">
                     <a href={l.url} target="_blank" rel="noreferrer" className="group flex h-full flex-col">
                       {thumb && (
                         <span className="ag-thumb block border border-line-soft">
@@ -79,32 +80,35 @@ export default function LinksPage() {
                           />
                         </span>
                       )}
-                      <p className={`${thumb ? "mt-4" : ""} text-[1.02rem] leading-[1.9]`}>
+                      <p className={`${thumb ? "mt-2.5 sm:mt-4" : ""} text-[0.88rem] leading-[1.75] sm:text-[1.02rem] sm:leading-[1.9]`}>
                         {/*
-                          灰色の地を行ごとにつなげるため、中は inline のまま（J の inline-block は使わない）。
-                          折るのは「（」の前だけ。ほかの所では折らない。
+                          名前は「（」の前で分けて、かたまりごとに灰色の地を付ける。
+                          かたまりの中では折らず、幅が足りないときはかたまりごと次の行へ送る。
+                          （ひとつの地の中で折ると、行によって地が欠けることがあった）
                         */}
-                        <span className="ag-tag transition-colors group-hover:bg-ink">
-                          {l.name.split(/(?=（)/).map((part, pi) => (
-                            <Fragment key={pi}>
-                              {pi > 0 && <wbr />}
-                              <span className="whitespace-nowrap">{part}</span>
-                            </Fragment>
-                          ))}
-                        </span>
+                        {parts.map((part, pi) => (
+                          <span
+                            key={pi}
+                            className={`ag-tag inline-block max-w-full transition-colors group-hover:bg-ink ${pi > 0 ? "pl-0" : ""} ${
+                              pi < parts.length - 1 ? (part.space ? "pr-[0.3em]" : "pr-0") : ""
+                            }`}
+                          >
+                            {part.t}
+                          </span>
+                        ))}
                       </p>
-                      <p className="mt-1 text-[0.8rem] text-soft">
+                      <p className="mt-1 text-[0.72rem] text-soft sm:text-[0.8rem]">
                         {l.lang}　{l.cost}
                       </p>
-                      <p className="mt-2 text-[0.9rem] leading-[1.65]">
+                      <p className="mt-1.5 line-clamp-3 text-[0.8rem] leading-[1.6] sm:mt-2 sm:line-clamp-none sm:text-[0.9rem] sm:leading-[1.65]">
                         <J text={l.desc} />
                       </p>
                       {l.note && (
-                        <p className="mt-1.5 text-[0.82rem] leading-[1.6] text-soft">
+                        <p className="mt-1.5 hidden text-[0.82rem] leading-[1.6] text-soft sm:block">
                           <J text={l.note} />
                         </p>
                       )}
-                      <p className="mt-auto pt-3 font-mono text-[0.72rem] tracking-normal text-soft [overflow-wrap:anywhere]">
+                      <p className="mt-auto hidden pt-3 font-mono text-[0.72rem] tracking-normal text-soft [overflow-wrap:anywhere] sm:block">
                         {l.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
                       </p>
                     </a>
