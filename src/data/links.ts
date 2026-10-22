@@ -361,6 +361,16 @@ export const LINKS: LinkItem[] = [
     cost: "無料",
   },
 
+  {
+    category: "taste",
+    name: "スキ発見器",
+    url: "https://sukihakken.kosukuma.com/",
+    desc: "2枚のカードから、ピンときた方を選んでいくだけ。配色、言葉選び、余白など49の軸で、自分の好みを測ってくれる。",
+    lang: "日本語",
+    cost: "無料",
+    note: "考えすぎず、直感で選ぶのがコツです。",
+  },
+
   // ---------- 見本・ギャラリー ----------
   {
     category: "inspire",
@@ -513,6 +523,15 @@ export const LINKS: LinkItem[] = [
     name: "JDN（ジャパンデザインネット）",
     url: "https://www.japandesign.ne.jp/",
     desc: "国内外のデザインのニュース、デザイナーへのインタビュー、イベントの情報。",
+    lang: "日本語",
+    cost: "無料",
+  },
+
+  {
+    category: "designinfo",
+    name: "IP研究ラボ",
+    url: "https://xn--ip-778e77f.kosukuma.com/",
+    desc: "ちいかわなど、SNSから生まれたキャラクターが大きく育つまでを、出典つきで調べたまとめ。",
     lang: "日本語",
     cost: "無料",
   },

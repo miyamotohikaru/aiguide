@@ -420,5 +420,15 @@
     "ok": true,
     "url": "https://jp.pinterest.com/",
     "at": "2026-10-22"
+  },
+  "sukihakken-kosukuma-com": {
+    "ok": true,
+    "url": "https://sukihakken.kosukuma.com/",
+    "at": "2026-10-22"
+  },
+  "xn-ip-778e77f-kosukuma-com": {
+    "ok": true,
+    "url": "https://xn--ip-778e77f.kosukuma.com/",
+    "at": "2026-10-22"
   }
 }
