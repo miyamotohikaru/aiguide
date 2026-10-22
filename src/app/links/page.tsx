@@ -32,14 +32,18 @@ export default function LinksPage() {
       </div>
 
       <nav aria-label="このページの目次" className="mx-auto max-w-[1180px] px-6 sm:px-10">
-        <ul className="flex flex-wrap gap-x-7 gap-y-2 border-t border-line pt-6 text-[0.95rem]">
-          {LINK_CATS.map((c) => (
-            <li key={c.id}>
-              <a href={`#${c.id}`} className="ag-link">
-                {c.label}
-              </a>
-            </li>
-          ))}
+        <ul className="flex flex-wrap gap-x-7 gap-y-3 border-t border-line pt-6 text-[0.95rem]">
+          {LINK_CATS.map((c) => {
+            const Pic = LINK_DOODLE[c.id];
+            return (
+              <li key={c.id}>
+                <a href={`#${c.id}`} className="group inline-flex items-center gap-2">
+                  {Pic && <Pic className="w-8 flex-none" />}
+                  <span className="ag-link">{c.label}</span>
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </nav>
 

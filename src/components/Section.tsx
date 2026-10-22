@@ -20,7 +20,7 @@ export default function Section({
   children: React.ReactNode;
   /** 見出しを上に出して、中身を紙幅いっぱいに使う（一覧やブロック並びのとき） */
   wide?: boolean;
-  /** 見出しに添える絵（ふだんは見出しの下、wide のときは番号の上） */
+  /** 見出しに添える絵（ふだんは見出しの下、wide のときは見出しの左） */
   pic?: React.ReactNode;
 }) {
   return (
@@ -28,20 +28,37 @@ export default function Section({
       <div data-reveal className="border-t border-line pt-8 sm:pt-10">
         {wide ? (
           <>
-            <div className="flex flex-wrap items-baseline gap-x-8 gap-y-2">
-              <div>
-                {pic && <div className="mb-4">{pic}</div>}
-                {no && <p className="ag-num">{no}</p>}
-                <h2 className="mt-1 text-[1.4rem] leading-snug sm:text-[1.7rem]">
-                  <J text={title} />
-                </h2>
+            {pic ? (
+              // 絵があるときは、左に絵、右に番号・見出し・前書きを縦に並べる
+              <div className="flex items-center gap-5 sm:gap-10">
+                <div className="flex-none">{pic}</div>
+                <div className="min-w-0">
+                  {no && <p className="ag-num">{no}</p>}
+                  <h2 className="mt-1 text-[1.4rem] leading-snug sm:text-[1.7rem]">
+                    <J text={title} />
+                  </h2>
+                  {lead && (
+                    <p className="mt-2 max-w-[36em] text-soft">
+                      <J text={lead} />
+                    </p>
+                  )}
+                </div>
               </div>
-              {lead && (
-                <p className="max-w-[36em] text-soft">
-                  <J text={lead} />
-                </p>
-              )}
-            </div>
+            ) : (
+              <div className="flex flex-wrap items-baseline gap-x-8 gap-y-2">
+                <div>
+                  {no && <p className="ag-num">{no}</p>}
+                  <h2 className="mt-1 text-[1.4rem] leading-snug sm:text-[1.7rem]">
+                    <J text={title} />
+                  </h2>
+                </div>
+                {lead && (
+                  <p className="max-w-[36em] text-soft">
+                    <J text={lead} />
+                  </p>
+                )}
+              </div>
+            )}
             <div className="mt-8">{children}</div>
           </>
         ) : (
